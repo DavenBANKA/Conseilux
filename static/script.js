@@ -4,13 +4,243 @@ const navMenu = document.querySelector('.nav-menu');
 const navLinks = document.querySelectorAll('.nav-link');
 
 // Toggle menu mobile
-menuToggle.addEventListener('click', () => {
-    menuToggle.classList.toggle('active');
-    navMenu.classList.toggle('active');
-    document.body.classList.toggle('no-scroll');
-    // Recalculer la hauteur si le menu mobile s'ouvre
-    updateHeaderOffset();
+if (menuToggle && navMenu) {
+    menuToggle.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        menuToggle.classList.toggle('active');
+        navMenu.classList.toggle('active');
+        document.body.classList.toggle('no-scroll');
+        
+        // Amélioration pour l'accessibilité
+        const isOpen = navMenu.classList.contains('active');
+        menuToggle.setAttribute('aria-expanded', isOpen);
+        navMenu.setAttribute('aria-hidden', !isOpen);
+        
+        // Recalculer la hauteur si le menu mobile s'ouvre
+        if (typeof updateHeaderOffset === 'function') {
+            updateHeaderOffset();
+        }
+    });
+
+    // Fermer le menu en cliquant à l'extérieur
+    document.addEventListener('click', (e) => {
+        if (!navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+            menuToggle.classList.remove('active');
+            navMenu.classList.remove('active');
+            document.body.classList.remove('no-scroll');
+            menuToggle.setAttribute('aria-expanded', 'false');
+            navMenu.setAttribute('aria-hidden', 'true');
+        }
+    });
+
+    // Fermer le menu avec la touche Escape
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+            menuToggle.classList.remove('active');
+            navMenu.classList.remove('active');
+            document.body.classList.remove('no-scroll');
+            menuToggle.setAttribute('aria-expanded', 'false');
+            navMenu.setAttribute('aria-hidden', 'true');
+            menuToggle.focus();
+        }
+    });
+}
+
+// Fermer le menu au clic sur un lien
+navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        if (window.innerWidth <= 768) {
+            menuToggle.classList.remove('active');
+            navMenu.classList.remove('active');
+            document.body.classList.remove('no-scroll');
+            menuToggle.setAttribute('aria-expanded', 'false');
+            navMenu.setAttribute('aria-hidden', 'true');
+        }
+    });
 });
+
+// Gestion des sous-menus sur mobile
+document.querySelectorAll('.has-submenu').forEach(item => {
+    const link = item.querySelector('.nav-link');
+    const submenu = item.querySelector('.megamenu, .submenu');
+    
+    if (link && submenu) {
+        link.addEventListener('click', (e) => {
+            if (window.innerWidth <= 768) {
+                e.preventDefault();
+                item.classList.toggle('active');
+                submenu.classList.toggle('active');
+            }
+        });
+    }
+});
+
+// Amélioration du scroll fluide
+function smoothScroll(target) {
+    const element = document.querySelector(target);
+    if (element) {
+        const headerHeight = document.querySelector('.header')?.offsetHeight || 0;
+        const targetPosition = element.offsetTop - headerHeight - 20;
+        
+        window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+        });
+    }
+}
+
+// Gestion des liens d'ancrage
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', (e) => {
+        const href = link.getAttribute('href');
+        if (href !== '#' && document.querySelector(href)) {
+            e.preventDefault();
+            smoothScroll(href);
+        }
+    });
+});
+
+// Détection du touch pour améliorer les interactions
+let isTouchDevice = false;
+
+function detectTouch() {
+    isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    if (isTouchDevice) {
+        document.body.classList.add('touch-device');
+    }
+}
+
+detectTouch();
+
+// Gestion responsive dynamique
+function handleResize() {
+    const width = window.innerWidth;
+    
+    // Fermer le menu mobile si on passe en desktop
+    if (width > 768 && navMenu && navMenu.classList.contains('active')) {
+        menuToggle.classList.remove('active');
+        navMenu.classList.remove('active');
+        document.body.classList.remove('no-scroll');
+        if (menuToggle) {
+            menuToggle.setAttribute('aria-expanded', 'false');
+            navMenu.setAttribute('aria-hidden', 'true');
+        }
+    }
+    
+    // Fermer les sous-menus actifs sur mobile
+    document.querySelectorAll('.has-submenu.active').forEach(item => {
+        if (width > 768) {
+            item.classList.remove('active');
+            const submenu = item.querySelector('.megamenu, .submenu');
+            if (submenu) {
+                submenu.classList.remove('active');
+            }
+        }
+    });
+    
+    // Ajuster la hauteur du viewport pour mobile (iOS Safari)
+    if (width <= 768) {
+        const vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+    }
+}
+
+// Écouter les changements de taille d'écran
+let resizeTimer;
+window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(handleResize, 150);
+});
+
+// Initialiser au chargement
+window.addEventListener('load', handleResize);
+
+// Amélioration du scroll pour les liens internes
+function improveScrollBehavior() {
+    // Smooth scroll pour tous les navigateurs
+    if (!('scrollBehavior' in document.documentElement.style)) {
+        const links = document.querySelectorAll('a[href^="#"]');
+        links.forEach(link => {
+            link.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                const target = document.querySelector(href);
+                if (target) {
+                    e.preventDefault();
+                    const headerHeight = document.querySelector('.header')?.offsetHeight || 0;
+                    const targetPosition = target.offsetTop - headerHeight - 20;
+                    
+                    // Polyfill pour smooth scroll
+                    const start = window.pageYOffset;
+                    const distance = targetPosition - start;
+                    const duration = 800;
+                    let startTime = null;
+                    
+                    function animation(currentTime) {
+                        if (startTime === null) startTime = currentTime;
+                        const timeElapsed = currentTime - startTime;
+                        const run = ease(timeElapsed, start, distance, duration);
+                        window.scrollTo(0, run);
+                        if (timeElapsed < duration) requestAnimationFrame(animation);
+                    }
+                    
+                    function ease(t, b, c, d) {
+                        t /= d / 2;
+                        if (t < 1) return c / 2 * t * t + b;
+                        t--;
+                        return -c / 2 * (t * (t - 2) - 1) + b;
+                    }
+                    
+                    requestAnimationFrame(animation);
+                }
+            });
+        });
+    }
+}
+
+improveScrollBehavior();
+
+// Lazy loading des images pour améliorer les performances
+function lazyLoadImages() {
+    const images = document.querySelectorAll('img[data-src]');
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                img.src = img.dataset.src;
+                img.classList.remove('lazy');
+                imageObserver.unobserve(img);
+            }
+        });
+    });
+    
+    images.forEach(img => imageObserver.observe(img));
+}
+
+// Initialiser le lazy loading si supporté
+if ('IntersectionObserver' in window) {
+    lazyLoadImages();
+}
+
+// Amélioration des performances sur mobile
+if (isTouchDevice) {
+    // Désactiver les animations coûteuses sur mobile
+    document.body.classList.add('reduce-motion');
+    
+    // Optimiser les événements de scroll
+    let ticking = false;
+    function updateScrollEffects() {
+        // Ici on peut ajouter des effets de scroll optimisés
+        ticking = false;
+    }
+    
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            requestAnimationFrame(updateScrollEffects);
+            ticking = true;
+        }
+    });
+}
 
 // ---- Category page: sliders (hero + refs) ----
 window.addEventListener('load', () => {

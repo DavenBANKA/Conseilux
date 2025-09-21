@@ -971,13 +971,82 @@ ul {
 }
 
 /* Styles responsifs */
-@media (max-width: 992px) {
-    .topbar {
-        grid-template-columns: 1fr; gap: 10px; border-radius: 12px;
+
+/* Tablettes (768px - 1024px) */
+@media (max-width: 1024px) {
+    .container {
+        padding: 0 15px;
     }
-    .topbar-left { justify-content: center; }
-    .topbar-search { order: 3; }
-    .topbar-actions { justify-content: center; }
+    
+    /* Ajustement des grilles pour tablettes */
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    
+    .cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    
+    .course-card .inner {
+        min-height: 200px;
+    }
+    
+    /* Navigation tablette */
+    .topbar {
+        padding: 10px 15px;
+    }
+    
+    .topbar-search input[type="search"] {
+        max-width: 400px;
+    }
+    
+    /* Hero section tablette */
+    .hero h1 {
+        font-size: 2.8rem;
+    }
+    
+    .hero p {
+        font-size: 1.1rem;
+    }
+}
+
+/* Mobile large (481px - 768px) */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 12px;
+    }
+    
+    /* Topbar mobile */
+    .topbar {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        border-radius: 12px;
+        padding: 8px 12px;
+    }
+    
+    .topbar-left {
+        justify-content: center;
+        order: 1;
+    }
+    
+    .topbar-search {
+        order: 3;
+        width: 100%;
+    }
+    
+    .topbar-search input[type="search"] {
+        width: 100%;
+        max-width: none;
+    }
+    
+    .topbar-actions {
+        justify-content: center;
+        order: 2;
+    }
+    
+    /* Navigation mobile */
     .menu-toggle {
         display: block;
         z-index: 1001;
@@ -999,16 +1068,18 @@ ul {
         position: fixed;
         top: 0;
         right: -100%;
-        width: 80%;
-        max-width: 400px;
+        width: 85%;
+        max-width: 350px;
         height: 100vh;
         background-color: var(--white);
         flex-direction: column;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
         transition: var(--transition);
         box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
         z-index: 1000;
+        padding-top: 80px;
+        overflow-y: auto;
     }
 
     .nav-menu.active {
@@ -1016,14 +1087,19 @@ ul {
     }
 
     .nav-item {
-        margin: 15px 0;
+        margin: 10px 0;
+        width: 90%;
     }
 
     .nav-link {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
+        padding: 12px 0;
+        text-align: center;
+        width: 100%;
+        border-bottom: 1px solid #f0f0f0;
     }
 
-    /* Sous-menu en mobile: affichage en accordéon */
+    /* Sous-menu en mobile */
     .submenu {
         position: static;
         width: 100%;
@@ -1035,7 +1111,7 @@ ul {
         visibility: visible;
         transform: none;
         display: none;
-        background: transparent;
+        background: #f8f9fa;
     }
 
     .submenu.active {
@@ -1043,50 +1119,120 @@ ul {
     }
 
     .submenu li a {
-        padding: 10px 0;
+        padding: 10px 15px;
         width: 100%;
-        text-align: center;
+        text-align: left;
         background: transparent;
+        font-size: 0.95rem;
+        color: #666;
     }
 
     /* Mega-menu en mobile */
     .megamenu {
         position: static;
         min-width: 0;
-        grid-template-columns: 1fr;
-        gap: 8px;
         box-shadow: none;
         border-radius: 0;
-        padding: 8px 0 0;
+        padding: 10px 0;
         opacity: 1;
         visibility: visible;
         transform: none;
         display: none;
-        background: transparent;
+        background: #f8f9fa;
+        margin-top: 10px;
     }
-    .megamenu.active { display: block; }
-
-    .hero h1 {
-        font-size: 2.5rem;
+    
+    .megamenu.active {
+        display: block;
     }
-}
+    
+    .megamenu-container {
+        flex-direction: column;
+        padding: 0 15px;
+        gap: 15px;
+    }
+    
+    .megamenu-col {
+        flex: none;
+        width: 100%;
+        padding: 0;
+        border-right: none;
+        border-bottom: 1px solid #e0e0e0;
+        padding-bottom: 15px;
+    }
+    
+    .megamenu-col:last-child {
+        border-bottom: none;
+    }
+    
+    .megamenu-featured {
+        flex: none;
+        width: 100%;
+        margin-left: 0;
+        margin-top: 10px;
+    }
 
-@media (max-width: 768px) {
+    /* Hero section mobile */
+    .hero {
+        padding-top: 120px;
+        min-height: 70vh;
+    }
+    
     .hero h1 {
-        font-size: 2rem;
+        font-size: 2.2rem;
+        line-height: 1.2;
+        margin-bottom: 15px;
     }
 
     .hero p {
         font-size: 1rem;
+        margin-bottom: 25px;
     }
-
-    .services-grid {
+    
+    /* Grilles mobile */
+    .services-grid,
+    .cards-grid,
+    .events-grid,
+    .pedagogy-grid,
+    .solutions-row {
         grid-template-columns: 1fr;
+        gap: 15px;
     }
-
+    
+    /* Cards mobile */
+    .service-card,
+    .course-card,
+    .event-card {
+        padding: 15px;
+    }
+    
+    .course-card .inner {
+        min-height: 180px;
+        padding: 15px;
+    }
+    
+    /* Home hero mobile */
+    .home-hero .grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .home-hero h1 {
+        font-size: 2.4rem;
+        line-height: 1.2;
+    }
+    
+    /* Stats mobile */
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    /* Footer mobile */
     .footer-content {
         grid-template-columns: 1fr;
         text-align: center;
+        gap: 30px;
     }
 
     .footer-section h4:after {
@@ -1097,7 +1243,145 @@ ul {
     .social-links {
         justify-content: center;
     }
+    
+    /* Forms mobile */
+    .newsletter-row {
+        grid-template-columns: 1fr;
+        padding: 20px;
+        text-align: center;
+    }
+    
+    .newsletter-form {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .newsletter-form input {
+        width: 100%;
+    }
+    
+    /* CTA mobile */
+    .cta-row {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding: 20px;
+    }
+    
+    .cta-actions {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    /* Page layout mobile */
+    .page-cta .box {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+    }
+    
+    .category-layout {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .filters-panel {
+        position: static;
+        margin-bottom: 20px;
+    }
+    
+    .category-hero-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
 }
+
+/* Mobile petit (320px - 480px) */
+@media (max-width: 480px) {
+    .container {
+        padding: 0 10px;
+    }
+    
+    /* Navigation très petit mobile */
+    .nav-menu {
+        width: 95%;
+        max-width: none;
+    }
+    
+    .topbar {
+        padding: 6px 10px;
+    }
+    
+    /* Hero très petit mobile */
+    .hero h1 {
+        font-size: 1.8rem;
+        margin-bottom: 12px;
+    }
+    
+    .hero p {
+        font-size: 0.9rem;
+        margin-bottom: 20px;
+    }
+    
+    .home-hero h1 {
+        font-size: 2rem;
+    }
+    
+    /* Cards très petit mobile */
+    .service-card,
+    .course-card,
+    .event-card {
+        padding: 12px;
+    }
+    
+    .course-card .inner {
+        min-height: 160px;
+        padding: 12px;
+    }
+    
+    /* Boutons mobile */
+    .btn {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+    }
+    
+    .btn-large {
+        padding: 10px 20px;
+        font-size: 1rem;
+    }
+    
+    /* Typography mobile */
+    .services h2,
+    .courses h2 {
+        font-size: 1.8rem;
+    }
+    
+    .service-card h3,
+    .course-card h3 {
+        font-size: 1.1rem;
+    }
+    
+    /* Spacing mobile */
+    .services,
+    .courses,
+    .reviews {
+        padding: 30px 0 40px;
+    }
+    
+    .footer {
+        padding: 40px 0 15px;
+    }
+    
+    /* Forms très petit mobile */
+    .cta-row,
+    .newsletter-row {
+        padding: 15px;
+    }
+    
+    .page-cta .box {
+        padding: 15px;
+    }
+}
+
 
 /* Unified Page Layout (Hero, Breadcrumbs, Sections) */
 .page-hero { background: #f7f8fb; padding: 110px 0 36px; border-bottom: 1px solid #eef0f5; }
@@ -1204,3 +1488,555 @@ ul {
 
 /* Titre cartes solutions en capitales */
 .solution-box h3 { text-transform: uppercase; letter-spacing: .5px; }
+
+/* Améliorations responsives globales */
+
+/* Images responsives */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Tableaux responsifs */
+.table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+@media (max-width: 768px) {
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+    
+    thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+    
+    tr {
+        border: 1px solid #ccc;
+        margin-bottom: 10px;
+        padding: 10px;
+        border-radius: 8px;
+    }
+    
+    td {
+        border: none;
+        position: relative;
+        padding-left: 50% !important;
+        text-align: left;
+    }
+    
+    td:before {
+        content: attr(data-label) ": ";
+        position: absolute;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        font-weight: bold;
+    }
+}
+
+/* Vidéos responsives */
+.video-responsive {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    height: 0;
+    overflow: hidden;
+}
+
+.video-responsive iframe,
+.video-responsive object,
+.video-responsive embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Amélioration des formulaires sur mobile */
+@media (max-width: 768px) {
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="password"],
+    textarea,
+    select {
+        width: 100%;
+        padding: 12px;
+        font-size: 16px; /* Évite le zoom sur iOS */
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        box-sizing: border-box;
+    }
+    
+    .form-group {
+        margin-bottom: 15px;
+    }
+    
+    .form-row {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .form-col {
+        width: 100%;
+    }
+}
+
+/* Amélioration des modales sur mobile */
+@media (max-width: 768px) {
+    .modal-content {
+        width: 95%;
+        max-width: none;
+        margin: 20px auto;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+    
+    .modal {
+        padding: 10px;
+    }
+}
+
+/* Amélioration des tooltips et dropdowns sur mobile */
+@media (max-width: 768px) {
+    .tooltip,
+    .dropdown-menu {
+        position: static !important;
+        transform: none !important;
+        box-shadow: none;
+        border-radius: 8px;
+        margin-top: 5px;
+    }
+}
+
+/* Amélioration du scroll horizontal pour les éléments larges */
+.scroll-x {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 768px) {
+    .scroll-x {
+        scrollbar-width: thin;
+        scrollbar-color: #ccc transparent;
+    }
+    
+    .scroll-x::-webkit-scrollbar {
+        height: 4px;
+    }
+    
+    .scroll-x::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 4px;
+    }
+    
+    .scroll-x::-webkit-scrollbar-thumb {
+        background: #ccc;
+        border-radius: 4px;
+    }
+}
+
+/* Amélioration des espacements sur très petits écrans */
+@media (max-width: 360px) {
+    .container {
+        padding: 0 8px;
+    }
+    
+    .hero h1 {
+        font-size: 1.6rem;
+    }
+    
+    .home-hero h1 {
+        font-size: 1.8rem;
+    }
+    
+    .btn {
+        padding: 6px 12px;
+        font-size: 0.85rem;
+    }
+    
+    .service-card,
+    .course-card,
+    .event-card {
+        padding: 10px;
+    }
+    
+    .course-card .inner {
+        min-height: 140px;
+        padding: 10px;
+    }
+}
+
+/* Amélioration de l'accessibilité sur mobile */
+@media (max-width: 768px) {
+    /* Augmentation de la zone de clic */
+    .btn,
+    .nav-link,
+    a {
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    /* Amélioration du contraste pour la lecture */
+    .text-muted {
+        color: #555 !important;
+    }
+    
+    /* Espacement des éléments interactifs */
+    .btn + .btn {
+        margin-left: 8px;
+        margin-top: 8px;
+    }
+}
+
+/* Correction du débordement horizontal */
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+}
+
+.container,
+.megamenu-container {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* Styles pour appareils tactiles */
+.touch-device .nav-link:hover {
+    background-color: transparent;
+}
+
+.touch-device .service-card:hover,
+.touch-device .course-card:hover {
+    transform: none;
+}
+
+/* Amélioration des interactions tactiles */
+@media (hover: none) and (pointer: coarse) {
+    .service-card:hover,
+    .course-card:hover,
+    .event-card:hover {
+        transform: none;
+        box-shadow: 0 6px 14px rgba(16, 44, 120, 0.08);
+    }
+    
+    .btn:hover {
+        transform: none;
+    }
+    
+    .social-links a:hover {
+        transform: none;
+    }
+}
+
+/* Prévention du scroll du body quand le menu mobile est ouvert */
+.no-scroll {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+}
+
+/* Amélioration des focus states pour l'accessibilité */
+@media (max-width: 768px) {
+    .nav-link:focus,
+    .btn:focus,
+    input:focus,
+    textarea:focus,
+    select:focus {
+        outline: 2px solid var(--accent-color);
+        outline-offset: 2px;
+    }
+}
+
+/* Correction des problèmes de viewport sur iOS */
+@supports (-webkit-touch-callout: none) {
+    .hero {
+        min-height: -webkit-fill-available;
+    }
+}
+
+/* Amélioration des cartes sur tablette */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .service-card,
+    .course-card,
+    .event-card {
+        padding: 18px;
+    }
+    
+    .course-card .inner {
+        min-height: 190px;
+        padding: 18px;
+    }
+    
+    .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .hero-img {
+        height: 200px;
+    }
+}
+
+/* Amélioration de la lisibilité sur petits écrans */
+@media (max-width: 480px) {
+    body {
+        font-size: 14px;
+        line-height: 1.5;
+    }
+    
+    h1 { font-size: 1.8rem; }
+    h2 { font-size: 1.5rem; }
+    h3 { font-size: 1.3rem; }
+    h4 { font-size: 1.1rem; }
+    h5 { font-size: 1rem; }
+    h6 { font-size: 0.9rem; }
+    
+    p, li {
+        font-size: 14px;
+        line-height: 1.6;
+    }
+}
+
+/* Correction du débordement des images dans les cartes */
+@media (max-width: 768px) {
+    .event-cover,
+    .card-cover,
+    .hero-img {
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+    
+    .image-card .img {
+        background-size: cover;
+        background-position: center;
+    }
+}
+
+/* Amélioration des espacements verticaux sur mobile */
+@media (max-width: 768px) {
+    section {
+        padding: 40px 0;
+    }
+    
+    .page-hero {
+        padding: 100px 0 30px;
+    }
+    
+    .home-hero {
+        padding: 60px 0 30px;
+    }
+    
+    .services,
+    .courses,
+    .events,
+    .reviews {
+        padding: 40px 0 50px;
+    }
+    
+    .cta-band,
+    .newsletter,
+    .pedagogy {
+        padding: 30px 0 40px;
+    }
+}
+
+/* Amélioration des marges entre les éléments */
+@media (max-width: 768px) {
+    .service-card + .service-card,
+    .course-card + .course-card,
+    .event-card + .event-card {
+        margin-top: 15px;
+    }
+    
+    .btn + .btn {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+    
+    .form-group + .form-group {
+        margin-top: 15px;
+    }
+}
+
+/* Optimisation des performances sur mobile */
+@media (max-width: 768px) {
+    * {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+    }
+    
+    .service-card,
+    .course-card,
+    .event-card {
+        will-change: auto;
+    }
+}
+
+/* Amélioration de la navigation par clavier */
+.nav-link:focus-visible,
+.btn:focus-visible {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* Skip link pour l'accessibilité */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 6px;
+    background: var(--accent-color);
+    color: white;
+    padding: 8px;
+    text-decoration: none;
+    border-radius: 4px;
+    z-index: 9999;
+}
+
+.skip-link:focus {
+    top: 6px;
+}
+
+/* Styles pour la réduction des animations sur mobile */
+.reduce-motion * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+}
+
+.reduce-motion .service-card:hover,
+.reduce-motion .course-card:hover,
+.reduce-motion .event-card:hover {
+    transform: none !important;
+}
+
+/* Utilisation de la variable CSS pour la hauteur du viewport */
+.hero {
+    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
+}
+
+/* Lazy loading des images */
+img.lazy {
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+img.lazy.loaded {
+    opacity: 1;
+}
+
+/* Amélioration des performances avec will-change */
+.service-card,
+.course-card,
+.event-card {
+    will-change: transform, box-shadow;
+}
+
+.service-card:hover,
+.course-card:hover,
+.event-card:hover {
+    will-change: auto;
+}
+
+/* Styles pour les très grands écrans */
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1320px;
+    }
+    
+    .hero h1 {
+        font-size: 3.5rem;
+    }
+    
+    .home-hero h1 {
+        font-size: 3.8rem;
+    }
+    
+    .services-grid,
+    .cards-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 30px;
+    }
+}
+
+/* Styles pour les écrans ultra-larges */
+@media (min-width: 1600px) {
+    .container {
+        max-width: 1500px;
+    }
+    
+    .services-grid {
+        grid-template-columns: repeat(5, 1fr);
+    }
+    
+    .cards-grid {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+/* Correction finale pour les débordements */
+@media (max-width: 768px) {
+    .row,
+    .grid,
+    .flex {
+        flex-wrap: wrap;
+        overflow-x: hidden;
+    }
+    
+    .col,
+    .grid-item {
+        min-width: 0;
+        flex: 1 1 100%;
+    }
+}
+
+/* Print styles pour une meilleure impression */
+@media print {
+    .header,
+    .footer,
+    .nav-menu,
+    .menu-toggle,
+    .btn,
+    .modal {
+        display: none !important;
+    }
+    
+    body {
+        font-size: 12pt;
+        line-height: 1.4;
+        color: #000;
+        background: #fff;
+    }
+    
+    .container {
+        max-width: none;
+        padding: 0;
+    }
+    
+    .service-card,
+    .course-card,
+    .event-card {
+        break-inside: avoid;
+        margin-bottom: 20pt;
+        border: 1pt solid #ccc;
+    }
+}
