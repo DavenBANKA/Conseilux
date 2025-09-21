@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Conseilux - Formation et Développement Professionnel{% endblock %}</title>
+    <meta name="description" content="Conseilux - La formation sur mesure, humaine et digitale. Développez vos compétences avec nos formations professionnelles et accompagnements personnalisés.">
+    <link rel="canonical" href="{{ request.url }}">
+    <!-- OpenGraph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Conseilux - Formation et Développement Professionnel">
+    <meta property="og:description" content="La formation sur mesure, humaine et digitale pour développer vos compétences et celles de vos équipes.">
+    <meta property="og:url" content="{{ request.url }}">
+    <meta property="og:image" content="{{ url_for('static', filename='images/conseilux-og.jpg') }}">
+    <meta property="og:site_name" content="Conseilux">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Modal styles */
+        .modal {
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            position: relative;
+        }
+        
+        .close {
+            position: absolute;
+            right: 15px;
+            top: 15px;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #999;
+        }
+        
+        .close:hover {
+            color: #333;
+        }
+        
+        .modal-content h2 {
+            margin-bottom: 20px;
+            color: #333;
+            text-align: center;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #555;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        
+        .form-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+        
+        .error-message {
+            background-color: #fee;
+            color: #c33;
+            padding: 10px;
+            border-radius: 6px;
+            margin-top: 15px;
+            text-align: center;
+        }
+    </style>
+    <!-- Swiper for sliders -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+    {% block head_extra %}{% endblock %}
+    <style>
+      /* Défilement infini pour la bande de certifications en haut */
+      @keyframes cert-scroll {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+      }
+      .cert-marquee { position: relative; }
+      .cert-marquee .cert-track { width: max-content; }
+      .cert-marquee img { display:inline-block; }
+      @media (prefers-reduced-motion: reduce) {
+        .cert-marquee .cert-track { animation: none !important; }
+      }
+    </style>
+</head>
+<body>
+    <!-- En-tête avec navigation -->
+    <header class="header" role="banner">
+        <div class="container">
+            <!-- Topbar: socials + search + actions -->
+            <div class="topbar" role="region" aria-label="Barre supérieure">
+                <div class="topbar-left">
+                    <a href="https://www.linkedin.com/company/conseilux-training-and-development" target="_blank" aria-label="LinkedIn" class="social"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://www.facebook.com/share/19TBdNAZfy/?mibextid=wwXIfr" target="_blank" aria-label="Facebook" class="social"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/conseilux_training_development?igsh=MXhkMnM5OTk5dzc0Mw%3D%3D&utm_source=qr" target="_blank" aria-label="Instagram" class="social"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="YouTube" class="social"><i class="fab fa-youtube"></i></a>
+                </div>
+                <form class="topbar-search" role="search" aria-label="Recherche de formation" action="{{ url_for('formations') }}" method="get">
+                    <div class="search-field">
+                        <i class="fas fa-search" aria-hidden="true"></i>
+                        <input type="search" name="q" placeholder="Rechercher une formation" aria-label="Rechercher une formation">
+                    </div>
+                    <button class="btn btn-accent btn-pill" type="submit">Rechercher</button>
+                </form>
+                <div class="topbar-actions">
+                    <a href="#" id="header-login-btn" class="btn btn-light btn-pill" onclick="showAdminLogin(); return false;">Connexion <i class="far fa-clock" aria-hidden="true"></i></a>
+                    <a href="{{ url_for('contact') }}" class="btn btn-dark btn-pill">Contact</a>
+                </div>
+            </div>
+            <!-- Bande certifications globale défilante (toutes les images de static/certifications/) -->
+            <div class="cert-marquee" aria-label="Certifications" style="overflow:hidden; padding:8px 0;">
+                <div class="cert-track" style="display:flex; gap:12px; align-items:center; will-change:transform; animation: cert-scroll 30s linear infinite;">
+                    {% for img in certifications_images %}
+                        <img src="{{ url_for('static', filename='certifications/' ~ img) }}" alt="{{ img.rsplit('.', 1)[0] }}" style="height:22px; object-fit:contain; opacity:.95;">
+                    {% endfor %}
+                    {# duplication pour défilement infini #}
+                    {% for img in certifications_images %}
+                        <img src="{{ url_for('static', filename='certifications/' ~ img) }}" alt="" aria-hidden="true" style="height:22px; object-fit:contain; opacity:.95;">
+                    {% endfor %}
+                </div>
+            </div>
+            <nav class="navbar" role="navigation" aria-label="Menu principal">
+                <a href="{{ url_for('home') }}" class="logo" aria-label="Accueil">
+                    <img src="{{ url_for('static', filename='conseilux.jpg') }}" alt="Conseilux Logo">
+                </a>
+                <div class="menu-toggle" id="mobile-menu">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+                <ul class="nav-menu" role="menubar">
+                    <li class="nav-item" role="none">
+                        <a href="{{ url_for('home') }}" class="nav-link {{ 'active' if request.path == url_for('home') }}" role="menuitem">Accueil</a>
+                    </li>
+                    <li class="nav-item has-submenu" role="none">
+                        <a href="{{ url_for('formations') }}" class="nav-link {{ 'active' if request.path == url_for('formations') }}" role="menuitem" aria-haspopup="true" aria-expanded="false">Formations <i class="fas fa-chevron-down" style="font-size:0.8em;margin-left:6px;"></i></a>
+                        <div class="megamenu" role="group" aria-label="Sous-menu Formations">
+                            <div class="megamenu-container">
+                                <div class="megamenu-col">
+                                    <div class="category-header">
+                                        <i class="fas fa-laptop-code"></i>
+                                        <h5>Technologies Numériques & Cybersécurité</h5>
+                                    </div>
+                                    <ul>
+                                        <li><a href="{{ url_for('formation_category', category_slug='tech') }}">IA générative</a></li>
+                                        <li><a href="{{ url_for('formation_category', category_slug='tech') }}">Cybersécurité</a></li>
+                                        <li><a href="{{ url_for('formation_category', category_slug='tech') }}">Cloud & Virtualisation</a></li>
+                                        <li><a href="{{ url_for('formation_category', category_slug='tech') }}">Gouvernance IT</a></li>
+                                    </ul>
+                                </div>
+                                <div class="megamenu-col">
+                                    <div class="category-header">
+                                        <i class="fas fa-project-diagram"></i>
+                                        <h5>Gestion de Projet, Management & Leadership</h5>
+                                    </div>
+                                    <ul>
+                                        <li><a href="{{ url_for('formation_category', category_slug='management') }}">Management & Leadership</a></li>
+                                        <li><a href="{{ url_for('formation_category', category_slug='management') }}">Agile, Scrum & SAFe</a></li>
+                                        <li><a href="{{ url_for('formation_category', category_slug='management') }}">Soft Skills</a></li>
+                                    </ul>
+                                </div>
+                                <div class="megamenu-col">
+                                    <div class="category-header">
+                                        <i class="fas fa-certificate"></i>
+                                        <h5>Normes ISO & QSSE</h5>
+                                    </div>
+                                    <ul>
+                                        <li><a href="{{ url_for('formation_category', category_slug='iso') }}">ISO 9001 (Qualité)</a></li>
+                                        <li><a href="{{ url_for('formation_category', category_slug='iso') }}">ISO 27001 (Sécurité)</a></li>
+                                        <li><a href="{{ url_for('formation_category', category_slug='iso') }}">ISO 14001 (Environnement)</a></li>
+                                        <li><a href="{{ url_for('formation_category', category_slug='iso') }}">ISO 45001 (SST)</a></li>
+                                    </ul>
+                                </div>
+                                <div class="megamenu-col">
+                                    <div class="category-header">
+                                        <i class="fas fa-briefcase"></i>
+                                        <h5>Filières Métiers</h5>
+                                    </div>
+                                    <ul>
+                                        <li><a href="{{ url_for('formation_category', category_slug='metiers') }}">Banque, Finance & Assurance</a></li>
+                                        <li><a href="{{ url_for('formation_category', category_slug='metiers') }}">Comptabilité & Audit</a></li>
+                                        <li><a href="{{ url_for('formation_category', category_slug='metiers') }}">Logistique & Achats</a></li>
+                                        <li><a href="{{ url_for('formation_category', category_slug='metiers') }}">Industrie / Pétrole, Gaz & Mines</a></li>
+                                    </ul>
+                                </div>
+                                <div class="megamenu-col">
+                                    <div class="category-header">
+                                        <i class="fas fa-chart-line"></i>
+                                        <h5>Performance Commerciale</h5>
+                                    </div>
+                                    <ul>
+                                        <li><a href="{{ url_for('formation_category', category_slug='commercial') }}">Relation client & négociation</a></li>
+                                        <li><a href="{{ url_for('formation_category', category_slug='commercial') }}">Leadership commercial</a></li>
+                                        <li><a href="{{ url_for('formation_category', category_slug='commercial') }}">Team Building & Séminaires</a></li>
+                                    </ul>
+                                </div>
+                                <div class="megamenu-col">
+                                    <div class="category-header">
+                                        <i class="fas fa-language"></i>
+                                        <h5>Langues</h5>
+                                    </div>
+                                    <ul>
+                                        <li><a href="{{ url_for('formation_category', category_slug='langues') }}">Anglais professionnel</a></li>
+                                        <li><a href="{{ url_for('formation_category', category_slug='langues') }}">Autres langues</a></li>
+                                    </ul>
+                                </div>
+                                <div class="megamenu-featured">
+                                    <div class="featured-content">
+                                        <h5>Formation à la une</h5>
+                                        <h6>IA Générative pour les entreprises</h6>
+                                        <p>Maîtrisez les dernières avancées en intelligence artificielle générative et leurs applications métiers.</p>
+                                        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                                            <a href="{{ url_for('formation_category', category_slug='tech') }}" class="btn btn-primary">En savoir plus</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="nav-item"><a href="{{ url_for('solutions') }}" class="nav-link {{ 'active' if request.path == url_for('solutions') }}">Nos Solutions</a></li>
+                    <li class="nav-item"><a href="{{ url_for('modalites') }}" class="nav-link {{ 'active' if request.path == url_for('modalites') }}">Modalités</a></li>
+                    <li class="nav-item"><a href="{{ url_for('evenements') }}" class="nav-link {{ 'active' if request.path == url_for('evenements') }}">Événements</a></li>
+                    <li class="nav-item"><a href="{{ url_for('apropos') }}" class="nav-link {{ 'active' if request.path == url_for('apropos') }}">Qui sommes-nous ?</a></li>
+                    <li class="nav-item"><a href="{{ url_for('contact') }}" class="btn btn-primary btn-pill">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    {% block content %}{% endblock %}
+
+    {% include 'partials/footer.html' %}
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script>
+        // Newsletter form submission
+        document.addEventListener('DOMContentLoaded', function() {
+            const newsletterForms = document.querySelectorAll('.newsletter-form');
+            newsletterForms.forEach(function(newsletterForm) {
+                newsletterForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const emailInput = this.querySelector('input[type="email"]');
+                    const submitButton = this.querySelector('button[type="submit"]');
+                    const originalButtonText = submitButton.innerHTML;
+                    
+                    // Validation basique
+                    if (!emailInput.value || !emailInput.value.includes('@')) {
+                        alert('Veuillez entrer une adresse email valide.');
+                        return;
+                    }
+                    
+                    // Désactiver le bouton et changer le texte
+                    submitButton.disabled = true;
+                    submitButton.innerHTML = '<i class="fas fa-spinner fa-spin" style="margin-right: 8px;"></i>Inscription...';
+                    
+                    // Envoyer la requête
+                    fetch('/newsletter', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: 'email=' + encodeURIComponent(emailInput.value)
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.ok) {
+                            alert('✅ ' + data.message);
+                            emailInput.value = '';
+                        } else {
+                            alert('❌ ' + data.error);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Erreur:', error);
+                        alert('❌ Une erreur s\'est produite. Veuillez réessayer.');
+                    })
+                    .finally(() => {
+                        // Réactiver le bouton
+                        submitButton.disabled = false;
+                        submitButton.innerHTML = originalButtonText;
+                    });
+                });
+            });
+        });
+
+        // Gestion de la connexion admin
+        function showAdminLogin() {
+            document.getElementById('adminModal').style.display = 'flex';
+            setTimeout(() => {
+                document.getElementById('adminPassword').focus();
+            }, 100);
+        }
+
+        function closeAdminModal() {
+            document.getElementById('adminModal').style.display = 'none';
+            document.getElementById('adminPassword').value = '';
+            document.getElementById('loginError').style.display = 'none';
+        }
+
+        // Fonction de connexion
+        function handleLogin(e) {
+            e.preventDefault();
+            const password = document.getElementById('adminPassword').value;
+            
+            if (!password) {
+                document.getElementById('loginError').textContent = 'Veuillez entrer un mot de passe';
+                document.getElementById('loginError').style.display = 'block';
+                return;
+            }
+            
+            // Afficher un indicateur de chargement
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Connexion...';
+            submitBtn.disabled = true;
+            
+            fetch('/admin/quick-login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ password: password })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.ok) {
+                    window.location.href = '/admin/newsletter';
+                } else {
+                    document.getElementById('loginError').textContent = 'Mot de passe incorrect';
+                    document.getElementById('loginError').style.display = 'block';
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                }
+            })
+            .catch(err => {
+                document.getElementById('loginError').textContent = 'Erreur de connexion au serveur';
+                document.getElementById('loginError').style.display = 'block';
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            });
+        }
+
+        // Fermer le modal en cliquant à l'extérieur
+        window.onclick = function(event) {
+            const modal = document.getElementById('adminModal');
+            if (event.target === modal) {
+                closeAdminModal();
+            }
+        }
+
+        // Le bouton reste toujours "Connexion" - pas de changement d'apparence
+    </script>
+    <!-- Modal de connexion admin -->
+    <div id="adminModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close" onclick="closeAdminModal()">&times;</span>
+            <h2>Connexion Administrateur</h2>
+            <form id="adminLoginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="adminPassword">Mot de passe :</label>
+                    <input type="password" id="adminPassword" name="password" required placeholder="Entrez votre mot de passe">
+                </div>
+                <div class="form-buttons">
+                    <button type="submit" class="btn btn-primary">Se connecter</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeAdminModal()">Annuler</button>
+                </div>
+            </form>
+            <div id="loginError" class="error-message" style="display: none;"></div>
+        </div>
+    </div>
+
+    {% block body_end %}{% endblock %}
+</body>
+</html>

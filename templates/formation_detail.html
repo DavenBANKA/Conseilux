@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+{% block title %}{{ course.title }} - Conseilux{% endblock %}
+
+{% block content %}
+<!-- Page Hero (detail) -->
+<section class="page-hero">
+  <div class="container">
+    <p class="kicker">{{ category.title }}</p>
+    <h1>{{ course.title }}</h1>
+    <p class="lead">{{ course.excerpt }}</p>
+  </div>
+</section>
+
+<!-- Breadcrumbs -->
+<div class="breadcrumbs" aria-label="Fil d'Ariane">
+  <div class="container">
+    <nav>
+      <a href="{{ url_for('home') }}">Accueil</a>
+      <span class="sep">›</span>
+      <a href="{{ url_for('formations') }}">Formations</a>
+      <span class="sep">›</span>
+      <a href="{{ url_for('formation_category', category_slug=request.path.split('/')[-2]) }}">{{ category.title }}</a>
+      <span class="sep">›</span>
+      <span>{{ course.title }}</span>
+    </nav>
+  </div>
+</div>
+
+<!-- Cover + facts -->
+<section class="page-section">
+  <div class="container">
+    <div style="display:grid;grid-template-columns: 1.1fr .9fr; gap: 20px; align-items: start;">
+      <div class="feature" style="padding:0; overflow:hidden;">
+        <div style="height:280px; background-image:url('{{ course.image }}'); background-size:cover; background-position:center;"></div>
+        <div style="padding:16px;">
+          <div class="badge-row" style="display:flex;gap:8px;margin-bottom:8px;">
+            <span class="chip accent">{{ course.badge }}</span>
+          </div>
+          <p style="color:#5a6472;">{{ course.excerpt }}</p>
+        </div>
+      </div>
+      <aside class="feature">
+        <h3 style="margin-bottom:8px;">Informations clés</h3>
+        <ul style="margin:0;">
+          <li><strong>Durée:</strong> {{ course.duration }}</li>
+          <li><strong>Modalités:</strong>
+            {% for m in course.modalities %}
+              <span class="chip" style="margin-left:6px;">{{ m }}</span>
+            {% endfor %}
+          </li>
+          <li><strong>Tags:</strong>
+            {% for t in course.tags %}
+              <span class="chip" style="margin-left:6px;">{{ t }}</span>
+            {% endfor %}
+          </li>
+        </ul>
+        <div style="margin-top:12px;">
+          <a href="{{ url_for('contact') }}" class="btn btn-accent btn-pill">Demander un devis</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- Programme, Objectifs, Public -->
+<section class="page-section alt">
+  <div class="container">
+    <div class="section-head">
+      <h2>Programme</h2>
+      <p class="section-sub">Exemple de trame modulable selon vos besoins.</p>
+    </div>
+    <div class="feature-grid">
+      <div class="feature">
+        <h3>Objectifs pédagogiques</h3>
+        <ul>
+          <li>Comprendre les fondamentaux et le vocabulaire clé</li>
+          <li>Appliquer les concepts sur des cas d’usage métier</li>
+          <li>Mesurer les gains et sécuriser les pratiques</li>
+        </ul>
+      </div>
+      <div class="feature">
+        <h3>Public & Pré‑requis</h3>
+        <ul>
+          <li>Managers, équipes techniques et métiers</li>
+          <li>Pré‑requis: notions de base du domaine</li>
+          <li>Parcours d’acculturation possible en amont</li>
+        </ul>
+      </div>
+      <div class="feature">
+        <h3>Contenus</h3>
+        <ul>
+          <li>Panorama des pratiques et standards</li>
+          <li>Ateliers sur données / processus de l’entreprise</li>
+          <li>Plan d’action individuel et collectif</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Modalités & Financement -->
+<section class="page-section">
+  <div class="container">
+    <div class="section-head">
+      <h2>Modalités & Financement</h2>
+    </div>
+    <div class="feature-grid">
+      <div class="feature">
+        <h3>Modalités</h3>
+        <ul>
+          <li>Présentiel, visioformation, elearning</li>
+          <li>Sessions inter / intra, accompagnement individuel</li>
+          <li>Évaluation des acquis et attestation</li>
+        </ul>
+      </div>
+      <div class="feature">
+        <h3>Financement</h3>
+        <ul>
+          <li>Plan de développement des compétences</li>
+          <li>Opérateurs de compétences (OPCO)</li>
+          <li>FNE‑Formation selon éligibilité</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="page-cta">
+  <div class="container">
+    <div class="box">
+      <div>
+        <h3>Construisons la bonne trajectoire pour vos équipes</h3>
+        <p>Parlez‑nous de vos enjeux, on vous conseille rapidement.</p>
+      </div>
+      <div>
+        <a href="{{ url_for('contact') }}" class="btn btn-accent btn-pill">Parler à un conseiller</a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

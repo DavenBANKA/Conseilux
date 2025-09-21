@@ -1,0 +1,177 @@
+{% extends 'base.html' %}
+
+{% block title %}Contact - Conseilux{% endblock %}
+
+{% block head_extra %}
+<style>
+:root {
+    --primary: #2563eb;
+    --primary-light: #3b82f6;
+    --primary-dark: #1d4ed8;
+    --dark: #1e293b;
+    --gray-700: #334155;
+    --white: #ffffff;
+}
+
+.contact-hero {
+    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+    color: white;
+    padding: 4rem 0;
+    text-align: center;
+}
+
+.contact-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.contact-info {
+    padding: 1rem 0;
+}
+
+.contact-method {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+}
+
+.contact-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    margin-right: 1rem;
+}
+
+.contact-form-container {
+    background: var(--white);
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    padding: 2rem;
+    position: relative;
+}
+
+.contact-form-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, var(--primary), var(--primary-light));
+    border-radius: 0.5rem 0.5rem 0 0;
+}
+
+.form-group {
+    margin-bottom: 1.25rem;
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.375rem;
+}
+
+.btn-submit {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    width: 100%;
+}
+
+.btn-submit:hover {
+    background: var(--primary-dark);
+}
+
+@media (max-width: 768px) {
+    .contact-container {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="contact-hero">
+    <div class="container">
+        <h1>Contactez-nous</h1>
+        <p>Notre équipe est à votre écoute pour répondre à toutes vos questions.</p>
+    </div>
+</section>
+
+<div class="contact-container">
+    <div class="contact-info">
+        <h2>Informations de contact</h2>
+        
+        <div class="contact-method">
+            <div class="contact-icon">
+                <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <div>
+                <h3>Adresse</h3>
+                <p>123 Rue de l'Exemple<br>75000 Paris, France</p>
+            </div>
+        </div>
+        
+        <div class="contact-method">
+            <div class="contact-icon">
+                <i class="fas fa-phone"></i>
+            </div>
+            <div>
+                <h3>Téléphone</h3>
+                <p><a href="tel:+33123456789">+33 1 23 45 67 89</a></p>
+            </div>
+        </div>
+        
+        <div class="contact-method">
+            <div class="contact-icon">
+                <i class="fas fa-envelope"></i>
+            </div>
+            <div>
+                <h3>Email</h3>
+                <p><a href="mailto:contact@conseilux.fr">contact@conseilux.fr</a></p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="contact-form-container">
+        <h2>Envoyez-nous un message</h2>
+        
+        <form method="post" class="contact-form">
+            <div class="form-group">
+                <label for="name">Nom complet *</label>
+                <input type="text" id="name" name="name" class="form-control" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email *</label>
+                <input type="email" id="email" name="email" class="form-control" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="subject">Sujet</label>
+                <input type="text" id="subject" name="subject" class="form-control">
+            </div>
+            
+            <div class="form-group">
+                <label for="message">Message *</label>
+                <textarea id="message" name="message" class="form-control" rows="5" required></textarea>
+            </div>
+            
+            <button type="submit" class="btn-submit">Envoyer le message</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

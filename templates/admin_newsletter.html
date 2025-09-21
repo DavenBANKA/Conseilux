@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block title %}Administration Newsletter - Conseilux{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+  <div class="container">
+    <h1>Administration Newsletter</h1>
+    <p class="lead">Gestion des abonnés à la newsletter</p>
+  </div>
+</section>
+
+<section class="page-section">
+  <div class="container">
+    <div class="section-head">
+      <h2>Abonnés Newsletter</h2>
+      <p class="section-sub">Total: {{ abonnes|length }} abonné(s)</p>
+    </div>
+
+    {% if abonnes %}
+    <div style="overflow-x: auto;">
+      <table style="width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+        <thead>
+          <tr style="background: #f8f9fa;">
+            <th style="padding: 15px; text-align: left; border-bottom: 1px solid #dee2e6;">ID</th>
+            <th style="padding: 15px; text-align: left; border-bottom: 1px solid #dee2e6;">Email</th>
+            <th style="padding: 15px; text-align: left; border-bottom: 1px solid #dee2e6;">Date d'inscription</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for abonne in abonnes %}
+          <tr style="border-bottom: 1px solid #f1f3f4;">
+            <td style="padding: 15px;">{{ abonne.id }}</td>
+            <td style="padding: 15px; font-weight: 500;">{{ abonne.email }}</td>
+            <td style="padding: 15px;">{{ abonne.date_inscription.strftime('%d/%m/%Y à %H:%M') }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <div style="text-align: center; padding: 40px; background: #f8f9fa; border-radius: 8px;">
+      <p style="color: #6c757d; margin: 0;">Aucun abonné pour le moment.</p>
+    </div>
+    {% endif %}
+
+    <div style="margin-top: 30px; text-align: center;">
+      <a href="{{ url_for('admin_logout') }}" class="btn btn-secondary" style="margin-right: 15px;">Se déconnecter</a>
+      <a href="{{ url_for('home') }}" class="btn btn-primary">Retour à l'accueil</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

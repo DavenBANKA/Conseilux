@@ -1,0 +1,427 @@
+{% extends 'base.html' %}
+
+{% block title %}Formations - Conseilux{% endblock %}
+
+{% block content %}
+    <!-- Hero Section -->
+    <section class="formations-hero" style="background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%); padding: 120px 0; position: relative; overflow: hidden;">
+        <!-- Éléments décoratifs -->
+        <div style="position: absolute; top: -100px; right: -100px; width: 300px; height: 300px; background: rgba(255,255,255,0.1); border-radius: 50%; opacity: 0.5;"></div>
+        <div style="position: absolute; bottom: -50px; left: -50px; width: 200px; height: 200px; background: rgba(255,255,255,0.08); border-radius: 50%;"></div>
+        
+        <div class="container">
+            <div style="display: grid; grid-template-columns: 1fr 400px; gap: 60px; align-items: center; max-width: 1200px; margin: 0 auto;">
+                <div style="color: white;">
+                    <p class="kicker" style="color: rgba(255,255,255,0.9); font-size: 1.1rem; margin-bottom: 16px; font-weight: 600;">Catalogue 2025</p>
+                    <h1 style="font-size: 3.5rem; font-weight: 800; line-height: 1.1; margin-bottom: 24px;">Nos Formations Professionnelles</h1>
+                    <p style="font-size: 1.2rem; line-height: 1.6; margin-bottom: 40px; color: rgba(255,255,255,0.9);">
+                        Développez les compétences de demain avec nos parcours certifiants. Formation présentielle, distancielle ou blended learning.
+                    </p>
+                    <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                        <a href="#catalogue" class="btn btn-primary" style="background: white; color: var(--primary-color); padding: 16px 32px; border-radius: 50px; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: all 0.3s ease;">
+                            Voir le catalogue <i class="fas fa-arrow-down"></i>
+                        </a>
+                        <a href="{{ url_for('contact') }}" class="btn" style="background: rgba(255,255,255,0.2); color: white; padding: 16px 32px; border-radius: 50px; font-weight: 600; text-decoration: none; border: 2px solid rgba(255,255,255,0.3); transition: all 0.3s ease;">
+                            Nous contacter
+                        </a>
+                    </div>
+                </div>
+                <div style="position: relative;">
+                    <div style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 20px; padding: 40px; border: 1px solid rgba(255,255,255,0.2);">
+                        <div style="background: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=400&h=300&q=80'); background-size: cover; background-position: center; height: 200px; border-radius: 12px; margin-bottom: 20px;"></div>
+                        <h3 style="color: white; font-size: 1.3rem; margin-bottom: 8px; font-weight: 600;">Formation Interactive</h3>
+                        <p style="color: rgba(255,255,255,0.8); font-size: 0.95rem;">Méthodes pédagogiques innovantes pour un apprentissage optimal</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistiques -->
+    <section class="formations-stats" style="padding: 80px 0; background: #f8fafc;">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; text-align: center;">
+                <div>
+                    <div style="font-size: 3rem; font-weight: 800; color: var(--primary-color); margin-bottom: 8px;">492+</div>
+                    <div style="font-size: 1.1rem; color: #64748b; font-weight: 500;">Formations disponibles</div>
+                </div>
+                <div>
+                    <div style="font-size: 3rem; font-weight: 800; color: var(--accent-color); margin-bottom: 8px;">99.1%</div>
+                    <div style="font-size: 1.1rem; color: #64748b; font-weight: 500;">Taux de satisfaction</div>
+                </div>
+                <div>
+                    <div style="font-size: 3rem; font-weight: 800; color: var(--primary-color); margin-bottom: 8px;">150+</div>
+                    <div style="font-size: 1.1rem; color: #64748b; font-weight: 500;">Formateurs experts</div>
+                </div>
+                <div>
+                    <div style="font-size: 3rem; font-weight: 800; color: var(--accent-color); margin-bottom: 8px;">24/7</div>
+                    <div style="font-size: 1.1rem; color: #64748b; font-weight: 500;">Support disponible</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications -->
+    <section class="certifications" style="padding: 80px 0; background: #ffffff;">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 60px;">
+                <p class="kicker" style="color: var(--accent-color); font-weight: 600; font-size: 1.1rem; margin-bottom: 16px;">Accréditations</p>
+                <h2 style="font-size: 2.5rem; font-weight: 800; color: var(--brand-dark); margin-bottom: 20px;">Nos Certifications & Partenaires</h2>
+                <p style="font-size: 1.1rem; color: #64748b; max-width: 600px; margin: 0 auto;">
+                    Conseilux est accrédité par les plus grands organismes de certification internationaux
+                </p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 30px; align-items: center; margin-bottom: 60px;">
+                <div style="background: white; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border: 1px solid #e2e8f0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 25px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.08)'">
+                    <img src="{{ url_for('static', filename='certifications/apics.png') }}" alt="APICS" style="max-width: 100%; height: 60px; object-fit: contain;">
+                </div>
+                <div style="background: white; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border: 1px solid #e2e8f0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 25px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.08)'">
+                    <img src="{{ url_for('static', filename='certifications/british.png') }}" alt="British Council" style="max-width: 100%; height: 60px; object-fit: contain;">
+                </div>
+                <div style="background: white; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border: 1px solid #e2e8f0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 25px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.08)'">
+                    <img src="{{ url_for('static', filename='certifications/cambridge.png') }}" alt="Cambridge" style="max-width: 100%; height: 60px; object-fit: contain;">
+                </div>
+                <div style="background: white; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border: 1px solid #e2e8f0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 25px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.08)'">
+                    <img src="{{ url_for('static', filename='certifications/cgeit.png') }}" alt="CGEIT" style="max-width: 100%; height: 60px; object-fit: contain;">
+                </div>
+                <div style="background: white; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border: 1px solid #e2e8f0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 25px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.08)'">
+                    <img src="{{ url_for('static', filename='certifications/cisaf.png') }}" alt="CISAF" style="max-width: 100%; height: 60px; object-fit: contain;">
+                </div>
+                <div style="background: white; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border: 1px solid #e2e8f0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 25px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.08)'">
+                    <img src="{{ url_for('static', filename='certifications/cobit.png') }}" alt="COBIT" style="max-width: 100%; height: 60px; object-fit: contain;">
+                </div>
+                <div style="background: white; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border: 1px solid #e2e8f0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 25px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.08)'">
+                    <img src="{{ url_for('static', filename='certifications/ielts.png') }}" alt="IELTS" style="max-width: 100%; height: 60px; object-fit: contain;">
+                </div>
+                <div style="background: white; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border: 1px solid #e2e8f0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 25px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.08)'">
+                    <img src="{{ url_for('static', filename='certifications/ifrs.png') }}" alt="IFRS" style="max-width: 100%; height: 60px; object-fit: contain;">
+                </div>
+                <div style="background: white; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border: 1px solid #e2e8f0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 25px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.08)'">
+                    <img src="{{ url_for('static', filename='certifications/isaca.png') }}" alt="ISACA" style="max-width: 100%; height: 60px; object-fit: contain;">
+                </div>
+                <div style="background: white; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border: 1px solid #e2e8f0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 25px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.08)'">
+                    <img src="{{ url_for('static', filename='certifications/iso.png') }}" alt="ISO" style="max-width: 100%; height: 60px; object-fit: contain;">
+                </div>
+                <div style="background: white; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border: 1px solid #e2e8f0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 25px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.08)'">
+                    <img src="{{ url_for('static', filename='certifications/itil.png') }}" alt="ITIL" style="max-width: 100%; height: 60px; object-fit: contain;">
+                </div>
+                <div style="background: white; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border: 1px solid #e2e8f0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 25px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.08)'">
+                    <img src="{{ url_for('static', filename='certifications/lean six sigma.png') }}" alt="Lean Six Sigma" style="max-width: 100%; height: 60px; object-fit: contain;">
+                </div>
+                <div style="background: white; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border: 1px solid #e2e8f0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 25px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.08)'">
+                    <img src="{{ url_for('static', filename='certifications/nebosh.png') }}" alt="NEBOSH" style="max-width: 100%; height: 60px; object-fit: contain;">
+                </div>
+                <div style="background: white; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border: 1px solid #e2e8f0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 25px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.08)'">
+                    <img src="{{ url_for('static', filename='certifications/pecb.png') }}" alt="PECB" style="max-width: 100%; height: 60px; object-fit: contain;">
+                </div>
+                <div style="background: white; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border: 1px solid #e2e8f0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 25px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.08)'">
+                    <img src="{{ url_for('static', filename='certifications/pmp.png') }}" alt="PMP" style="max-width: 100%; height: 60px; object-fit: contain;">
+                </div>
+                <div style="background: white; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border: 1px solid #e2e8f0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 25px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.08)'">
+                    <img src="{{ url_for('static', filename='certifications/safe.png') }}" alt="SAFe" style="max-width: 100%; height: 60px; object-fit: contain;">
+                </div>
+                <div style="background: white; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border: 1px solid #e2e8f0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 25px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.08)'">
+                    <img src="{{ url_for('static', filename='certifications/scrum.png') }}" alt="Scrum" style="max-width: 100%; height: 60px; object-fit: contain;">
+                </div>
+                <div style="background: white; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border: 1px solid #e2e8f0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 25px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.08)'">
+                    <img src="{{ url_for('static', filename='certifications/toefl.png') }}" alt="TOEFL" style="max-width: 100%; height: 60px; object-fit: contain;">
+                </div>
+                <div style="background: white; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border: 1px solid #e2e8f0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 25px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.08)'">
+                    <img src="{{ url_for('static', filename='certifications/toeic.png') }}" alt="TOEIC" style="max-width: 100%; height: 60px; object-fit: contain;">
+                </div>
+                <div style="background: white; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border: 1px solid #e2e8f0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 25px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.08)'">
+                    <img src="{{ url_for('static', filename='certifications/togaf.png') }}" alt="TOGAF" style="max-width: 100%; height: 60px; object-fit: contain;">
+                </div>
+            </div>
+
+            <!-- Partenaires -->
+            <div style="text-align: center; margin-bottom: 40px;">
+                <h3 style="font-size: 1.8rem; font-weight: 700; color: var(--brand-dark); margin-bottom: 30px;">Nos Partenaires de Confiance</h3>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 25px; align-items: center;">
+                <div style="background: white; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.06); border: 1px solid #f0f0f0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.1)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.06)'">
+                    <img src="{{ url_for('static', filename='partenaires/aibd.png') }}" alt="AIBD" style="max-width: 100%; height: 50px; object-fit: contain;">
+                </div>
+                <div style="background: white; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.06); border: 1px solid #f0f0f0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.1)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.06)'">
+                    <img src="{{ url_for('static', filename='partenaires/air liquide.png') }}" alt="Air Liquide" style="max-width: 100%; height: 50px; object-fit: contain;">
+                </div>
+                <div style="background: white; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.06); border: 1px solid #f0f0f0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.1)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.06)'">
+                    <img src="{{ url_for('static', filename='partenaires/anglogold.png') }}" alt="AngloGold" style="max-width: 100%; height: 50px; object-fit: contain;">
+                </div>
+                <div style="background: white; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.06); border: 1px solid #f0f0f0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.1)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.06)'">
+                    <img src="{{ url_for('static', filename='partenaires/ansd.png') }}" alt="ANSD" style="max-width: 100%; height: 50px; object-fit: contain;">
+                </div>
+                <div style="background: white; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.06); border: 1px solid #f0f0f0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.1)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.06)'">
+                    <img src="{{ url_for('static', filename='partenaires/apm terminals.png') }}" alt="APM Terminals" style="max-width: 100%; height: 50px; object-fit: contain;">
+                </div>
+                <div style="background: white; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.06); border: 1px solid #f0f0f0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.1)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.06)'">
+                    <img src="{{ url_for('static', filename='partenaires/boa.png') }}" alt="BOA" style="max-width: 100%; height: 50px; object-fit: contain;">
+                </div>
+                <div style="background: white; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.06); border: 1px solid #f0f0f0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.1)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.06)'">
+                    <img src="{{ url_for('static', filename='partenaires/bollore.png') }}" alt="Bolloré" style="max-width: 100%; height: 50px; object-fit: contain;">
+                </div>
+                <div style="background: white; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.06); border: 1px solid #f0f0f0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.1)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.06)'">
+                    <img src="{{ url_for('static', filename='partenaires/cat.png') }}" alt="CAT" style="max-width: 100%; height: 50px; object-fit: contain;">
+                </div>
+                <div style="background: white; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.06); border: 1px solid #f0f0f0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.1)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.06)'">
+                    <img src="{{ url_for('static', filename='partenaires/cbi.png') }}" alt="CBI" style="max-width: 100%; height: 50px; object-fit: contain;">
+                </div>
+                <div style="background: white; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.06); border: 1px solid #f0f0f0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.1)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.06)'">
+                    <img src="{{ url_for('static', filename='partenaires/cde.png') }}" alt="CDE" style="max-width: 100%; height: 50px; object-fit: contain;">
+                </div>
+                <div style="background: white; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.06); border: 1px solid #f0f0f0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.1)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.06)'">
+                    <img src="{{ url_for('static', filename='partenaires/cfmpl.png') }}" alt="CFMPL" style="max-width: 100%; height: 50px; object-fit: contain;">
+                </div>
+                <div style="background: white; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.06); border: 1px solid #f0f0f0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.1)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.06)'">
+                    <img src="{{ url_for('static', filename='partenaires/cotecna.png') }}" alt="Cotecna" style="max-width: 100%; height: 50px; object-fit: contain;">
+                </div>
+                <div style="background: white; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.06); border: 1px solid #f0f0f0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.1)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.06)'">
+                    <img src="{{ url_for('static', filename='partenaires/diamond.png') }}" alt="Diamond" style="max-width: 100%; height: 50px; object-fit: contain;">
+                </div>
+                <div style="background: white; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.06); border: 1px solid #f0f0f0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.1)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.06)'">
+                    <img src="{{ url_for('static', filename='partenaires/dp world.png') }}" alt="DP World" style="max-width: 100%; height: 50px; object-fit: contain;">
+                </div>
+                <div style="background: white; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.06); border: 1px solid #f0f0f0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.1)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.06)'">
+                    <img src="{{ url_for('static', filename='partenaires/ecobank.png') }}" alt="Ecobank" style="max-width: 100%; height: 50px; object-fit: contain;">
+                </div>
+                <div style="background: white; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.06); border: 1px solid #f0f0f0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.1)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.06)'">
+                    <img src="{{ url_for('static', filename='partenaires/eiffage.png') }}" alt="Eiffage" style="max-width: 100%; height: 50px; object-fit: contain;">
+                </div>
+                <div style="background: white; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.06); border: 1px solid #f0f0f0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.1)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.06)'">
+                    <img src="{{ url_for('static', filename='partenaires/lonase.png') }}" alt="Lonase" style="max-width: 100%; height: 50px; object-fit: contain;">
+                </div>
+                <div style="background: white; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.06); border: 1px solid #f0f0f0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.1)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.06)'">
+                    <img src="{{ url_for('static', filename='partenaires/mccann.png') }}" alt="McCann" style="max-width: 100%; height: 50px; object-fit: contain;">
+                </div>
+                <div style="background: white; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.06); border: 1px solid #f0f0f0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.1)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.06)'">
+                    <img src="{{ url_for('static', filename='partenaires/noom.png') }}" alt="Noom" style="max-width: 100%; height: 50px; object-fit: contain;">
+                </div>
+                <div style="background: white; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.06); border: 1px solid #f0f0f0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.1)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.06)'">
+                    <img src="{{ url_for('static', filename='partenaires/oryx.png') }}" alt="Oryx" style="max-width: 100%; height: 50px; object-fit: contain;">
+                </div>
+                <div style="background: white; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.06); border: 1px solid #f0f0f0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.1)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.06)'">
+                    <img src="{{ url_for('static', filename='partenaires/osiwa.png') }}" alt="Osiwa" style="max-width: 100%; height: 50px; object-fit: contain;">
+                </div>
+                <div style="background: white; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.06); border: 1px solid #f0f0f0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.1)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.06)'">
+                    <img src="{{ url_for('static', filename='partenaires/plan.png') }}" alt="Plan" style="max-width: 100%; height: 50px; object-fit: contain;">
+                </div>
+                <div style="background: white; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.06); border: 1px solid #f0f0f0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.1)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.06)'">
+                    <img src="{{ url_for('static', filename='partenaires/pnud.png') }}" alt="PNUD" style="max-width: 100%; height: 50px; object-fit: contain;">
+                </div>
+                <div style="background: white; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.06); border: 1px solid #f0f0f0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.1)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.06)'">
+                    <img src="{{ url_for('static', filename='partenaires/save the children.png') }}" alt="Save the Children" style="max-width: 100%; height: 50px; object-fit: contain;">
+                </div>
+                <div style="background: white; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.06); border: 1px solid #f0f0f0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.1)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.06)'">
+                    <img src="{{ url_for('static', filename='partenaires/segub.png') }}" alt="SEGUB" style="max-width: 100%; height: 50px; object-fit: contain;">
+                </div>
+                <div style="background: white; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.06); border: 1px solid #f0f0f0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.1)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.06)'">
+                    <img src="{{ url_for('static', filename='partenaires/senelec.png') }}" alt="Senelec" style="max-width: 100%; height: 50px; object-fit: contain;">
+                </div>
+                <div style="background: white; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.06); border: 1px solid #f0f0f0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.1)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.06)'">
+                    <img src="{{ url_for('static', filename='partenaires/sonatel.png') }}" alt="Sonatel" style="max-width: 100%; height: 50px; object-fit: contain;">
+                </div>
+                <div style="background: white; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.06); border: 1px solid #f0f0f0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.1)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.06)'">
+                    <img src="{{ url_for('static', filename='partenaires/tigo.png') }}" alt="Tigo" style="max-width: 100%; height: 50px; object-fit: contain;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Catalogue des formations -->
+    <section id="catalogue" class="formations-catalogue" style="padding: 100px 0;">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 60px;">
+                <p class="kicker" style="color: var(--accent-color); font-weight: 600; font-size: 1.1rem; margin-bottom: 16px;">Catalogue</p>
+                <h2 style="font-size: 2.5rem; font-weight: 800; color: var(--brand-dark); margin-bottom: 20px;">Nos Domaines de Formation</h2>
+                <p style="font-size: 1.1rem; color: #64748b; max-width: 600px; margin: 0 auto;">
+                    Découvrez nos parcours certifiants organisés par domaines d'expertise
+                </p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px;">
+                <!-- Technologies Numériques -->
+                <div style="background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); border-radius: 20px; padding: 40px; color: white; position: relative; overflow: hidden;">
+                    <div style="position: absolute; top: -20px; right: -20px; width: 100px; height: 100px; background: rgba(255,255,255,0.1); border-radius: 50%;"></div>
+                    <div style="font-size: 3rem; margin-bottom: 20px;"><i class="fas fa-laptop-code"></i></div>
+                    <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 16px;">Technologies Numériques & Cybersécurité</h3>
+                    <p style="margin-bottom: 20px; opacity: 0.9;">Gouvernance, sécurité et technologies pour accélérer vos transformations.</p>
+                    <ul style="list-style: none; padding: 0; margin-bottom: 30px;">
+                        <li style="margin-bottom: 8px;"><i class="fas fa-check" style="color: #22c55e; margin-right: 8px;"></i>ITIL® V4 Foundation</li>
+                        <li style="margin-bottom: 8px;"><i class="fas fa-check" style="color: #22c55e; margin-right: 8px;"></i>Cybersécurité & Cloud</li>
+                        <li style="margin-bottom: 8px;"><i class="fas fa-check" style="color: #22c55e; margin-right: 8px;"></i>IA générative appliquée</li>
+                        <li style="margin-bottom: 8px;"><i class="fas fa-check" style="color: #22c55e; margin-right: 8px;"></i>COBIT® 2019</li>
+                        <li style="margin-bottom: 8px;"><i class="fas fa-check" style="color: #22c55e; margin-right: 8px;"></i>TOGAF® 9</li>
+                        <li style="margin-bottom: 8px;"><i class="fas fa-check" style="color: #22c55e; margin-right: 8px;"></i>SOC & SIEM</li>
+                    </ul>
+                    <a href="{{ url_for('formation_category', category_slug='tech') }}" style="background: white; color: var(--primary-color); padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 8px;">
+                        Voir les formations <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <!-- Management & Leadership -->
+                <div style="background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); border-radius: 20px; padding: 40px; color: white; position: relative; overflow: hidden;">
+                    <div style="position: absolute; top: -20px; right: -20px; width: 100px; height: 100px; background: rgba(255,255,255,0.1); border-radius: 50%;"></div>
+                    <div style="font-size: 3rem; margin-bottom: 20px;"><i class="fas fa-project-diagram"></i></div>
+                    <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 16px;">Management & Leadership</h3>
+                    <p style="margin-bottom: 20px; opacity: 0.9;">Certifications et méthodes pour piloter et transformer les équipes.</p>
+                    <ul style="list-style: none; padding: 0; margin-bottom: 30px;">
+                        <li style="margin-bottom: 8px;"><i class="fas fa-check" style="color: #22c55e; margin-right: 8px;"></i>PMP® & Prince2®</li>
+                        <li style="margin-bottom: 8px;"><i class="fas fa-check" style="color: #22c55e; margin-right: 8px;"></i>Agile & Scrum</li>
+                        <li style="margin-bottom: 8px;"><i class="fas fa-check" style="color: #22c55e; margin-right: 8px;"></i>Lean Six Sigma</li>
+                        <li style="margin-bottom: 8px;"><i class="fas fa-check" style="color: #22c55e; margin-right: 8px;"></i>SAFe® (PO/PM, RTE)</li>
+                        <li style="margin-bottom: 8px;"><i class="fas fa-check" style="color: #22c55e; margin-right: 8px;"></i>Kanban Essentiels</li>
+                    </ul>
+                    <a href="{{ url_for('formation_category', category_slug='management') }}" style="background: white; color: var(--primary-color); padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 8px;">
+                        Voir les formations <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <!-- Normes ISO -->
+                <div style="background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); border-radius: 20px; padding: 40px; color: white; position: relative; overflow: hidden;">
+                    <div style="position: absolute; top: -20px; right: -20px; width: 100px; height: 100px; background: rgba(255,255,255,0.1); border-radius: 50%;"></div>
+                    <div style="font-size: 3rem; margin-bottom: 20px;"><i class="fas fa-certificate"></i></div>
+                    <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 16px;">Normes ISO & QSSE</h3>
+                    <p style="margin-bottom: 20px; opacity: 0.9;">Systèmes certifiables au meilleur niveau international.</p>
+                    <ul style="list-style: none; padding: 0; margin-bottom: 30px;">
+                        <li style="margin-bottom: 8px;"><i class="fas fa-check" style="color: #22c55e; margin-right: 8px;"></i>ISO 9001, 14001, 45001</li>
+                        <li style="margin-bottom: 8px;"><i class="fas fa-check" style="color: #22c55e; margin-right: 8px;"></i>ISO 27001</li>
+                        <li style="margin-bottom: 8px;"><i class="fas fa-check" style="color: #22c55e; margin-right: 8px;"></i>NEBOSH IGC</li>
+                    </ul>
+                    <a href="{{ url_for('formation_category', category_slug='iso') }}" style="background: white; color: var(--primary-color); padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 8px;">
+                        Voir les formations <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <!-- Performance Commerciale -->
+                <div style="background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); border-radius: 20px; padding: 40px; color: white; position: relative; overflow: hidden;">
+                    <div style="position: absolute; top: -20px; right: -20px; width: 100px; height: 100px; background: rgba(255,255,255,0.1); border-radius: 50%;"></div>
+                    <div style="font-size: 3rem; margin-bottom: 20px;"><i class="fas fa-chart-line"></i></div>
+                    <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 16px;">Performance Commerciale</h3>
+                    <p style="margin-bottom: 20px; opacity: 0.9;">Parcours orientés résultats pour l'efficacité commerciale.</p>
+                    <ul style="list-style: none; padding: 0; margin-bottom: 30px;">
+                        <li style="margin-bottom: 8px;"><i class="fas fa-check" style="color: #22c55e; margin-right: 8px;"></i>Techniques de vente</li>
+                        <li style="margin-bottom: 8px;"><i class="fas fa-check" style="color: #22c55e; margin-right: 8px;"></i>Leadership commercial</li>
+                        <li style="margin-bottom: 8px;"><i class="fas fa-check" style="color: #22c55e; margin-right: 8px;"></i>Relation client</li>
+                    </ul>
+                    <a href="{{ url_for('formation_category', category_slug='commercial') }}" style="background: white; color: var(--primary-color); padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 8px;">
+                        Voir les formations <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <!-- Langues -->
+                <div style="background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); border-radius: 20px; padding: 40px; color: white; position: relative; overflow: hidden;">
+                    <div style="position: absolute; top: -20px; right: -20px; width: 100px; height: 100px; background: rgba(255,255,255,0.1); border-radius: 50%;"></div>
+                    <div style="font-size: 3rem; margin-bottom: 20px;"><i class="fas fa-language"></i></div>
+                    <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 16px;">Langues</h3>
+                    <p style="margin-bottom: 20px; opacity: 0.9;">Anglais professionnel et préparation aux certifications.</p>
+                    <ul style="list-style: none; padding: 0; margin-bottom: 30px;">
+                        <li style="margin-bottom: 8px;"><i class="fas fa-check" style="color: #22c55e; margin-right: 8px;"></i>Business English</li>
+                        <li style="margin-bottom: 8px;"><i class="fas fa-check" style="color: #22c55e; margin-right: 8px;"></i>TOEFL, TOEIC, IELTS</li>
+                        <li style="margin-bottom: 8px;"><i class="fas fa-check" style="color: #22c55e; margin-right: 8px;"></i>Cambridge</li>
+                    </ul>
+                    <a href="{{ url_for('formation_category', category_slug='langues') }}" style="background: white; color: var(--primary-color); padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 8px;">
+                        Voir les formations <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <!-- Filières Métiers -->
+                <div style="background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); border-radius: 20px; padding: 40px; color: white; position: relative; overflow: hidden;">
+                    <div style="position: absolute; top: -20px; right: -20px; width: 100px; height: 100px; background: rgba(255,255,255,0.1); border-radius: 50%;"></div>
+                    <div style="font-size: 3rem; margin-bottom: 20px;"><i class="fas fa-briefcase"></i></div>
+                    <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 16px;">Filières Métiers</h3>
+                    <p style="margin-bottom: 20px; opacity: 0.9;">Contenus adaptés par secteurs d'activité.</p>
+                    <ul style="list-style: none; padding: 0; margin-bottom: 30px;">
+                        <li style="margin-bottom: 8px;"><i class="fas fa-check" style="color: #22c55e; margin-right: 8px;"></i>Banque & Finance</li>
+                        <li style="margin-bottom: 8px;"><i class="fas fa-check" style="color: #22c55e; margin-right: 8px;"></i>Logistique & Achats</li>
+                        <li style="margin-bottom: 8px;"><i class="fas fa-check" style="color: #22c55e; margin-right: 8px;"></i>Industrie & Mines</li>
+                    </ul>
+                    <a href="{{ url_for('formation_category', category_slug='metiers') }}" style="background: white; color: var(--primary-color); padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 8px;">
+                        Voir les formations <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modalités de formation -->
+    <section class="formations-modalities" style="padding: 100px 0; background: #f8fafc;">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 60px;">
+                <p style="color: #ff6600; font-weight: 600; font-size: 1.1rem; margin-bottom: 16px;">Modalités</p>
+                <h2 style="font-size: 2.5rem; font-weight: 800; color: #1e293b; margin-bottom: 20px;">Formats de Formation</h2>
+                <p style="font-size: 1.1rem; color: #64748b; max-width: 600px; margin: 0 auto;">
+                    Choisissez le format qui convient le mieux à vos contraintes et objectifs
+                </p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px;">
+                <div style="background: white; border-radius: 20px; padding: 40px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 1px solid #e2e8f0;">
+                    <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #4169e1, #1e40af); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px;">
+                        <i class="fas fa-chalkboard-teacher" style="font-size: 2rem; color: white;"></i>
+                    </div>
+                    <h3 style="font-size: 1.5rem; font-weight: 700; color: #1e293b; margin-bottom: 16px;">Présentiel</h3>
+                    <p style="color: #64748b; margin-bottom: 24px; line-height: 1.6;">
+                        Sessions en face-à-face dans nos centres ou dans vos locaux pour un apprentissage immersif
+                    </p>
+                    <ul style="list-style: none; padding: 0; text-align: left;">
+                        <li style="margin-bottom: 8px; color: #64748b;"><i class="fas fa-check" style="color: #22c55e; margin-right: 8px;"></i>Interaction directe</li>
+                        <li style="margin-bottom: 8px; color: #64748b;"><i class="fas fa-check" style="color: #22c55e; margin-right: 8px;"></i>Ateliers pratiques</li>
+                        <li style="margin-bottom: 8px; color: #64748b;"><i class="fas fa-check" style="color: #22c55e; margin-right: 8px;"></i>Networking</li>
+                    </ul>
+                </div>
+
+                <div style="background: white; border-radius: 20px; padding: 40px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 1px solid #e2e8f0;">
+                    <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #ff6600, #ea580c); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px;">
+                        <i class="fas fa-video" style="font-size: 2rem; color: white;"></i>
+                    </div>
+                    <h3 style="font-size: 1.5rem; font-weight: 700; color: #1e293b; margin-bottom: 16px;">Visioformation</h3>
+                    <p style="color: #64748b; margin-bottom: 24px; line-height: 1.6;">
+                        Classes virtuelles en temps réel avec formateur et participants connectés
+                    </p>
+                    <ul style="list-style: none; padding: 0; text-align: left;">
+                        <li style="margin-bottom: 8px; color: #64748b;"><i class="fas fa-check" style="color: #22c55e; margin-right: 8px;"></i>Flexibilité géographique</li>
+                        <li style="margin-bottom: 8px; color: #64748b;"><i class="fas fa-check" style="color: #22c55e; margin-right: 8px;"></i>Outils collaboratifs</li>
+                        <li style="margin-bottom: 8px; color: #64748b;"><i class="fas fa-check" style="color: #22c55e; margin-right: 8px;"></i>Enregistrements disponibles</li>
+                    </ul>
+                </div>
+
+                <div style="background: white; border-radius: 20px; padding: 40px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 1px solid #e2e8f0;">
+                    <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #22c55e, #16a34a); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px;">
+                        <i class="fas fa-laptop" style="font-size: 2rem; color: white;"></i>
+                    </div>
+                    <h3 style="font-size: 1.5rem; font-weight: 700; color: #1e293b; margin-bottom: 16px;">E-learning</h3>
+                    <p style="color: #64748b; margin-bottom: 24px; line-height: 1.6;">
+                        Parcours autonomes avec contenus interactifs et suivi personnalisé
+                    </p>
+                    <ul style="list-style: none; padding: 0; text-align: left;">
+                        <li style="margin-bottom: 8px; color: #64748b;"><i class="fas fa-check" style="color: #22c55e; margin-right: 8px;"></i>Rythme personnalisé</li>
+                        <li style="margin-bottom: 8px; color: #64748b;"><i class="fas fa-check" style="color: #22c55e; margin-right: 8px;"></i>Disponible 24/7</li>
+                        <li style="margin-bottom: 8px; color: #64748b;"><i class="fas fa-check" style="color: #22c55e; margin-right: 8px;"></i>Suivi des progrès</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="formations-cta" style="padding: 100px 0; background: linear-gradient(135deg, #1e293b, #334155);">
+        <div class="container">
+            <div style="text-align: center; color: white;">
+                <h2 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 20px;">Prêt à développer vos compétences ?</h2>
+                <p style="font-size: 1.2rem; margin-bottom: 40px; opacity: 0.9; max-width: 600px; margin-left: auto; margin-right: auto;">
+                    Contactez nos conseillers pour construire un parcours de formation adapté à vos besoins
+                </p>
+                <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+                    <a href="{{ url_for('contact') }}" style="background: #ff6600; color: white; padding: 16px 32px; border-radius: 50px; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; transition: all 0.3s ease;">
+                        <i class="fas fa-phone"></i> Nous contacter
+                    </a>
+                    <a href="tel:+22870674796" style="background: transparent; color: white; padding: 16px 32px; border-radius: 50px; text-decoration: none; font-weight: 600; border: 2px solid rgba(255,255,255,0.3); display: inline-flex; align-items: center; gap: 8px; transition: all 0.3s ease;">
+                        <i class="fas fa-phone"></i> +228 70 67 47 96
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

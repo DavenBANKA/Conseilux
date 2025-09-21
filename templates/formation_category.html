@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+{% block title %}{{ data.title }} - Conseilux{% endblock %}
+
+{% block content %}
+<!-- Page Hero (split: image + info) -->
+<section class="page-hero">
+  <div class="container">
+    <p class="kicker">{{ data.kicker }}</p>
+    <h1>{{ data.title }}</h1>
+    <div class="category-hero-grid">
+      <div class="category-visual" aria-label="Visuel">
+        <div class="img" style="background-image:url('{{ data.image }}');"></div>
+      </div>
+      <div class="category-info">
+        <nav class="mini-breadcrumbs" aria-label="Chemin">
+          <a href="{{ url_for('home') }}">Accueil</a>
+          <span>›</span>
+          <a href="{{ url_for('formations') }}">Formations</a>
+          <span>›</span>
+          <span>{{ data.title }}</span>
+        </nav>
+        <h2>{{ data.title }}</h2>
+        <p class="lead">{{ data.lead }}</p>
+        {% if data.filters %}
+        <div class="chips-row">
+          {% for f in data.filters %}
+            <span class="chip">{{ f }}</span>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Section avec filtres et contenu -->
+<section class="page-section alt">
+  <div class="container">
+    <div class="category-layout">
+      <!-- Filtres -->
+      <aside class="filters-panel">
+        <h3>Filtrer par domaine</h3>
+        {% if data.filters %}
+        <ul>
+          {% for f in data.filters %}
+          <li><label><input type="checkbox" class="js-filter" value="{{ f }}"> <span>{{ f }}</span></label></li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+        <button class="btn btn-light btn-pill js-clear-filters" type="button" style="margin-top:8px;">Réinitialiser</button>
+      </aside>
+
+      <!-- Contenu principal -->
+      <div class="category-content">
+        <div class="category-intro">
+          <h3>{{ data.title }}</h3>
+          <p>{{ data.lead }}</p>
+          {% if data.filters %}
+          <div class="chips-row" style="margin-top: 1rem;">
+            {% for f in data.filters %}
+              <span class="chip">{{ f }}</span>
+            {% endfor %}
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="page-section">
+  <div class="container">
+    <div class="section-head">
+      <h2>Formations</h2>
+      <p class="section-sub">Parcourez les programmes disponibles dans cette catégorie.</p>
+    </div>
+
+    {% if data.courses %}
+    <div class="cards-grid js-courses" style="grid-template-columns: repeat(3, minmax(260px, 1fr));">
+      {% for c in data.courses %}
+      <article class="course-card js-course" data-cats="{{ c.badge }} {{ c.cats|default('') }}">
+        <a href="{{ url_for('formation_detail', course_slug=c.slug) }}" aria-label="{{ c.title }}">
+          <div class="card-cover" style="background-image:url('{{ c.image or "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80" }}');"></div>
+        </a>
+        <div class="inner">
+          <div class="badge-row">
+            <span class="chip accent">{{ c.badge }}</span>
+          </div>
+          <h3><a href="{{ url_for('formation_detail', course_slug=c.slug) }}">{{ c.title }}</a></h3>
+          <p>{{ c.excerpt }}</p>
+        </div>
+        <ul>
+          <li><strong>{{ c.duration }}</strong></li>
+          <li>
+            {% for m in c.modalities %}
+              <span class="chip" style="margin-right:6px;">{{ m }}</span>
+            {% endfor %}
+          </li>
+          <li>
+            {% for t in c.tags %}
+              <span class="chip" style="margin-right:6px;">{{ t }}</span>
+            {% endfor %}
+          </li>
+        </ul>
+      </article>
+      {% endfor %}
+    </div>
+    {% else %}
+      <p style="color:#5a6472;">Les formations de cette catégorie seront bientôt en ligne. Contactez‑nous pour une proposition sur‑mesure.</p>
+    {% endif %}
+  </div>
+</section>
+
+<!-- Galerie / Références (slider) -->
+<section class="page-section alt">
+  <div class="container">
+    <div class="section-head">
+      <h2>Ils nous font confiance</h2>
+      <p class="section-sub">Un aperçu de nos réalisations et de nos partenariats.</p>
+    </div>
+    <div class="swiper refs-swiper" style="border-radius:16px; overflow:hidden;">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=1200&q=80" alt="slide" style="width:100%; height:320px; object-fit:cover;"></div>
+        <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80" alt="slide" style="width:100%; height:320px; object-fit:cover;"></div>
+        <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1200&q=80" alt="slide" style="width:100%; height:320px; object-fit:cover;"></div>
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
+  </div>
+</section>
+
+<section class="page-cta">
+  <div class="container">
+    <div class="box">
+      <div>
+        <h3>Besoin d’un parcours personnalisé ?</h3>
+        <p>Nos conseillers vous accompagnent pour concevoir la bonne trajectoire de compétences.</p>
+      </div>
+      <div>
+        <a href="{{ url_for('contact') }}" class="btn btn-accent btn-pill">Parler à un conseiller</a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

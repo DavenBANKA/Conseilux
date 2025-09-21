@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block title %}Connexion Admin - Conseilux{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+  <div class="container">
+    <h1>Administration</h1>
+    <p class="lead">Accès réservé au propriétaire du site</p>
+  </div>
+</section>
+
+<section class="page-section">
+  <div class="container">
+    <div style="max-width: 400px; margin: 0 auto;">
+      <div style="background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+        <h2 style="text-align: center; margin-bottom: 30px; color: #333;">Connexion</h2>
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div style="padding: 12px; margin-bottom: 20px; border-radius: 6px; {% if category == 'error' %}background: #fee; color: #c33; border: 1px solid #fcc;{% endif %}">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        <form method="post">
+          <div style="margin-bottom: 20px;">
+            <label for="password" style="display: block; margin-bottom: 8px; font-weight: 500; color: #555;">Mot de passe :</label>
+            <input 
+              type="password" 
+              id="password" 
+              name="password" 
+              required
+              style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 16px;"
+              placeholder="Entrez votre mot de passe"
+            >
+          </div>
+          
+          <button 
+            type="submit" 
+            style="width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; font-size: 16px; font-weight: 500; cursor: pointer; transition: background 0.3s;"
+            onmouseover="this.style.background='#1d4ed8'"
+            onmouseout="this.style.background='#2563eb'"
+          >
+            Se connecter
+          </button>
+        </form>
+        
+        <div style="text-align: center; margin-top: 30px;">
+          <a href="{{ url_for('home') }}" style="color: #666; text-decoration: none;">← Retour à l'accueil</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,563 @@
+{% extends 'base.html' %}
+
+{% block title %}Accueil - Conseilux{% endblock %}
+
+{% block content %}
+    <!-- Accueil: Intro principale -->
+    <section class="home-hero">
+        <div class="container">
+            <div class="grid">
+                <div>
+                    <p class="kicker">La transformation de votre entreprise commence par la formation de vos talents !</p>
+                    <h1>Conseilux<br>La formation sur mesure, humaine et digitale</h1>
+                    <a href="{{ url_for('formations') }}" class="cta-primary">Trouver votre formation <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="side">
+                    <p>Accélérez votre transformation digitale et développez les compétences de demain</p>
+                    <div class="badge-rating">
+                        <strong>4.9/5</strong>
+                        <span>Google Avis Clients</span>
+                    </div>
+                    <!-- Bande de certifications (toutes les images dans static/certifications/) -->
+                    <div class="cert-logos" aria-label="Certifications">
+                        {% for img in certifications_images %}
+                            <img src="{{ url_for('static', filename='certifications/' ~ img) }}" alt="{{ img.rsplit('.', 1)[0] }}" loading="lazy">
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bande statistiques + cartes images -->
+    <section class="stats-band">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="image-card" aria-label="Visuel de formation">
+                    <div class="img" style="background-image:url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=1200&q=80');"></div>
+                    <div class="overlay"></div>
+                </div>
+                <div class="stats-card">
+                    <div class="stat" style="margin-bottom:14px;">
+                        <div class="value" data-counter data-start="0" data-end="492" data-duration="1600" data-suffix="+">492+</div>
+                        <div class="label">Formations disponibles</div>
+                    </div>
+                    <div class="stat" style="margin-bottom:14px;">
+                        <div class="value" data-counter data-start="0" data-end="10" data-duration="1400" data-suffix="+ ans">10+ ans</div>
+                        <div class="label">D'expérience</div>
+                    </div>
+                    <div class="stat" style="margin-bottom:14px;">
+                        <div class="value" data-counter data-start="0" data-end="99.1" data-duration="1800" data-decimals="1" data-suffix="%">99,1%</div>
+                        <div class="label">De satisfaction en 2024</div>
+                    </div>
+                    <ul>
+                        <li>Acteurs de transformation par la compétence, nous accompagnons les organisations dans l’évolution de leurs pratiques</li>
+                    </ul>
+                    <p style="margin-top:14px;">
+                        <a href="{{ url_for('formations') }}" class="link-arrow">Découvrir nos formations <i class="fas fa-arrow-right"></i></a>
+                    </p>
+                </div>
+            </div>
+            <div class="stats-grid" style="margin-top:24px;">
+                <div class="image-card" aria-label="Catégories de formations">
+                    <div class="img" style="background-image:url('https://images.unsplash.com/photo-1557800636-894a64c1696f?auto=format&fit=crop&w=1200&q=80');"></div>
+                    <div class="overlay"></div>
+                    <div class="inner">
+                        <span class="chip">IA</span>
+                        <span class="chip">Management & Leadership</span>
+                        <span class="chip">QVCT & RSE</span>
+                        <span class="chip">Soft Skills</span>
+                        <span class="chip">Performance commerciale</span>
+                        <span class="chip">Bureautique & Digital</span>
+                        <span class="chip">Langues</span>
+                        <a href="{{ url_for('formations') }}" class="chip accent">Toutes nos formations</a>
+                    </div>
+                </div>
+                <div class="image-card" aria-label="Visuel">
+                    <div class="img" style="background-image:url('https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=1200&q=80');"></div>
+                    <div class="overlay"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <!-- Bande logos partenaires (affiche toutes les images dans static/partenaires/) -->
+    <section class="partners">
+        <div class="container">
+            <div class="partners-logos real-logos" aria-label="Partenaires & Accréditations">
+                {% for img in partners_images %}
+                    <div>
+                        <img src="{{ url_for('static', filename='partenaires/' ~ img) }}" alt="{{ img.rsplit('.', 1)[0] }}">
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Nos formations (cartes catégories) -->
+    <section class="courses">
+        <div class="container">
+            <p class="kicker">Découvrez nos solutions</p>
+            <h2>Nos solutions</h2>
+            <div class="cards-grid">
+                <article class="course-card">
+                    <div class="inner">
+                        <div class="icon-tile"><i class="fas fa-laptop-code"></i></div>
+                        <h3><a href="{{ url_for('solutions') }}" class="link-arrow" style="color:#fff;">Technologies Numériques & Cybersécurité</a></h3>
+                        <p>Des parcours orientés gouvernance, sécurité et technologies pour accélérer vos transformations.</p>
+                    </div>
+                    <ul>
+                        <li>ITIL® V4 Foundation</li>
+                        <li>Gouvernance SI, Audit & Risques</li>
+                        <li>DORA Lead Manager (PECB)</li>
+                        <li>Cybersécurité, Cloud & IA générative appliquée</li>
+                    </ul>
+                </article>
+                <article class="course-card">
+                    <div class="inner">
+                        <div class="icon-tile"><i class="fas fa-project-diagram"></i></div>
+                        <h3><a href="{{ url_for('solutions') }}" class="link-arrow" style="color:#fff;">Gestion de Projet, Management & Leadership</a></h3>
+                        <p>Des certifications et méthodes pour piloter, transformer et aligner les équipes.</p>
+                    </div>
+                    <ul>
+                        <li>PMP® (PMI), Prince2®</li>
+                        <li>Agile & Scrum (PSM, PSPO)</li>
+                        <li>Lean Six Sigma (Y/G/B)</li>
+                        <li>SAFe® (PO/PM, RTE)</li>
+                        <li>Management transversal, Design Thinking, PMO</li>
+                    </ul>
+                </article>
+                <article class="course-card">
+                    <div class="inner">
+                        <div class="icon-tile"><i class="fas fa-certificate"></i></div>
+                        <h3><a href="{{ url_for('solutions') }}" class="link-arrow" style="color:#fff;">Normes ISO & QSSE</a></h3>
+                        <p>Mettre en place et auditer des systèmes certifiables au meilleur niveau.</p>
+                    </div>
+                    <ul>
+                        <li>ISO 45001, ISO 50001, ISO 20121</li>
+                        <li>ISO 9001, ISO 14001, ISO 22000</li>
+                        <li>ISO 27001</li>
+                        <li>NEBOSH IGC</li>
+                    </ul>
+                </article>
+                <article class="course-card">
+                    <div class="inner">
+                        <div class="icon-tile"><i class="fas fa-briefcase"></i></div>
+                        <h3><a href="{{ url_for('solutions') }}" class="link-arrow" style="color:#fff;">Filières Métiers</a></h3>
+                        <p>Par secteurs: banque, industrie, logistique… des contenus adaptés à vos enjeux.</p>
+                    </div>
+                    <ul>
+                        <li>Banque, Finance & Assurance</li>
+                        <li>Comptabilité & Audit</li>
+                        <li>Logistique & Achats</li>
+                        <li>Industrie, Pétrole, Gaz & Mines</li>
+                    </ul>
+                </article>
+                <article class="course-card">
+                    <div class="inner">
+                        <div class="icon-tile"><i class="fas fa-chart-line"></i></div>
+                        <h3><a href="{{ url_for('solutions') }}" class="link-arrow" style="color:#fff;">Performance Commerciale</a></h3>
+                        <p>Des parcours orientés résultats pour élever l’efficacité commerciale.</p>
+                    </div>
+                    <ul>
+                        <li>Relation client & éducation financière</li>
+                        <li>Négociation & techniques de vente</li>
+                        <li>Leadership commercial</li>
+                        <li>Séminaires & Team Building</li>
+                    </ul>
+                </article>
+                <article class="course-card">
+                    <div class="inner">
+                        <div class="icon-tile"><i class="fas fa-language"></i></div>
+                        <h3><a href="{{ url_for('solutions') }}" class="link-arrow" style="color:#fff;">Langues</a></h3>
+                        <p>Des parcours d’anglais professionnel et de préparation aux certifications.</p>
+                    </div>
+                    <ul>
+                        <li>Anglais professionnel & académique</li>
+                        <li>Business English & spécialisé</li>
+                        <li>Préparation TOEFL, TOEIC, TFI, IELTS, Cambridge</li>
+                    </ul>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pédagogie -->
+    <section class="pedagogy">
+        <div class="container">
+            <p class="kicker">Découvrez</p>
+            <h2>Notre Méthode Pédagogique</h2>
+            <div class="pedagogy-grid">
+                <div class="ped-card">
+                    <p style="opacity:.9; margin-bottom:8px;">Pas de « prêt-à-former » chez Conseilux !</p>
+                    <h3 style="font-weight:800;">HyperPersonnalisation</h3>
+                    <p>Du diagnostic au parcours, en passant par le choix des intervenants ou des outils : l'apprenant est au centre de notre démarche.</p>
+                    <a href="https://wa.me/22870674796?text=Bonjour,%20je%20souhaite%20en%20savoir%20plus%20sur%20votre%20approche%20HyperPersonnalisation" target="_blank" class="btn-ghost-light">En savoir plus</a>
+                </div>
+                <div class="ped-card accent">
+                    <p style="opacity:.95; margin-bottom:8px;">On ne vous lâche pas… même à distance…</p>
+                    <h3 style="font-weight:800;">Accompagnement</h3>
+                    <p>Que ce soit par nos formateurs ou nos Learning Partners, nous optons pour des profils au plus près de vos aspirations.</p>
+                    <a href="https://wa.me/22870674796?text=Bonjour,%20je%20souhaite%20en%20savoir%20plus%20sur%20votre%20accompagnement" target="_blank" class="btn-ghost-light">En savoir plus</a>
+                </div>
+                <div class="ped-card">
+                    <p style="opacity:.9; margin-bottom:8px;">Le résultat : vous… augmenté !</p>
+                    <h3 style="font-weight:800;">Performance</h3>
+                    <p>Notre méthodologie FEST nous garantit votre progression.</p>
+                    <a href="https://wa.me/22870674796?text=Bonjour,%20je%20souhaite%20en%20savoir%20plus%20sur%20votre%20approche%20Performance" target="_blank" class="btn-ghost-light">En savoir plus</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bande CTA -->
+    <section class="cta-band">
+        <div class="container">
+            <div class="cta-row">
+                <div>
+                    <h3>Prêt à booster les compétences de vos équipes ?</h3>
+                    <p>Construisons ensemble un parcours de formation adapté à vos enjeux.</p>
+                </div>
+                <div>
+                    <a href="{{ url_for('contact') }}" class="btn btn-accent btn-pill">Parler à un conseiller</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Services / Catalogue -->
+    <section id="services" class="services">
+        <div class="container">
+            <p class="kicker">Solutions sur‑mesure</p>
+            <h2>Nos Services</h2>
+            <p class="services-sub">Des formats adaptés à vos enjeux: à distance, en présentiel ou en blended learning, avec accompagnement humain et résultats mesurables.</p>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-laptop-code"></i></div>
+                    <h3>Formation en Ligne</h3>
+                    <p>Des classes virtuelles engageantes, où que vous soyez.</p>
+                    <ul class="service-list">
+                        <li>Classes live & replays</li>
+                        <li>Parcours flexibles</li>
+                        <li>Suivi individualisé</li>
+                    </ul>
+                    <div class="service-actions"><a href="https://wa.me/22870674796?text=Bonjour,%20je%20souhaite%20en%20savoir%20plus%20sur%20vos%20formations%20en%20ligne" target="_blank">En savoir plus →</a></div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+                    <h3>Formation en Présentiel</h3>
+                    <p>Des sessions immersives pour accélérer l'apprentissage.</p>
+                    <ul class="service-list">
+                        <li>Ateliers pratiques</li>
+                        <li>Modalités actives</li>
+                        <li>Retours personnalisés</li>
+                    </ul>
+                    <div class="service-actions"><a href="https://wa.me/22870674796?text=Bonjour,%20je%20souhaite%20en%20savoir%20plus%20sur%20vos%20formations%20en%20présentiel" target="_blank">En savoir plus →</a></div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-bullseye"></i></div>
+                    <h3>Sur‑mesure</h3>
+                    <p>Concevez un dispositif adapté à vos objectifs.</p>
+                    <ul class="service-list">
+                        <li>Diagnostic & objectifs</li>
+                        <li>Blended learning</li>
+                        <li>Mesure d'impact</li>
+                    </ul>
+                    <div class="service-actions"><a href="https://wa.me/22870674796?text=Bonjour,%20je%20souhaite%20en%20savoir%20plus%20sur%20vos%20solutions%20sur-mesure" target="_blank">En savoir plus →</a></div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-user-tie"></i></div>
+                    <h3>Coaching individuel</h3>
+                    <p>Un accompagnement personnalisé pour des résultats rapides.</p>
+                    <ul class="service-list">
+                        <li>Objectifs concrets</li>
+                        <li>Sessions ciblées</li>
+                        <li>Plan d’action</li>
+                    </ul>
+                    <div class="service-actions"><a href="https://wa.me/22870674796?text=Bonjour,%20je%20souhaite%20en%20savoir%20plus%20sur%20vos%20audits%20et%20diagnostics" target="_blank">En savoir plus →</a></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Avis clients: affichage dynamique intelligent -->
+    {% if avis_clients|length > 0 %}
+    <section class="reviews">
+        <div class="container">
+            <p class="kicker" style="text-align:center;">Avis clients</p>
+            <h2 class="reviews-title">Ils ont aimé notre démarche</h2>
+        </div>
+        
+        {% if avis_clients|length <= 3 %}
+        <!-- Affichage statique centré pour 1-3 avis -->
+        <div class="reviews-static" style="display: flex; justify-content: center; align-items: center; gap: 2rem; padding: 2rem; flex-wrap: wrap; max-width: 1200px; margin: 0 auto;">
+            {% for avis in avis_clients %}
+            <article class="review-card" style="flex: 0 0 auto; max-width: 350px;">
+                <div class="review-quote"><i class="fas fa-quote-right"></i></div>
+                <div class="review-body">
+                    <p>{{ avis.avis }}</p>
+                    <div class="review-rating">
+                        {% for i in range(avis.note) %}
+                            <i class="fas fa-star" style="color: #ff6600;"></i>
+                        {% endfor %}
+                        {% for i in range(5 - avis.note) %}
+                            <i class="far fa-star" style="color: #ddd;"></i>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="review-footer">
+                    <strong>{{ avis.nom_complet }}</strong>
+                    <small>{{ avis.date_creation.strftime('%d/%m/%Y') }}</small>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+        {% else %}
+        <!-- Affichage avec défilement pour 4+ avis -->
+        <div class="reviews-viewport">
+            <div class="reviews-track">
+                {% for avis in avis_clients %}
+                <article class="review-card">
+                    <div class="review-quote"><i class="fas fa-quote-right"></i></div>
+                    <div class="review-body">
+                        <p>{{ avis.avis }}</p>
+                        <div class="review-rating">
+                            {% for i in range(avis.note) %}
+                                <i class="fas fa-star" style="color: #ff6600;"></i>
+                            {% endfor %}
+                            {% for i in range(5 - avis.note) %}
+                                <i class="far fa-star" style="color: #ddd;"></i>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="review-footer">
+                        <strong>{{ avis.nom_complet }}</strong>
+                        <small>{{ avis.date_creation.strftime('%d/%m/%Y') }}</small>
+                    </div>
+                </article>
+                {% endfor %}
+                
+                <!-- Duplication pour boucle infinie -->
+                {% for avis in avis_clients %}
+                <article class="review-card">
+                    <div class="review-quote"><i class="fas fa-quote-right"></i></div>
+                    <div class="review-body">
+                        <p>{{ avis.avis }}</p>
+                        <div class="review-rating">
+                            {% for i in range(avis.note) %}
+                                <i class="fas fa-star" style="color: #ff6600;"></i>
+                            {% endfor %}
+                            {% for i in range(5 - avis.note) %}
+                                <i class="far fa-star" style="color: #ddd;"></i>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="review-footer">
+                        <strong>{{ avis.nom_complet }}</strong>
+                        <small>{{ avis.date_creation.strftime('%d/%m/%Y') }}</small>
+                    </div>
+                </article>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+    </section>
+    {% endif %}
+
+    <!-- Événements récents (en bas) -->
+    <section class="events">
+        <div class="container">
+            <div class="events-head">
+                <div>
+                    <p class="kicker">Événements</p>
+                    <h2>Nos événements récents</h2>
+                </div>
+                <div class="events-actions">
+                    <a href="{{ url_for('evenements') }}" class="btn btn-dark btn-pill">Tous nos événements</a>
+                </div>
+            </div>
+
+            <div class="events-grid">
+                <!-- Card 1 -->
+                <article class="event-card">
+                    <div class="event-cover" style="background-image:url('https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=1200&q=80');">
+                        <span class="event-badge">Formation</span>
+                    </div>
+                    <div class="event-body">
+                        <h3>Formation en anglais</h3>
+                        <p class="event-excerpt">Améliorez vos compétences linguistiques avec notre formation complète en anglais professionnel...</p>
+                        <p class="event-more" hidden>Du niveau débutant à avancé, développez votre aisance à l'oral et à l'écrit dans un contexte professionnel.</p>
+                        <a href="#" class="event-read" data-target="prev">Lire la suite</a>
+                    </div>
+                </article>
+
+                <!-- Card 2 -->
+                <article class="event-card">
+                    <div class="event-cover" style="background-image:url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80');">
+                        <span class="event-badge">Formation</span>
+                    </div>
+                    <div class="event-body">
+                        <h3>Formation en Excel avancé VBA</h3>
+                        <p class="event-excerpt">Maîtrisez les fonctionnalités avancées d'Excel et automatisez vos tâches avec la programmation VBA...</p>
+                        <p class="event-more" hidden>Tableaux croisés dynamiques, macros, formules complexes et développement d'applications personnalisées.</p>
+                        <a href="#" class="event-read" data-target="prev">Lire la suite</a>
+                    </div>
+                </article>
+
+                <!-- Card 3 -->
+                <article class="event-card">
+                    <div class="event-cover" style="background-image:url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80');">
+                        <span class="event-badge">Formation</span>
+                    </div>
+                    <div class="event-body">
+                        <h3>Formation en PowerBI</h3>
+                        <p class="event-excerpt">Transformez vos données en insights actionables avec Microsoft Power BI...</p>
+                        <p class="event-more" hidden>Création de tableaux de bord interactifs, visualisations avancées et analyse de données en temps réel.</p>
+                        <a href="#" class="event-read" data-target="prev">Lire la suite</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ (en bas) -->
+    <section class="faq">
+        <div class="container">
+            <div class="faq-box">
+                <div>
+                    <p class="kicker">Quelques réponses</p>
+                    <h2>FAQ</h2>
+                    <h3 class="faq-sub">Vous souhaitez plus d’informations ?</h3>
+                    <p>Notre équipe est disponible pour répondre à vos questions et vous aider à choisir les formations les plus adaptées à vos besoins.</p>
+                </div>
+                <div class="faq-actions">
+                    <a href="{{ url_for('contact') }}" class="btn btn-primary">Nous contacter</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter (en bas) -->
+    <section class="newsletter" style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); padding: 80px 0; position: relative; overflow: hidden;">
+        <!-- Éléments décoratifs -->
+        <div style="position: absolute; top: -50px; right: -50px; width: 200px; height: 200px; background: linear-gradient(135deg, #4169e1, #ff6600); border-radius: 50%; opacity: 0.1;"></div>
+        <div style="position: absolute; bottom: -30px; left: -30px; width: 150px; height: 150px; background: linear-gradient(135deg, #ff6600, #4169e1); border-radius: 50%; opacity: 0.08;"></div>
+        
+        <div class="container">
+            <div style="text-align: center; max-width: 600px; margin: 0 auto;">
+                <!-- Icône et titre -->
+                <div style="display: inline-flex; align-items: center; justify-content: center; width: 80px; height: 80px; background: linear-gradient(135deg, #4169e1, #ff6600); border-radius: 50%; margin-bottom: 24px; box-shadow: 0 10px 30px rgba(65, 105, 225, 0.3);">
+                    <i class="fas fa-envelope" style="font-size: 32px; color: white;"></i>
+                </div>
+                
+                <h2 style="font-size: 2.5rem; font-weight: 700; color: #1e293b; margin-bottom: 16px; background: linear-gradient(135deg, #4169e1, #ff6600); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                    Restez Informé
+                </h2>
+                
+                <p style="font-size: 1.1rem; color: #64748b; margin-bottom: 40px; line-height: 1.6;">
+                    Recevez en exclusivité nos dernières formations, conseils d'experts et offres spéciales directement dans votre boîte mail.
+                </p>
+                
+                <!-- Formulaire moderne -->
+                <form action="{{ url_for('newsletter') }}" method="post" class="newsletter-form" id="newsletter-form" style="max-width: 400px; margin: 0 auto;">
+                    <div style="position: relative; margin-bottom: 20px;">
+                        <div style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: #94a3b8; z-index: 2;">
+                            <i class="fas fa-envelope" style="font-size: 16px;"></i>
+                        </div>
+                        <input type="email" name="email" id="newsletter-email" placeholder="votre@email.com" required 
+                               style="width: 100%; min-width: 350px; padding: 18px 18px 18px 55px; border: 2px solid #e2e8f0; border-radius: 12px; font-size: 16px; background: white; transition: all 0.3s ease; box-shadow: 0 4px 6px rgba(0,0,0,0.05); box-sizing: border-box;"
+                               onfocus="this.style.borderColor='#4169e1'; this.style.boxShadow='0 0 0 3px rgba(65, 105, 225, 0.1)'"
+                               onblur="this.style.borderColor='#e2e8f0'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.05)'">
+                    </div>
+                    
+                    <div>
+                        <button type="submit" style="width: 100%; padding: 16px; background: linear-gradient(135deg, #4169e1, #ff6600); color: white; border: none; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(65, 105, 225, 0.3); margin-bottom: 16px;"
+                                onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 25px rgba(65, 105, 225, 0.4)'"
+                                onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(65, 105, 225, 0.3)'">
+                            S'abonner à la Newsletter
+                        </button>
+                    </div>
+                    
+                    <small style="color: #64748b; font-size: 13px; line-height: 1.4;">
+                        En vous inscrivant, vous acceptez notre <a href="#" style="color: #4169e1; text-decoration: none;">Politique de confidentialité</a>. Désabonnement possible à tout moment.
+                    </small>
+                    
+                    <p class="newsletter-success" hidden style="background: #dcfce7; color: #166534; padding: 12px; border-radius: 8px; margin-top: 16px; border-left: 4px solid #22c55e;">
+                        <i class="fas fa-check-circle" style="margin-right: 8px;"></i>
+                        Parfait ! Vous recevrez bientôt nos dernières actualités.
+                    </p>
+                </form>
+                
+                <!-- Badges de confiance -->
+                <div style="display: flex; justify-content: center; gap: 24px; margin-top: 40px; flex-wrap: wrap;">
+                    <div style="display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.7); padding: 12px 20px; border-radius: 25px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);">
+                        <i class="fas fa-shield-alt" style="color: #22c55e; font-size: 16px;"></i>
+                        <span style="color: #1e293b; font-size: 14px; font-weight: 500;">100% Sécurisé</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.7); padding: 12px 20px; border-radius: 25px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);">
+                        <i class="fas fa-users" style="color: #4169e1; font-size: 16px;"></i>
+                        <span style="color: #1e293b; font-size: 14px; font-weight: 500;">+5000 Abonnés</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.7); padding: 12px 20px; border-radius: 25px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);">
+                        <i class="fas fa-star" style="color: #ff6600; font-size: 16px;"></i>
+                        <span style="color: #1e293b; font-size: 14px; font-weight: 500;">Contenu Premium</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <style>
+        /* Logos de certifications dans le hero */
+        .cert-logos{
+            display:flex;
+            flex-wrap:wrap;
+            gap:10px;
+            align-items:center;
+            margin-top:14px;
+        }
+        .cert-logos img{
+            height:28px;
+            object-fit:contain;
+            filter:none;
+            opacity:.95;
+        }
+
+        /* Bande partenaires: vrais logos */
+        .partners .real-logos{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+            gap:20px;
+            align-items:center;
+        }
+        .partners .real-logos img{
+            max-width:100%;
+            height:32px;
+            object-fit:contain;
+            filter:none;
+            opacity:.95;
+        }
+        .partners .real-logos a{
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            padding:10px 12px;
+            background:#fff;
+            border:1px solid #eee;
+            border-radius:8px;
+            transition: box-shadow .2s ease;
+        }
+        .partners .real-logos a:hover{ box-shadow:0 6px 18px rgba(0,0,0,.06); }
+
+        @media (max-width:768px){
+            .cert-logos img{ height:22px; }
+            .partners .real-logos img{ height:26px; }
+        }
+    </style>
+
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block title %}Notre mission - Conseilux{% endblock %}
+{% block content %}
+<!-- Page Hero -->
+<section class="page-hero">
+  <div class="container">
+    <p class="kicker">À propos</p>
+    <h1>Notre mission</h1>
+    <p class="lead">Changer la vie des personnes et des organisations par la compétence, avec un accompagnement humain, une excellence pédagogique et une mesure d'impact réelle.</p>
+  </div>
+  </section>
+
+<!-- Breadcrumbs -->
+<div class="breadcrumbs" aria-label="Fil d'Ariane">
+  <div class="container">
+    <nav>
+      <a href="{{ url_for('home') }}">Accueil</a>
+      <span class="sep">›</span>
+      <span>Notre mission</span>
+    </nav>
+  </div>
+</div>
+
+<!-- Sections -->
+<section class="page-section">
+  <div class="container">
+    <div class="section-head">
+      <h2>Ce qui nous anime</h2>
+      <p class="section-sub">Des résultats concrets pour vos équipes, aujourd'hui et demain.</p>
+    </div>
+    <div class="feature-grid">
+      <div class="feature">
+        <h3>Impact mesurable</h3>
+        <ul>
+          <li>Objectifs pédagogiques alignés métiers</li>
+          <li>Indicateurs de progression clairs</li>
+          <li>Transfert en situation de travail</li>
+        </ul>
+      </div>
+      <div class="feature">
+        <h3>Accompagnement humain</h3>
+        <ul>
+          <li>Learning Partner dédié</li>
+          <li>Suivi personnalisé</li>
+          <li>Coaching orienté performance</li>
+        </ul>
+      </div>
+      <div class="feature">
+        <h3>Excellence pédagogique</h3>
+        <ul>
+          <li>Parcours adaptés et activables</li>
+          <li>Cas pratiques contextualisés</li>
+          <li>Modalités distanciel, présentiel, blended</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="page-cta">
+  <div class="container">
+    <div class="box">
+      <div>
+        <h3>Prêt à construire une trajectoire de compétences durable ?</h3>
+        <p>Parlons de vos enjeux et co‑construisons un dispositif efficace.</p>
+      </div>
+      <div>
+        <a href="{{ url_for('contact') }}" class="btn btn-accent btn-pill">Parler à un conseiller</a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

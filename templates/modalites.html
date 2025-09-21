@@ -1,0 +1,581 @@
+{% extends 'base.html' %}
+{% block title %}Nos modalités de formation - Conseilux{% endblock %}
+
+{% block content %}
+<section class="modalities" style="padding: 120px 0 80px;">
+    <div class="container">
+        <!-- Minimalist header -->
+        <div class="section-header">
+            <h1>Modalités de formation</h1>
+        </div>
+
+        <!-- Hero Section professionnel -->
+        <div class="modalities-hero">
+            <div class="hero-layout">
+                <div class="hero-image">
+                    <img src="{{ url_for('static', filename='conseilux.jpg') }}" alt="Formation Conseilux" />
+                </div>
+                <div class="hero-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h2>Formations sur mesure</h2>
+                    </div>
+                    <div class="card-content">
+                        <p>Des solutions adaptées à vos besoins spécifiques et à vos contraintes organisationnelles. Nos experts vous accompagnent pour atteindre vos objectifs avec efficacité.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Formats distanciels -->
+        <div class="formats-section">
+            <h2 class="section-title">Nos formats distanciels</h2>
+            <p class="section-subtitle">Étudiez où vous voulez, quand vous voulez — sans compromis sur la qualité de l'accompagnement.</p>
+            <div class="formats-grid">
+                <div class="format-card">
+                    <div class="card-header-format">
+                        <div class="format-icon-large">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <h3>VISIO FORMATION</h3>
+                        <div class="chip-group">
+                            <span class="chip">Individuel</span>
+                            <span class="chip accent">Distanciel</span>
+                        </div>
+                    </div>
+                    <div class="format-content">
+                        <h4>Pour quoi ?</h4>
+                        <ul>
+                            <li>Co-construire des séances ciblées pour accélérer la montée en compétences.</li>
+                            <li>Bénéficier d'un feedback immédiat et d'un suivi exigeant.</li>
+                            <li>Gagner en flexibilité tout en conservant un haut niveau d'exigence.</li>
+                        </ul>
+                        <h4>Pour qui ?</h4>
+                        <ul>
+                            <li>Managers, experts et collaborateurs recherchant un format 100% adapté.</li>
+                            <li>Profils en mobilité ou à l'agenda contraint.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="format-card">
+                    <div class="card-header-format">
+                        <div class="format-icon-large">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>VISIO FORMATION & WORKSHOP</h3>
+                        <div class="chip-group">
+                            <span class="chip">Collectif</span>
+                            <span class="chip accent">Distanciel</span>
+                        </div>
+                    </div>
+                    <div class="format-content">
+                        <h4>Pourquoi ?</h4>
+                        <ul>
+                            <li>Stimuler l'intelligence collective et le partage d'expériences.</li>
+                            <li>Transformer les concepts en pratiques opérationnelles.</li>
+                            <li>Créer une dynamique d'équipe motivante et engageante.</li>
+                        </ul>
+                        <h4>Pour qui ?</h4>
+                        <ul>
+                            <li>Équipes projet, services et communautés de pratique.</li>
+                            <li>Organisations privilégiant les formats collaboratifs.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="format-card">
+                    <div class="card-header-format">
+                        <div class="format-icon-large">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <h3>TÉLÉPHONE</h3>
+                        <div class="chip-group">
+                            <span class="chip">Individuel</span>
+                            <span class="chip accent">Distanciel</span>
+                        </div>
+                    </div>
+                    <div class="format-content">
+                        <h4>Pour quoi ?</h4>
+                        <ul>
+                            <li>Intégrer la formation au quotidien (déplacements, temps courts).</li>
+                            <li>Progresser sur la communication orale et la prise de parole.</li>
+                            <li>Bénéficier d'un suivi agile et réactif.</li>
+                        </ul>
+                        <h4>Pour qui ?</h4>
+                        <ul>
+                            <li>Professionnels en mobilité.</li>
+                            <li>Apprenants privilégiant l'échange vocal.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="format-card">
+                    <div class="card-header-format">
+                        <div class="format-icon-large">
+                            <i class="fas fa-laptop"></i>
+                        </div>
+                        <h3>E-LEARNING</h3>
+                        <div class="chip-group">
+                            <span class="chip">Individuel</span>
+                            <span class="chip accent">Distanciel</span>
+                        </div>
+                    </div>
+                    <div class="format-content">
+                        <h4>Pour quoi ?</h4>
+                        <ul>
+                            <li>Accéder à des parcours personnalisés et modulaires.</li>
+                            <li>Avancer à votre rythme avec des contenus interactifs.</li>
+                        </ul>
+                        <h4>Pour qui ?</h4>
+                        <ul>
+                            <li>Apprenants autonomes et équipes distribuées.</li>
+                            <li>Organisations recherchant une solution scalable et flexible.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Formats présentiels -->
+        <div class="formats-section">
+            <h2 class="section-title">Nos formats présentiels</h2>
+            <p class="section-subtitle">Un cadre immersif, propice aux interactions et aux mises en situation concrètes.</p>
+            <div class="formats-grid">
+                <div class="format-card">
+                    <div class="card-header-format">
+                        <div class="format-icon-large">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h3>FACE-À-FACE</h3>
+                        <div class="chip-group">
+                            <span class="chip">Individuel</span>
+                            <span class="chip success">Présentiel</span>
+                        </div>
+                    </div>
+                    <div class="format-content">
+                        <h4>Pour quoi ?</h4>
+                        <ul>
+                            <li>Bénéficier d'un accompagnement très personnalisé et confidentiel.</li>
+                            <li>Travailler des cas concrets issus de votre contexte.</li>
+                            <li>Obtenir des résultats rapides et mesurables.</li>
+                        </ul>
+                        <h4>Pour qui ?</h4>
+                        <ul>
+                            <li>Dirigeants, managers et experts métiers.</li>
+                            <li>Profils souhaitant un coaching ciblé.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="format-card">
+                    <div class="card-header-format">
+                        <div class="format-icon-large">
+                            <i class="fas fa-users-cog"></i>
+                        </div>
+                        <h3>FACE-À-FACE</h3>
+                        <div class="chip-group">
+                            <span class="chip">Collectif</span>
+                            <span class="chip success">Présentiel</span>
+                        </div>
+                    </div>
+                    <div class="format-content">
+                        <h4>Pour quoi ?</h4>
+                        <ul>
+                            <li>Développer les compétences clés d'une équipe.</li>
+                            <li>Expérimenter par le jeu, la simulation et les ateliers.</li>
+                            <li>Renforcer la cohésion et les pratiques communes.</li>
+                        </ul>
+                        <h4>Pour qui ?</h4>
+                        <ul>
+                            <li>Équipes opérationnelles, fonctions support, CODIR étendus.</li>
+                            <li>Organisations privilégiant le présentiel.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Variantes pour plus de performance -->
+        <div class="formats-section">
+            <h2 class="section-title">Deux variantes pour encore plus de performance</h2>
+            <p class="section-subtitle">Des dispositifs hybrides et intensifs pour accélérer et ancrer les apprentissages.</p>
+            <div class="formats-grid">
+                <div class="format-card enhanced">
+                    <div class="card-header-format">
+                        <div class="format-icon-large enhanced">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <h3>IMMERSIONS</h3>
+                        <div class="chip-group">
+                            <span class="chip success">Présentiel</span>
+                        </div>
+                    </div>
+                    <div class="format-content">
+                        <p>Nos programmes d'immersion offrent une expérience d'apprentissage intensive et immersive. Plongez au cœur de votre domaine d'expertise avec nos formateurs experts et bénéficiez d'un accompagnement personnalisé dans un environnement dédié à votre réussite.</p>
+                        <ul>
+                            <li>Programmes intensifs de 2 à 5 jours</li>
+                            <li>Environnement d'apprentissage dédié</li>
+                            <li>Accompagnement personnalisé</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="format-card enhanced">
+                    <div class="card-header-format">
+                        <div class="format-icon-large enhanced">
+                            <i class="fas fa-sync-alt"></i>
+                        </div>
+                        <h3>BLENDED LEARNING</h3>
+                        <div class="chip-group">
+                            <span class="chip accent">Hybride</span>
+                        </div>
+                    </div>
+                    <div class="format-content">
+                        <p>Notre approche Blended Learning combine le meilleur du présentiel et du digital. Cette méthode hybride optimise l'apprentissage en alternant sessions en ligne, ateliers pratiques, coaching individuel et ressources digitales pour une expérience complète et efficace.</p>
+                        <ul>
+                            <li>Combinaison présentiel/distanciel</li>
+                            <li>Parcours personnalisés</li>
+                            <li>Suivi continu et adaptatif</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Call to action -->
+        <div class="cta-section text-center" style="margin-top: 60px;">
+            <h3>Trouvez la modalité qui vous convient</h3>
+            <p>Nos conseillers sont à votre disposition pour vous aider à choisir la modalité de formation la plus adaptée à vos besoins et contraintes.</p>
+            <a href="{{ url_for('contact') }}" class="btn btn-primary">Nous contacter</a>
+        </div>
+    </div>
+</section>
+
+<style>
+.modalities {
+    background-color: #f9fafc;
+}
+
+.modalities-hero {
+    margin-bottom: 60px;
+}
+
+/* Fil d'Ariane + kicker */
+.breadcrumb {
+    margin: -10px 0 24px 0;
+    font-size: 0.95rem;
+    color: #667085;
+}
+.breadcrumb ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+.breadcrumb li { display: flex; align-items: center; gap: 8px; }
+.breadcrumb li+li:before { content: ">"; color: #98a2b3; }
+.breadcrumb a { color: var(--brand-primary); text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; }
+.kicker {
+    color: var(--brand-dark);
+    font-weight: 600;
+    margin-bottom: 28px;
+}
+
+.hero-layout {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+    margin-bottom: 40px;
+}
+
+.hero-image {
+    flex: 0 0 300px;
+    max-width: 300px;
+    margin-top: 20px;
+}
+
+.hero-image img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Accent variables to match reference */
+:root {
+    --mod-accent: #2563eb; /* blue border */
+    --mod-icon: #f97316;   /* orange icon */
+}
+
+.hero-card {
+    flex: 1;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border: 2px solid #2563eb; /* Blue border */
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+.card-header {
+    background: #f8f9fa;
+    padding: 20px 25px;
+    border-bottom: 1px solid #e9ecef;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.card-icon {
+    width: 36px;
+    height: 36px;
+    background: #f97316; /* Orange background */
+    color: white;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
+.card-header h2 {
+    font-size: 1.3rem;
+    color: #343a40;
+    margin: 0;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
+
+.card-content {
+    padding: 20px 25px 25px 25px;
+    line-height: 1.6;
+    color: #495057;
+    font-size: 0.95rem;
+}
+
+.card-content p {
+    color: #666;
+    line-height: 1.7;
+    font-size: 1rem;
+    margin: 0;
+}
+
+.formats-section {
+    margin-bottom: 50px;
+    padding-top: 20px;
+}
+
+.section-title {
+    font-size: 1.5rem;
+    color: #343a40;
+    margin: 0 0 15px 0;
+    text-align: left;
+    font-weight: 600;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #e9ecef;
+}
+
+.section-subtitle {
+    display: none;
+}
+
+/* Typographie raffinée */
+.section-header h1 { letter-spacing: 0.2px; }
+.eyebrow { color: var(--brand-primary); font-weight: 700; text-transform: uppercase; letter-spacing: .6px; margin: 0 0 6px 0; font-size: .9rem; }
+.lead { color: #475467; }
+.format-content h4 { color: #0f172a; }
+.format-content ul { margin-top: 8px; }
+.format-content li { color: #475467; }
+
+/* Chips (badges) */
+.chip-group { display: none; }
+.chip {
+    display: inline-block;
+    padding: 6px 10px;
+    font-size: .8rem;
+    border-radius: 999px;
+    background: #eef2ff;
+    color: var(--brand-primary);
+    border: 1px solid rgba(59,130,246,.25);
+    font-weight: 600;
+}
+.chip.accent { background: #ecfeff; color: #0ea5e9; border-color: rgba(14,165,233,.25); }
+.chip.success { background: #ecfdf5; color: #059669; border-color: rgba(5,150,105,.25); }
+
+.formats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.format-card {
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: all 0.2s ease;
+    border: 2px solid #2563eb; /* Blue border */
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.format-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.format-card.enhanced {
+    background: #ffffff;
+    border: 2px solid #2563eb; /* Blue border */
+}
+
+.card-header-format {
+    background: #f8f9fa;
+    padding: 20px 20px 10px 20px;
+    border-bottom: 1px solid #e9ecef;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 0;
+}
+
+.format-icon-large {
+    width: 50px;
+    height: 50px;
+    background: #f97316; /* Orange background */
+    color: white;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    margin-bottom: 8px;
+}
+
+.format-icon-large.enhanced {
+    background: #f97316; /* Orange background */
+    color: white;
+}
+
+.card-header-format h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #343a40;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-align: center;
+    line-height: 1.3;
+}
+
+.format-card h3 { margin-bottom: 6px; }
+
+.format-content {
+    padding: 15px 20px 25px 20px;
+}
+
+.format-content h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #2563eb; /* Blue */
+    margin: 16px 0 8px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.format-content ul {
+    padding-left: 0;
+    margin: 8px 0 0 0;
+    list-style: none;
+}
+
+.format-content li {
+    margin-bottom: 6px;
+    position: relative;
+    padding-left: 22px;
+    line-height: 1.5;
+    color: #495057;
+    font-size: 0.9rem;
+}
+
+.format-content li:before {
+    content: "•";
+    color: #f97316; /* Orange */
+    font-weight: bold;
+    font-size: 1.2rem;
+    position: absolute;
+    left: 0;
+    top: -1px;
+}
+
+.format-card.enhanced .format-content {
+    padding: 12px 28px 24px 28px;
+}
+
+.format-card.enhanced .format-content p {
+    color: #444;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    font-size: 1rem;
+}
+
+.cta-section h3 {
+    font-size: 2rem;
+    color: var(--brand-dark);
+    margin-bottom: 20px;
+}
+
+.cta-section p {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 30px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero-layout {
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    .hero-image {
+        flex: none;
+        max-width: 100%;
+    }
+    
+    .card-header {
+        padding: 15px 20px;
+    }
+    
+    .card-content {
+        padding: 20px;
+    }
+    
+    .card-header-format {
+        padding: 15px 20px;
+    }
+    
+    .format-content {
+        padding: 20px;
+    }
+    
+    .formats-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+
+{% endblock %}

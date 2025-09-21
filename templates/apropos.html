@@ -1,0 +1,563 @@
+{% extends 'base.html' %}
+
+{% block title %}À propos - Conseilux{% endblock %}
+
+{% block head_extra %}
+<style>
+:root {
+    --primary: #2563eb;
+    --primary-light: #3b82f6;
+    --dark: #1e293b;
+    --gray-100: #f1f5f9;
+    --white: #ffffff;
+    --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    --radius: 0.5rem;
+}
+
+.about-hero {
+    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+    color: white;
+    padding: 5rem 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.about-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1920&q=80') center/cover;
+    opacity: 0.1;
+    z-index: 1;
+}
+
+.about-hero .container {
+    position: relative;
+    z-index: 2;
+}
+
+.about-hero h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    margin-bottom: 2.5rem;
+    opacity: 0.95;
+    font-weight: 300;
+}
+
+.hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin-top: 2rem;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-number {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #fbbf24;
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    opacity: 0.9;
+    font-weight: 400;
+}
+
+.about-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.section {
+    padding: 4rem 0;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.section-title h2 {
+    font-size: 2rem;
+    color: var(--dark);
+    position: relative;
+    display: inline-block;
+    padding-bottom: 0.5rem;
+}
+
+.section-title h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: var(--primary);
+}
+
+.mission-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.mission-card {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 2.5rem 2rem;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(37, 99, 235, 0.1);
+}
+
+.mission-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.mission-icon {
+    font-size: 3rem;
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+    background: linear-gradient(135deg, var(--primary), #3b82f6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.mission-card h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 1rem;
+}
+
+.mission-card p {
+    color: #64748b;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.value-card {
+    background: var(--white);
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease;
+}
+
+.value-card:hover {
+    transform: translateY(-2px);
+}
+
+.value-icon {
+    font-size: 2rem;
+    color: var(--primary);
+    margin-bottom: 1rem;
+}
+
+.value-card h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 0.75rem;
+}
+
+.value-card p {
+    color: #64748b;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.expertise-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-top: 2.5rem;
+}
+
+.expertise-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background: var(--white);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    transition: all 0.2s ease;
+}
+
+.expertise-item:hover {
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    transform: translateY(-2px);
+}
+
+.expertise-icon {
+    font-size: 2.5rem;
+    color: var(--primary);
+    flex-shrink: 0;
+}
+
+.expertise-item h4 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 0.5rem;
+}
+
+.expertise-item p {
+    color: #64748b;
+    line-height: 1.5;
+    font-size: 0.9rem;
+}
+
+.cta-section {
+    background: linear-gradient(135deg, var(--primary) 0%, #1e40af 100%);
+    color: white;
+    text-align: center;
+    padding: 4rem 2rem;
+    border-radius: 12px;
+    margin: 3rem 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('https://images.unsplash.com/photo-1560472354-b33ff0c44a43?auto=format&fit=crop&w=1920&q=80') center/cover;
+    opacity: 0.1;
+    z-index: 1;
+}
+
+.cta-section h2,
+.cta-section p,
+.cta-buttons {
+    position: relative;
+    z-index: 2;
+}
+
+.cta-section h2 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.cta-section p {
+    font-size: 1.1rem;
+    opacity: 0.95;
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn-cta {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+}
+
+.btn-cta.primary {
+    background: white;
+    color: var(--primary);
+}
+
+.btn-cta.primary:hover {
+    background: #f8fafc;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+.btn-cta.secondary {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+}
+
+.btn-cta.secondary:hover {
+    background: white;
+    color: var(--primary);
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .about-hero {
+        padding: 3rem 0;
+    }
+    
+    .about-hero h1 {
+        font-size: 2.2rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .hero-stats {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    
+    .stat-number {
+        font-size: 2rem;
+    }
+    
+    .section {
+        padding: 2.5rem 0;
+    }
+    
+    .mission-grid,
+    .values-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .expertise-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .expertise-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+    
+    .cta-section {
+        padding: 2.5rem 1.5rem;
+    }
+    
+    .cta-section h2 {
+        font-size: 1.8rem;
+    }
+    
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .btn-cta {
+        width: 100%;
+        max-width: 280px;
+    }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="about-hero">
+    <div class="container">
+        <h1>À propos de Conseilux</h1>
+        <p class="hero-subtitle">Votre partenaire de confiance pour l'excellence en formation et conseil</p>
+        <div class="hero-stats">
+            <div class="stat-item">
+                <span class="stat-number">100+</span>
+                <span class="stat-label">Entreprises accompagnées</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">10+</span>
+                <span class="stat-label">Années d'expérience</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">492+</span>
+                <span class="stat-label">Formations disponibles</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Notre Mission -->
+<section class="section">
+    <div class="about-content">
+        <div class="section-title">
+            <h2>Notre Mission</h2>
+            <p>Développer les compétences et accompagner la croissance des entreprises à travers des formations de qualité et un conseil stratégique personnalisé</p>
+        </div>
+        
+        <div class="mission-grid">
+            <div class="mission-card">
+                <div class="mission-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <h3>Formation d'Excellence</h3>
+                <p>Des programmes de formation certifiants conçus par des experts pour développer les compétences clés de vos équipes.</p>
+            </div>
+            
+            <div class="mission-card">
+                <div class="mission-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3>Accompagnement Personnalisé</h3>
+                <p>Un suivi individualisé et des solutions sur mesure adaptées aux besoins spécifiques de votre organisation.</p>
+            </div>
+            
+            <div class="mission-card">
+                <div class="mission-icon">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <h3>Résultats Mesurables</h3>
+                <p>Des indicateurs de performance clairs et un retour sur investissement démontrable pour chaque formation.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Nos Valeurs -->
+<section class="section" style="background-color: var(--gray-100);">
+    <div class="about-content">
+        <div class="section-title">
+            <h2>Nos Valeurs</h2>
+            <p>Les principes qui guident notre action au quotidien</p>
+        </div>
+        
+        <div class="values-grid">
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fas fa-star"></i>
+                </div>
+                <h4>Excellence</h4>
+                <p>Nous visons l'excellence dans chaque formation et chaque conseil que nous dispensons.</p>
+            </div>
+            
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <h4>Engagement</h4>
+                <p>Nous nous engageons pleinement dans la réussite de nos clients et de leurs projets.</p>
+            </div>
+            
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <h4>Innovation</h4>
+                <p>Nous intégrons les dernières innovations pédagogiques et technologiques.</p>
+            </div>
+            
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fas fa-handshake"></i>
+                </div>
+                <h4>Intégrité</h4>
+                <p>Nous agissons avec transparence, honnêteté et respect envers tous nos partenaires.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Notre Expertise -->
+<section class="section">
+    <div class="about-content">
+        <div class="section-title">
+            <h2>Notre Expertise</h2>
+            <p>Des domaines de compétences variés pour répondre à tous vos besoins</p>
+        </div>
+        
+        <div class="expertise-grid">
+            <div class="expertise-item">
+                <div class="expertise-icon">
+                    <i class="fas fa-language"></i>
+                </div>
+                <h4>Langues & Communication</h4>
+                <p>Formations en anglais, communication professionnelle et préparation aux certifications internationales.</p>
+            </div>
+            
+            <div class="expertise-item">
+                <div class="expertise-icon">
+                    <i class="fas fa-chart-bar"></i>
+                </div>
+                <h4>Bureautique & Analyse</h4>
+                <p>Maîtrise d'Excel, PowerBI, outils de gestion et d'analyse de données pour optimiser vos performances.</p>
+            </div>
+            
+            <div class="expertise-item">
+                <div class="expertise-icon">
+                    <i class="fas fa-cogs"></i>
+                </div>
+                <h4>Management & Leadership</h4>
+                <p>Développement des compétences managériales, gestion d'équipe et leadership stratégique.</p>
+            </div>
+            
+            <div class="expertise-item">
+                <div class="expertise-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h4>Sécurité & Conformité</h4>
+                <p>Formation en sécurité au travail, gouvernance des risques et conformité réglementaire.</p>
+            </div>
+            
+            <div class="expertise-item">
+                <div class="expertise-icon">
+                    <i class="fas fa-laptop-code"></i>
+                </div>
+                <h4>Technologies & Digital</h4>
+                <p>Transformation numérique, cybersécurité, cloud computing et intelligence artificielle.</p>
+            </div>
+            
+            <div class="expertise-item">
+                <div class="expertise-icon">
+                    <i class="fas fa-industry"></i>
+                </div>
+                <h4>Secteurs Spécialisés</h4>
+                <p>Expertise sectorielle en banque, finance, industrie, logistique, énergie et environnement.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<div class="about-content">
+    <div class="cta-section">
+        <h2>Prêt à développer vos compétences ?</h2>
+        <p>Découvrez nos formations et solutions de conseil personnalisées pour faire évoluer votre organisation</p>
+        <div class="cta-buttons">
+            <a href="/formations" class="btn-cta primary">Voir nos formations</a>
+            <a href="/contact" class="btn-cta secondary">Demander un devis</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

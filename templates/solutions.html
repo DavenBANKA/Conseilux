@@ -1,0 +1,1413 @@
+{% extends 'base.html' %}
+{% block title %}Nos Solutions - Conseilux{% endblock %}
+
+{% block content %}
+<style>
+/* Hero Section */
+.solutions-hero {
+    padding: 100px 0 60px;
+    background: #f8fafc;
+}
+
+.hero-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.hero-layout {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+}
+
+.hero-image {
+    flex: 0 0 400px;
+    max-width: 400px;
+    position: relative;
+}
+
+.hero-image img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 10px 24px rgba(20,42,128,.08);
+}
+
+.hero-content {
+    flex: 1;
+    padding: 40px 0;
+}
+
+.hero-content h1 {
+    font-size: 2.5rem;
+    color: #1e293b;
+    margin: 0 0 20px 0;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.hero-content p {
+    font-size: 1.1rem;
+    color: #475569;
+    line-height: 1.6;
+    margin: 0 0 30px 0;
+}
+
+.hero-cta {
+    display: inline-block;
+    background: var(--brand-primary);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.hero-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.breadcrumb {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.breadcrumb a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.breadcrumb a:hover {
+    color: var(--accent-color);
+}
+
+.hero-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--brand-dark);
+    margin-bottom: 0;
+    text-decoration: underline;
+    text-decoration-color: var(--brand-dark);
+    text-decoration-thickness: 2px;
+}
+
+.hero-description {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.hero-features {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.hero-features li {
+    position: relative;
+    padding-left: 32px;
+    margin: 16px 0;
+    color: #334155;
+    font-size: 1.1rem;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.hero-features li:hover {
+    color: var(--primary-color);
+    transform: translateX(4px);
+}
+
+.hero-features li:before {
+    content: '\f00c';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    left: 0;
+    top: 4px;
+    color: var(--accent-color);
+    font-size: 1rem;
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(135deg, var(--accent-color), #ff8a50);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Solutions Cards - Professional Enhancement */
+.solutions-cards {
+    padding: 120px 0;
+    background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    position: relative;
+}
+
+.cards-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+.cards-title {
+    font-size: 3.25rem;
+    color: var(--brand-dark);
+    text-align: center;
+    margin-bottom: 24px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+}
+
+.cards-subtitle {
+    font-size: 1.25rem;
+    color: #64748b;
+    text-align: center;
+    margin-bottom: 80px;
+    font-weight: 400;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: 48px;
+}
+
+.solution-card {
+    background: white;
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    border-radius: 16px;
+    padding: 48px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+}
+
+.solution-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    transform: scaleX(0);
+    transition: all 0.3s ease;
+    transform-origin: left;
+}
+
+.solution-card:hover::before {
+    transform: scaleX(1);
+}
+
+.solution-card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    border-color: var(--primary-color);
+}
+
+.card-header {
+    margin-bottom: 32px;
+}
+
+.card-icon {
+    font-size: 4rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 24px;
+    transition: all 0.3s ease;
+}
+
+.solution-card:hover .card-icon {
+    transform: scale(1.1);
+}
+
+.card-title {
+    font-size: 1.75rem;
+    color: var(--brand-dark);
+    margin: 0;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+
+.card-description {
+    color: #64748b;
+    line-height: 1.7;
+    margin-bottom: 40px;
+    font-size: 1.1rem;
+    font-weight: 400;
+}
+
+.card-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 16px 32px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.card-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.card-button::after {
+    content: '\f061';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    transition: var(--transition);
+}
+
+.card-button:hover::after {
+    transform: translateX(4px);
+}
+
+.card-button:hover {
+    filter: brightness(0.95);
+    transform: translateY(-2px);
+}
+
+/* Expertise Section - Professional Enhancement */
+.expertise-section {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    padding: 120px 0;
+    position: relative;
+}
+
+.expertise-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="%23ffffff" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>') repeat;
+    pointer-events: none;
+}
+
+.expertise-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+    position: relative;
+    z-index: 1;
+}
+
+.expertise-title {
+    font-size: 3.25rem;
+    color: var(--brand-dark);
+    text-align: center;
+    margin-bottom: 24px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+}
+
+.expertise-subtitle {
+    font-size: 1.25rem;
+    color: #64748b;
+    text-align: center;
+    margin-bottom: 80px;
+    font-weight: 400;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.expertise-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 48px;
+}
+
+.expertise-card {
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    border-radius: var(--border-radius);
+    padding: 48px;
+    box-shadow: var(--shadow-medium);
+    transition: var(--transition);
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+}
+
+.expertise-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(135deg, var(--accent-color), #ff8a50);
+    transform: scaleX(0);
+    transition: all 0.3s ease;
+    transform-origin: left;
+}
+
+.expertise-card:hover::before {
+    transform: scaleX(1);
+}
+
+.expertise-card:hover {
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: var(--shadow-heavy);
+    border-color: var(--accent-color);
+}
+
+.expertise-card h3 {
+    color: var(--brand-dark);
+    margin-bottom: 24px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    position: relative;
+}
+
+.expertise-card h3::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background: linear-gradient(135deg, var(--accent-color), #ff8a50);
+    border-radius: 2px;
+}
+
+.expertise-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.expertise-card li {
+    position: relative;
+    padding-left: 32px;
+    margin: 16px 0;
+    color: #475569;
+    line-height: 1.6;
+    font-size: 1.05rem;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.expertise-card li:hover {
+    color: var(--primary-color);
+    transform: translateX(4px);
+}
+
+.expertise-card li:before {
+    content: '\f00c';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    left: 0;
+    top: 4px;
+    color: var(--accent-color);
+    font-size: 1rem;
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(135deg, var(--accent-color), #ff8a50);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* CTA Section - Professional Enhancement */
+.cta-section {
+    background: linear-gradient(135deg, var(--brand-dark) 0%, var(--primary-color) 100%);
+    padding: 100px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 30% 70%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 70% 30%, rgba(249, 115, 22, 0.2) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.cta-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+    position: relative;
+    z-index: 1;
+}
+
+.cta-box {
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--border-radius);
+    padding: 80px 60px;
+    text-align: center;
+    box-shadow: var(--shadow-heavy);
+    backdrop-filter: blur(20px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(135deg, var(--accent-color), #ff8a50);
+}
+
+.cta-box h2 {
+    color: var(--brand-dark);
+    font-size: 2.75rem;
+    margin: 0;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    background: linear-gradient(135deg, var(--brand-dark) 0%, var(--primary-color) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.cta-box p {
+    color: #64748b;
+    font-size: 1.25rem;
+    margin: 0;
+    max-width: 700px;
+    line-height: 1.6;
+    font-weight: 400;
+}
+
+.cta-button {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 20px 48px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.cta-button:hover {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+}
+
+.cta-button::after {
+    content: '\f061';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    transition: var(--transition);
+}
+
+.cta-button:hover::after {
+    transform: translateX(4px);
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .hero-layout {
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    .hero-image {
+        flex: none;
+        max-width: 100%;
+    }
+    
+    .hero-content {
+        padding: 30px;
+    }
+    
+    .hero-title {
+        font-size: 28px;
+    }
+    
+    .cards-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .cta-box {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+/* Styles pour les nouvelles sections */
+.process-section, .sectors-section {
+    padding: 60px 0;
+}
+
+.process-section { 
+    background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+    position: relative;
+}
+
+.process-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 70% 30%, rgba(59, 130, 246, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.sectors-section { 
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    position: relative;
+}
+
+.process-container, .sectors-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.process-title, .sectors-title {
+    font-size: 2.2rem;
+    color: var(--brand-dark);
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+/* Process Steps - Professional Enhancement */
+.process-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 48px;
+    position: relative;
+}
+
+.process-steps::before {
+    content: '';
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary-color) 0%, var(--accent-color) 50%, var(--secondary-color) 100%);
+    opacity: 0.3;
+    z-index: 0;
+}
+
+.step-card {
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    border-radius: var(--border-radius);
+    padding: 40px;
+    box-shadow: var(--shadow-medium);
+    position: relative;
+    backdrop-filter: blur(10px);
+    transition: var(--transition);
+    z-index: 1;
+}
+
+.step-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: var(--shadow-heavy);
+}
+
+.step-number {
+    position: absolute;
+    top: -20px;
+    left: 40px;
+    background: linear-gradient(135deg, var(--accent-color), #ff8a50);
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    border: 4px solid white;
+}
+
+.step-card h3 {
+    color: var(--brand-dark);
+    margin: 20px 0 16px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+
+.step-card p {
+    color: #64748b;
+    margin-bottom: 24px;
+    line-height: 1.7;
+    font-size: 1.05rem;
+    font-weight: 400;
+}
+
+.step-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.step-card li {
+    position: relative;
+    padding-left: 28px;
+    margin: 12px 0;
+    color: #475569;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.6;
+    transition: var(--transition);
+}
+
+.step-card li:hover {
+    color: var(--primary-color);
+    transform: translateX(4px);
+}
+
+.step-card li:before {
+    content: '\f00c';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    left: 0;
+    top: 4px;
+    color: var(--accent-color);
+    font-size: 0.9rem;
+}
+
+/* Sectors */
+.sectors-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.sector-card {
+    background: white;
+    border: 1px solid #edf0f5;
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 6px 14px rgba(16,44,120,.06);
+}
+
+.sector-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: white;
+}
+
+.sector-card h3 {
+    color: var(--brand-dark);
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+}
+
+.sector-details h4 {
+    color: var(--brand-dark);
+    margin: 20px 0 10px;
+    font-size: 1.1rem;
+}
+
+.sector-details ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sector-details li {
+    position: relative;
+    padding-left: 20px;
+    margin: 8px 0;
+    color: #3b4352;
+}
+
+.sector-details li:before {
+    content: '\f00c';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    left: 0;
+    top: 2px;
+    color: var(--accent-color);
+    font-size: 0.8rem;
+}
+
+/* Modalités Section - Professional Enhancement */
+.modalities-section {
+    padding: 120px 0;
+    background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+    position: relative;
+}
+
+.modalities-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 20% 80%, rgba(249, 115, 22, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.modalities-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.modalities-title {
+    font-size: 2.2rem;
+    color: var(--brand-dark);
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.modalities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+}
+
+.modality-card {
+    background: white;
+    border: 1px solid #edf0f5;
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 6px 14px rgba(16,44,120,.06);
+    text-align: center;
+}
+
+.modality-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 32px;
+    color: white;
+}
+
+.modality-card h3 {
+    color: var(--brand-dark);
+    margin-bottom: 15px;
+    font-size: 1.4rem;
+}
+
+.modality-features {
+    text-align: left;
+    margin-top: 20px;
+}
+
+.modality-features h4 {
+    color: var(--brand-dark);
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+}
+
+/* Certifications Section */
+.certifications-section {
+    padding: 60px 0;
+    background: #f7f8fb;
+}
+
+.certifications-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.certifications-title {
+    font-size: 2.2rem;
+    color: var(--brand-dark);
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.certifications-text {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 1.1rem;
+    color: #3b4352;
+}
+
+.certifications-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.certification-item {
+    background: white;
+    border: 1px solid #edf0f5;
+    border-radius: 16px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 6px 14px rgba(16,44,120,.06);
+}
+
+.cert-logo {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f7f8fb;
+    border-radius: 50%;
+}
+
+.cert-logo img {
+    max-width: 60px;
+    max-height: 60px;
+}
+
+.certification-item h4 {
+    color: var(--brand-dark);
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+/* Testimonials Section - Professional Enhancement */
+.testimonials-section {
+    padding: 120px 0;
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    position: relative;
+}
+
+.testimonials-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.testimonials-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+    position: relative;
+    z-index: 1;
+}
+
+.testimonials-title {
+    font-size: 3.25rem;
+    color: var(--brand-dark);
+    text-align: center;
+    margin-bottom: 24px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+}
+
+.testimonials-subtitle {
+    font-size: 1.25rem;
+    color: #64748b;
+    text-align: center;
+    margin-bottom: 80px;
+    font-weight: 400;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: 48px;
+}
+
+.testimonial-card {
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    border-radius: var(--border-radius);
+    padding: 48px;
+    box-shadow: var(--shadow-medium);
+    backdrop-filter: blur(10px);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.testimonial-card::before {
+    content: '\f10d';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    font-size: 2rem;
+    color: var(--accent-color);
+    opacity: 0.2;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: var(--shadow-heavy);
+}
+
+.testimonial-content {
+    margin-bottom: 32px;
+}
+
+.testimonial-content p {
+    font-style: italic;
+    color: #475569;
+    font-size: 1.15rem;
+    line-height: 1.7;
+    font-weight: 400;
+    margin: 0;
+}
+
+.testimonial-author {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 24px;
+    border-top: 2px solid #f1f5f9;
+}
+
+.author-info h4 {
+    color: var(--brand-dark);
+    margin: 0 0 8px;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.author-info span {
+    color: #64748b;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.testimonial-rating {
+    color: var(--accent-color);
+    font-size: 1.1rem;
+}
+</style>
+
+<!-- Hero Section -->
+<div class="solutions-hero">
+    <div class="hero-container">
+        <div class="hero-layout">
+            <div class="hero-image">
+                <img src="{{ url_for('static', filename='images/team-training.jpg') }}" alt="Équipe en formation" style="width: 100%; height: 400px; object-fit: cover; border-radius: 8px;"/>
+            </div>
+            <div class="hero-content">
+                <h1>Nos Solutions</h1>
+                <p>Des solutions sur-mesure pour répondre à vos enjeux de formation et de développement des compétences.</p>
+                <a href="#contact" class="hero-cta">Nous contacter</a>
+            </div>
+        </div>
+        </div>
+    </div>
+</section>
+
+<!-- Solutions Cards Section -->
+<section class="solutions-cards">
+    <div class="cards-container">
+        <div class="cards-grid">
+            <!-- Coaching Card -->
+            <div class="solution-card">
+                <div class="card-header">
+                    <i class="fas fa-user-tie card-icon"></i>
+                    <h3 class="card-title">Coaching</h3>
+                </div>
+                <p class="card-description">
+                    Nos dispositifs de coaching visent l'accroissement rapide et durable de la performance individuelle et collective. Adaptation sur mesure du parcours avec système de suivi personnalisé.
+                </p>
+                <a href="{{ url_for('contact') }}" class="card-button">En savoir plus</a>
+            </div>
+
+            <!-- Diagnostics Card -->
+            <div class="solution-card">
+                <div class="card-header">
+                    <i class="fas fa-chart-line card-icon"></i>
+                    <h3 class="card-title">Diagnostics</h3>
+                </div>
+                <p class="card-description">
+                    Un diagnostic clair et chiffré pour cadrer un dispositif à fort impact. Cartographie des compétences, plan d'actions priorisé avec trajectoire et indicateurs précis.
+                </p>
+                <a href="{{ url_for('contact') }}" class="card-button">En savoir plus</a>
+            </div>
+
+            <!-- À la carte Card -->
+            <div class="solution-card">
+                <div class="card-header">
+                    <i class="fas fa-puzzle-piece card-icon"></i>
+                    <h3 class="card-title">À la carte</h3>
+                </div>
+                <p class="card-description">
+                    Formations modulaires, ateliers, visioformation, e-learning, séminaires et team building. Forte flexibilité d'engagement pour s'adapter à toutes vos contraintes.
+                </p>
+                <a href="{{ url_for('contact') }}" class="card-button">En savoir plus</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Expertise Section -->
+<section class="expertise-section">
+    <div class="expertise-container">
+        <h2 class="expertise-title">Notre Expertise</h2>
+        <p class="expertise-subtitle">Une approche méthodologique éprouvée pour garantir le succès de vos projets de transformation</p>
+        <p class="testimonials-subtitle">Ce que nos clients disent de notre accompagnement et de nos résultats</p>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <h3>Accompagnement Personnalisé</h3>
+                <ul>
+                    <li>Analyse des besoins spécifiques</li>
+                    <li>Parcours de formation sur mesure</li>
+                    <li>Suivi individuel et collectif</li>
+                    <li>Évaluation continue des progrès</li>
+                </ul>
+            </div>
+            
+            <div class="expertise-card">
+                <h3>Méthodes Innovantes</h3>
+                <ul>
+                    <li>Pédagogie active et participative</li>
+                    <li>Outils digitaux interactifs</li>
+                    <li>Approche blended learning</li>
+                    <li>Certification reconnue</li>
+                </ul>
+            </div>
+            
+            <div class="expertise-card">
+                <h3>Résultats Mesurables</h3>
+                <ul>
+                    <li>Indicateurs de performance clairs</li>
+                    <li>ROI formation démontré</li>
+                    <li>Amélioration des compétences</li>
+                    <li>Satisfaction client élevée</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Processus Section -->
+<section class="process-section">
+    <div class="process-container">
+        <h2 class="process-title">Notre Processus d'Accompagnement</h2>
+        <div class="process-steps">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h3>Analyse des Besoins</h3>
+                <p>Nous commençons par une analyse approfondie de vos besoins spécifiques, de votre contexte organisationnel et de vos objectifs de développement.</p>
+                <ul>
+                    <li>Audit des compétences actuelles</li>
+                    <li>Identification des gaps de formation</li>
+                    <li>Définition des objectifs SMART</li>
+                    <li>Analyse du contexte organisationnel</li>
+                </ul>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h3>Conception Sur Mesure</h3>
+                <p>Sur la base de l'analyse, nous concevons un programme de formation entièrement personnalisé.</p>
+                <ul>
+                    <li>Création de contenus personnalisés</li>
+                    <li>Sélection des modalités pédagogiques</li>
+                    <li>Planification des sessions</li>
+                    <li>Définition des indicateurs de réussite</li>
+                </ul>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h3>Déploiement</h3>
+                <p>Mise en œuvre du programme avec un accompagnement constant.</p>
+                <ul>
+                    <li>Animation par des experts métier</li>
+                    <li>Pédagogie active et participative</li>
+                    <li>Outils digitaux interactifs</li>
+                    <li>Suivi individualisé</li>
+                </ul>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-number">4</div>
+                <h3>Évaluation & Suivi</h3>
+                <p>Mesure de l'impact et accompagnement post-formation pour garantir la mise en application des acquis.</p>
+                <ul>
+                    <li>Évaluation des acquis</li>
+                    <li>Mesure de la satisfaction</li>
+                    <li>Plan d'action post-formation</li>
+                    <li>Accompagnement à la mise en œuvre</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Modalités Section -->
+<section class="modalities-section">
+    <div class="modalities-container">
+        <h2 class="modalities-title">Modalités de Formation</h2>
+        <div class="modalities-grid">
+            <div class="modality-card">
+                <div class="modality-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3>Formation Présentielle</h3>
+                <p>Sessions en face-à-face dans vos locaux ou dans nos centres de formation.</p>
+                <div class="modality-features">
+                    <h4>Avantages :</h4>
+                    <ul>
+                        <li>Interaction directe avec le formateur</li>
+                        <li>Échanges entre participants</li>
+                        <li>Adaptation en temps réel</li>
+                        <li>Mise en pratique immédiate</li>
+                        <li>Networking professionnel</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="modality-card">
+                <div class="modality-icon">
+                    <i class="fas fa-laptop"></i>
+                </div>
+                <h3>Formation Distancielle</h3>
+                <p>Classes virtuelles interactives avec outils collaboratifs avancés.</p>
+                <div class="modality-features">
+                    <h4>Caractéristiques :</h4>
+                    <ul>
+                        <li>Plateforme e-learning intuitive</li>
+                        <li>Sessions live interactives</li>
+                        <li>Outils de collaboration</li>
+                        <li>Flexibilité géographique</li>
+                        <li>Enregistrements disponibles</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="modality-card">
+                <div class="modality-icon">
+                    <i class="fas fa-sync-alt"></i>
+                </div>
+                <h3>Formation Hybride</h3>
+                <p>Combinaison optimale entre présentiel et distanciel pour maximiser l'efficacité.</p>
+                <div class="modality-features">
+                    <h4>Bénéfices :</h4>
+                    <ul>
+                        <li>Flexibilité maximale</li>
+                        <li>Apprentissage progressif</li>
+                        <li>Suivi personnalisé</li>
+                        <li>Optimisation des coûts</li>
+                        <li>Adaptation aux contraintes</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Certifications Section -->
+<section class="certifications-section">
+    <div class="certifications-container">
+        <h2 class="certifications-title">Nos Certifications & Accréditations</h2>
+        <div class="certifications-content">
+            <div class="certifications-text">
+                <p>Nos formations sont reconnues par les organismes professionnels les plus exigeants et répondent aux standards internationaux de qualité.</p>
+            </div>
+            <div class="certifications-grid">
+                {% for img in certifications_images %}
+                    {% set cert_name = img.rsplit('.', 1)[0] %}
+                    <div class="certification-item">
+                        <div class="cert-logo">
+                            <img src="{{ url_for('static', filename='certifications/' ~ img) }}" alt="{{ cert_name }}" />
+                        </div>
+                        <h4>{{ cert_name|title }}</h4>
+                        <p>
+                            {% if 'iso' in cert_name.lower() %}
+                                Standard international de management de la qualité
+                            {% elif 'pmp' in cert_name.lower() %}
+                                Certification Project Management Professional
+                            {% elif 'itil' in cert_name.lower() %}
+                                Framework de gestion des services informatiques
+                            {% elif 'scrum' in cert_name.lower() %}
+                                Méthodologie agile pour la gestion de projet
+                            {% elif 'lean' in cert_name.lower() %}
+                                Méthodologie d'amélioration continue
+                            {% elif 'safe' in cert_name.lower() %}
+                                Framework Scaled Agile
+                            {% elif 'togaf' in cert_name.lower() %}
+                                Architecture d'entreprise
+                            {% elif 'cobit' in cert_name.lower() %}
+                                Gouvernance et gestion des SI
+                            {% elif 'nebosh' in cert_name.lower() %}
+                                Sécurité et santé au travail
+                            {% elif 'apics' in cert_name.lower() %}
+                                Supply Chain et opérations
+                            {% elif 'toeic' in cert_name.lower() or 'toefl' in cert_name.lower() or 'ielts' in cert_name.lower() %}
+                                Certification d'anglais professionnel
+                            {% elif 'cambridge' in cert_name.lower() or 'british' in cert_name.lower() %}
+                                Certification d'anglais académique
+                            {% elif 'pecb' in cert_name.lower() %}
+                                Organisme de certification ISO
+                            {% elif 'isaca' in cert_name.lower() or 'cgeit' in cert_name.lower() %}
+                                Gouvernance IT et audit
+                            {% elif 'cisaf' in cert_name.lower() %}
+                                Audit et contrôle interne
+                            {% elif 'ifrs' in cert_name.lower() %}
+                                Normes comptables internationales
+                            {% else %}
+                                Certification professionnelle reconnue
+                            {% endif %}
+                        </p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Solutions Cards -->
+<section class="solutions-cards">
+    <div class="cards-container">
+        <h2 class="cards-title">Nos Solutions</h2>
+        <p class="cards-subtitle">Des approches sur-mesure pour transformer votre organisation et développer les compétences de vos équipes</p>
+        <div class="cards-grid">
+            <div class="sector-card">
+                <div class="sector-icon">
+                    <i class="fas fa-industry"></i>
+                </div>
+                <h3>Industrie & Manufacturing</h3>
+                <p>Optimisation des processus industriels et amélioration continue.</p>
+                <div class="sector-details">
+                    <h4>Spécialités :</h4>
+                    <ul>
+                        <li>Lean Manufacturing & Six Sigma</li>
+                        <li>Supply Chain Management</li>
+                        <li>Maintenance industrielle</li>
+                        <li>Sécurité au travail</li>
+                        <li>Qualité et certification ISO</li>
+                        <li>Gestion de production</li>
+                        <li>Amélioration continue</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="sector-card">
+                <div class="sector-icon">
+                    <i class="fas fa-building"></i>
+                </div>
+                <h3>Services & Tertiaire</h3>
+                <p>Développement des compétences managériales et commerciales.</p>
+                <div class="sector-details">
+                    <h4>Domaines :</h4>
+                    <ul>
+                        <li>Relation client & service</li>
+                        <li>Management & leadership</li>
+                        <li>Vente et négociation</li>
+                        <li>Communication professionnelle</li>
+                        <li>Gestion de projet</li>
+                        <li>Ressources humaines</li>
+                        <li>Marketing digital</li>
+            <div class="sector-card">
+                <div class="sector-icon">
+                    <i class="fas fa-laptop-code"></i>
+                </div>
+                <h3>Technologies & Digital</h3>
+                <p>Formation aux dernières technologies et accompagnement de la transformation digitale des entreprises.</p>
+                <div class="sector-details">
+                    <h4>Formations clés :</h4>
+                    <ul>
+                        <li>Intelligence Artificielle générative</li>
+                        <li>Cybersécurité avancée</li>
+                        <li>Cloud Computing (AWS, Azure, GCP)</li>
+                        <li>DevOps et Agile</li>
+                        <li>Data Science et Big Data</li>
+                        <li>Transformation digitale</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="sector-card">
+                <div class="sector-icon">
+                    <i class="fas fa-heartbeat"></i>
+                </div>
+                <h3>Santé & Pharmaceutique</h3>
+                <p>Solutions de formation adaptées aux exigences strictes du secteur de la santé et de l'industrie pharmaceutique.</p>
+                <div class="sector-details">
+                    <h4>Formations clés :</h4>
+                    <ul>
+                        <li>Bonnes Pratiques de Fabrication (BPF)</li>
+                        <li>Validation et qualification</li>
+                        <li>Affaires réglementaires</li>
+                        <li>Pharmacovigilance</li>
+                        <li>Gestion de la qualité pharmaceutique</li>
+                        <li>Dispositifs médicaux</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+    <div class="cta-container">
+        <div class="cta-box">
+            <h2>Prêt à transformer votre organisation ?</h2>
+            <p>Contactez-nous dès aujourd'hui pour une consultation personnalisée</p>
+            <a href="/contact" class="cta-button">Demander un devis gratuit</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

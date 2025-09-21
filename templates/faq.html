@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}FAQ - Conseilux{% endblock %}
+{% block content %}
+<!-- Page Hero -->
+<section class="page-hero">
+  <div class="container">
+    <p class="kicker">Aide</p>
+    <h1>FAQ</h1>
+    <p class="lead">Des réponses rapides aux questions les plus fréquentes sur nos formations et nos modalités.</p>
+  </div>
+</section>
+
+<!-- Breadcrumbs -->
+<div class="breadcrumbs" aria-label="Fil d'Ariane">
+  <div class="container">
+    <nav>
+      <a href="{{ url_for('home') }}">Accueil</a>
+      <span class="sep">›</span>
+      <span>FAQ</span>
+    </nav>
+  </div>
+</div>
+
+<!-- FAQ Section -->
+<section class="page-section alt">
+  <div class="container">
+    <div class="faq-box" style="margin-bottom:20px;">
+      <div>
+        <p class="kicker">Quelques réponses</p>
+        <h2>Questions fréquentes</h2>
+        <h3 class="faq-sub">Besoin d’informations complémentaires ?</h3>
+        <p>Notre équipe est disponible pour vous conseiller et construire le bon parcours.</p>
+      </div>
+      <div class="faq-actions">
+        <a href="{{ url_for('contact') }}" class="btn btn-accent btn-pill">Nous contacter</a>
+      </div>
+    </div>
+    <details class="faq-item"><summary>Comment m’inscrire à une formation ?</summary><div>Choisissez votre formation et contactez‑nous via le formulaire. Nous vous accompagnons pour le financement et l’inscription.</div></details>
+    <details class="faq-item"><summary>Proposez‑vous des formations sur‑mesure ?</summary><div>Oui, diagnostic, ingénierie pédagogique et blended learning adaptés à vos objectifs.</div></details>
+    <details class="faq-item"><summary>Peut‑on suivre vos formations à distance ?</summary><div>Oui, classes virtuelles interactives, replays, e‑learning et coaching.</div></details>
+  </div>
+</section>
+{% endblock %}

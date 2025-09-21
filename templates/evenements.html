@@ -1,0 +1,727 @@
+{% extends 'base.html' %}
+{% block title %}Événements - Conseilux{% endblock %}
+
+{% block head_extra %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<style>
+:root {
+    --primary: #2563eb;
+    --primary-hover: #1d4ed8;
+    --dark: #1e293b;
+    --gray-700: #334155;
+    --gray-500: #64748b;
+    --gray-300: #cbd5e1;
+    --gray-100: #f1f5f9;
+    --white: #ffffff;
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --radius: 0.5rem;
+    --transition: all 0.2s ease-in-out;
+}
+
+/* Reset et base */
+.events {
+    padding: 4rem 0;
+    background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/* En-tête */
+.events-header {
+    text-align: center;
+    margin-bottom: 3.5rem;
+}
+
+.kicker {
+    display: inline-block;
+    color: var(--primary);
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.75rem;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.kicker::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1rem;
+    height: 2px;
+    background: var(--primary);
+}
+
+.events-header h2 {
+    font-size: 2.25rem;
+    font-weight: 800;
+    color: var(--dark);
+    margin-bottom: 1.25rem;
+    line-height: 1.2;
+}
+
+.events-header p {
+    font-size: 1.125rem;
+    color: var(--gray-700);
+    max-width: 42rem;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Grille d'événements */
+.events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 2rem;
+    margin-top: 2.5rem;
+}
+
+/* Carte d'événement */
+.event-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+    border: 1px solid var(--gray-100);
+}
+
+.event-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+.event-cover {
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.event-cover.event-english {
+    background-image: url("https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=1200&q=80");
+}
+
+.event-cover.event-business {
+    background-image: url("https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=1200&q=80");
+}
+
+.event-cover.event-excel {
+    background-image: url("https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80");
+}
+
+.event-cover.event-programming {
+    background-image: url("https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=1200&q=80");
+}
+
+.event-cover.event-data {
+    background-image: url("https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit=crop&w=1200&q=80");
+}
+
+.event-cover.event-certification {
+    background-image: url("https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=1200&q=80");
+}
+
+.event-cover.event-sales {
+    background-image: url("https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1200&q=80");
+}
+
+.event-cover.event-marketing {
+    background-image: url("https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80");
+}
+
+.event-cover.event-industry {
+    background-image: url("https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1200&q=80");
+}
+
+.event-cover.event-logistics {
+    background-image: url("https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1200&q=80");
+}
+
+.event-cover.event-finance {
+    background-image: url("https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=80");
+}
+
+.event-cover.event-banking {
+    background-image: url("https://images.unsplash.com/photo-1541354329998-f4d9a9f9297f?auto=format&fit=crop&w=1200&q=80");
+}
+
+.event-cover.event-insurance {
+    background-image: url("https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?auto=format&fit=crop&w=1200&q=80");
+}
+
+.event-cover.event-energy {
+    background-image: url("https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?auto=format&fit=crop&w=1200&q=80");
+}
+
+.event-cover.event-environment {
+    background-image: url("https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1200&q=80");
+}
+
+.event-cover.event-safety {
+    background-image: url("https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=1200&q=80");
+}
+
+.event-cover.event-governance {
+    background-image: url("https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1200&q=80");
+}
+
+.event-cover.event-digital {
+    background-image: url("https://images.unsplash.com/photo-1518709268805-4e9042af2176?auto=format&fit=crop&w=1200&q=80");
+}
+
+.event-cover.event-quality {
+    background-image: url("https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1200&q=80");
+}
+
+.event-cover.event-leadership {
+    background-image: url("https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80");
+}
+
+.event-cover.event-project {
+    background-image: url("https://images.unsplash.com/photo-1611224923853-80b023f02d71?auto=format&fit=crop&w=1200&q=80");
+}
+
+.event-cover.event-personal {
+    background-image: url("https://images.unsplash.com/photo-1559136555-9303baea8ebd?auto=format&fit=crop&w=1200&q=80");
+}
+
+.event-cover.event-security {
+    background-image: url("https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1200&q=80");
+}
+
+.event-cover.event-cloud {
+    background-image: url("https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80");
+}
+
+.event-cover.event-office {
+    background-image: url("https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&w=1200&q=80");
+}
+
+.event-cover.event-ia {
+    background-image: url("https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1200&q=80");
+}
+
+.event-cover::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.6) 100%);
+    opacity: 0.8;
+    transition: var(--transition);
+}
+
+.event-card:hover .event-cover::after {
+    opacity: 0.9;
+}
+
+.event-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: var(--white);
+    color: var(--primary);
+    padding: 0.35rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    z-index: 2;
+    box-shadow: var(--shadow-sm);
+}
+
+.event-badge.webinar { background: #e0f2fe; color: #0369a1; }
+.event-badge.workshop { background: #fef3c7; color: #92400e; }
+.event-badge.conference { background: #ede9fe; color: #6d28d9; }
+
+.event-body {
+    padding: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.event-body h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin: 0 0 0.75rem 0;
+    line-height: 1.4;
+}
+
+.event-excerpt {
+    color: var(--gray-700);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+    flex-grow: 1;
+}
+
+.event-cta {
+    display: inline-flex;
+    align-items: center;
+    color: var(--primary);
+    font-weight: 600;
+    text-decoration: none;
+    transition: var(--transition);
+    margin-top: auto;
+    width: fit-content;
+}
+
+.event-cta::after {
+    content: '→';
+    margin-left: 0.5rem;
+    transition: transform 0.2s ease;
+}
+
+.event-cta:hover {
+    color: var(--primary-hover);
+}
+
+.event-cta:hover::after {
+    transform: translateX(4px);
+}
+
+/* Filtres */
+.events-filters {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 2.5rem;
+}
+
+.filter-btn {
+    padding: 0.5rem 1.25rem;
+    border-radius: 9999px;
+    border: 1px solid var(--gray-300);
+    background: var(--white);
+    color: var(--gray-700);
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.filter-btn:hover, .filter-btn.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .events-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .events-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .events-header h2 {
+        font-size: 1.875rem;
+    }
+    
+    .events-header p {
+        font-size: 1rem;
+    }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Fil d'Ariane -->
+<div class="breadcrumbs" aria-label="Fil d'Ariane">
+    <div class="container">
+        <nav>
+            <a href="{{ url_for('home') }}">Accueil</a>
+            <span class="sep">›</span>
+            <span>Événements</span>
+        </nav>
+    </div>
+</div>
+
+<!-- Section Événements -->
+<section class="events">
+    <div class="container">
+        <header class="events-header">
+            <span class="kicker">Événements à venir</span>
+            <h2>Découvrez nos prochains rendez-vous</h2>
+            <p>Participez à nos webinaires, ateliers et conférences pour développer vos compétences et échanger avec nos experts.</p>
+        </header>
+
+        <!-- Filtres -->
+        <div class="events-filters">
+            <button class="filter-btn active" data-filter="all">Tous les événements</button>
+            <button class="filter-btn" data-filter="webinar">Webinaires</button>
+            <button class="filter-btn" data-filter="workshop">Ateliers</button>
+            <button class="filter-btn" data-filter="conference">Conférences</button>
+        </div>
+
+        <!-- Grille d'événements -->
+        <div class="events-grid">
+            <!-- Formation Anglais Généraliste -->
+            <article class="event-card" data-category="workshop">
+                <div class="event-cover event-english">
+                    <span class="event-badge workshop">Formation</span>
+                </div>
+                <div class="event-body">
+                    <h3>Formation en Anglais Généraliste</h3>
+                    <p class="event-excerpt">Développez vos compétences en anglais général avec une approche communicative et interactive. Perfectionnez votre expression orale et écrite.</p>
+                    <a href="https://wa.me/22870674796?text=Bonjour,%20je%20souhaite%20m'inscrire%20à%20cette%20formation.%20Pouvez-vous%20me%20donner%20plus%20d'informations%20?" class="event-cta" target="_blank">S'inscrire</a>
+                </div>
+            </article>
+
+            <!-- Formation Anglais Professionnel -->
+            <article class="event-card" data-category="workshop">
+                <div class="event-cover event-business">
+                    <span class="event-badge workshop">Formation</span>
+                </div>
+                <div class="event-body">
+                    <h3>Formation en Anglais Professionnel</h3>
+                    <p class="event-excerpt">Maîtrisez l'anglais des affaires : présentations, négociations, correspondance professionnelle et communication interculturelle.</p>
+                    <a href="https://wa.me/22870674796?text=Bonjour,%20je%20souhaite%20m'inscrire%20à%20cette%20formation.%20Pouvez-vous%20me%20donner%20plus%20d'informations%20?" class="event-cta" target="_blank">S'inscrire</a>
+                </div>
+            </article>
+
+            <!-- Formation Excel Débutant -->
+            <article class="event-card" data-category="workshop">
+                <div class="event-cover event-excel">
+                    <span class="event-badge workshop">Formation</span>
+                </div>
+                <div class="event-body">
+                    <h3>Formation en Excel Débutant</h3>
+                    <p class="event-excerpt">Apprenez les bases d'Excel : saisie de données, formules simples, mise en forme et création de graphiques basiques.</p>
+                    <a href="https://wa.me/22870674796?text=Bonjour,%20je%20souhaite%20m'inscrire%20à%20cette%20formation.%20Pouvez-vous%20me%20donner%20plus%20d'informations%20?" class="event-cta" target="_blank">S'inscrire</a>
+                </div>
+            </article>
+
+            <!-- Formation Excel Avancé VBA -->
+            <article class="event-card" data-category="workshop">
+                <div class="event-cover event-programming">
+                    <span class="event-badge workshop">Formation</span>
+                </div>
+                <div class="event-body">
+                    <h3>Formation en Excel Avancé VBA</h3>
+                    <p class="event-excerpt">Maîtrisez les fonctions avancées d'Excel et la programmation VBA pour automatiser vos tâches et créer des applications personnalisées.</p>
+                    <a href="https://wa.me/22870674796?text=Bonjour,%20je%20souhaite%20m'inscrire%20à%20cette%20formation.%20Pouvez-vous%20me%20donner%20plus%20d'informations%20?" class="event-cta" target="_blank">S'inscrire</a>
+                </div>
+            </article>
+
+            <!-- Formation PowerBI -->
+            <article class="event-card" data-category="workshop">
+                <div class="event-cover event-data">
+                    <span class="event-badge workshop">Formation</span>
+                </div>
+                <div class="event-body">
+                    <h3>Formation en PowerBI</h3>
+                    <p class="event-excerpt">Créez des tableaux de bord interactifs et des rapports dynamiques avec PowerBI. Transformez vos données en insights exploitables.</p>
+                    <a href="https://wa.me/22870674796?text=Bonjour,%20je%20souhaite%20m'inscrire%20à%20cette%20formation.%20Pouvez-vous%20me%20donner%20plus%20d'informations%20?" class="event-cta" target="_blank">S'inscrire</a>
+                </div>
+            </article>
+
+            <!-- Préparation TOEFL/TOEIC/TFI -->
+            <article class="event-card" data-category="workshop">
+                <div class="event-cover event-certification">
+                    <span class="event-badge workshop">Formation</span>
+                </div>
+                <div class="event-body">
+                    <h3>Préparation aux Examens TOEFL, TOEIC, TFI</h3>
+                    <p class="event-excerpt">Préparez-vous efficacement aux certifications internationales d'anglais avec des stratégies d'examen et des exercices pratiques.</p>
+                    <a href="https://wa.me/22870674796?text=Bonjour,%20je%20souhaite%20m'inscrire%20à%20cette%20formation.%20Pouvez-vous%20me%20donner%20plus%20d'informations%20?" class="event-cta" target="_blank">S'inscrire</a>
+                </div>
+            </article>
+
+            <!-- Formation Performance Commerciale -->
+            <article class="event-card" data-category="workshop">
+                <div class="event-cover event-sales">
+                    <span class="event-badge workshop">Formation</span>
+                </div>
+                <div class="event-body">
+                    <h3>Formation en Performance Commerciale</h3>
+                    <p class="event-excerpt">Optimisez vos résultats commerciaux : prospection, négociation, closing et fidélisation client pour maximiser votre chiffre d'affaires.</p>
+                    <a href="https://wa.me/22870674796?text=Bonjour,%20je%20souhaite%20m'inscrire%20à%20cette%20formation.%20Pouvez-vous%20me%20donner%20plus%20d'informations%20?" class="event-cta" target="_blank">S'inscrire</a>
+                </div>
+            </article>
+
+            <!-- Formation Techniques de Vente -->
+            <article class="event-card" data-category="workshop">
+                <div class="event-cover event-marketing">
+                    <span class="event-badge workshop">Formation</span>
+                </div>
+                <div class="event-body">
+                    <h3>Formation en Techniques de Vente</h3>
+                    <p class="event-excerpt">Maîtrisez les techniques de vente modernes : écoute active, argumentation, traitement des objections et conclusion de vente.</p>
+                    <a href="https://wa.me/22870674796?text=Bonjour,%20je%20souhaite%20m'inscrire%20à%20cette%20formation.%20Pouvez-vous%20me%20donner%20plus%20d'informations%20?" class="event-cta" target="_blank">S'inscrire</a>
+                </div>
+            </article>
+
+            <!-- Formation Industriel -->
+            <article class="event-card" data-category="workshop">
+                <div class="event-cover event-industry">
+                    <span class="event-badge workshop">Formation</span>
+                </div>
+                <div class="event-body">
+                    <h3>Formation en Industriel</h3>
+                    <p class="event-excerpt">Découvrez les enjeux du secteur industriel : processus de production, qualité, maintenance et optimisation des performances.</p>
+                    <a href="https://wa.me/22870674796?text=Bonjour,%20je%20souhaite%20m'inscrire%20à%20cette%20formation.%20Pouvez-vous%20me%20donner%20plus%20d'informations%20?" class="event-cta" target="_blank">S'inscrire</a>
+                </div>
+            </article>
+
+            <!-- Formation Logistique et Achats -->
+            <article class="event-card" data-category="workshop">
+                <div class="event-cover event-logistics">
+                    <span class="event-badge workshop">Formation</span>
+                </div>
+                <div class="event-body">
+                    <h3>Formation en Logistique et Achats</h3>
+                    <p class="event-excerpt">Optimisez votre chaîne d'approvisionnement : gestion des stocks, négociation fournisseurs et stratégies d'achats.</p>
+                    <a href="https://wa.me/22870674796?text=Bonjour,%20je%20souhaite%20m'inscrire%20à%20cette%20formation.%20Pouvez-vous%20me%20donner%20plus%20d'informations%20?" class="event-cta" target="_blank">S'inscrire</a>
+                </div>
+            </article>
+
+            <!-- Formation Comptabilité & Audit -->
+            <article class="event-card" data-category="workshop">
+                <div class="event-cover event-finance">
+                    <span class="event-badge workshop">Formation</span>
+                </div>
+                <div class="event-body">
+                    <h3>Formation en Comptabilité & Audit</h3>
+                    <p class="event-excerpt">Maîtrisez les principes comptables, l'analyse financière et les techniques d'audit pour une gestion rigoureuse.</p>
+                    <a href="https://wa.me/22870674796?text=Bonjour,%20je%20souhaite%20m'inscrire%20à%20cette%20formation.%20Pouvez-vous%20me%20donner%20plus%20d'informations%20?" class="event-cta" target="_blank">S'inscrire</a>
+                </div>
+            </article>
+
+            <!-- Formation Banque -->
+            <article class="event-card" data-category="workshop">
+                <div class="event-cover event-banking">
+                    <span class="event-badge workshop">Formation</span>
+                </div>
+                <div class="event-body">
+                    <h3>Formation en Banque</h3>
+                    <p class="event-excerpt">Découvrez les métiers bancaires : crédit, investissement, gestion des risques et réglementation financière.</p>
+                    <a href="https://wa.me/22870674796?text=Bonjour,%20je%20souhaite%20m'inscrire%20à%20cette%20formation.%20Pouvez-vous%20me%20donner%20plus%20d'informations%20?" class="event-cta" target="_blank">S'inscrire</a>
+                </div>
+            </article>
+
+            <!-- Formation Finance & Assurance -->
+            <article class="event-card" data-category="workshop">
+                <div class="event-cover event-insurance">
+                    <span class="event-badge workshop">Formation</span>
+                </div>
+                <div class="event-body">
+                    <h3>Formation en Finance & Assurance</h3>
+                    <p class="event-excerpt">Approfondissez vos connaissances en finance et assurance : produits financiers, évaluation des risques et stratégies d'investissement.</p>
+                    <a href="https://wa.me/22870674796?text=Bonjour,%20je%20souhaite%20m'inscrire%20à%20cette%20formation.%20Pouvez-vous%20me%20donner%20plus%20d'informations%20?" class="event-cta" target="_blank">S'inscrire</a>
+                </div>
+            </article>
+
+            <!-- Formation Pétrole Gaz & Mine -->
+            <article class="event-card" data-category="workshop">
+                <div class="event-cover event-energy">
+                    <span class="event-badge workshop">Formation</span>
+                </div>
+                <div class="event-body">
+                    <h3>Formation en Pétrole Gaz & Mine</h3>
+                    <p class="event-excerpt">Explorez les enjeux de l'industrie extractive : exploration, exploitation, sécurité et impact environnemental.</p>
+                    <a href="https://wa.me/22870674796?text=Bonjour,%20je%20souhaite%20m'inscrire%20à%20cette%20formation.%20Pouvez-vous%20me%20donner%20plus%20d'informations%20?" class="event-cta" target="_blank">S'inscrire</a>
+                </div>
+            </article>
+
+            <!-- Formation Économie Durable & Environnement -->
+            <article class="event-card" data-category="workshop">
+                <div class="event-cover event-environment">
+                    <span class="event-badge workshop">Formation</span>
+                </div>
+                <div class="event-body">
+                    <h3>Formation en Économie Durable & Environnement</h3>
+                    <p class="event-excerpt">Intégrez les enjeux du développement durable : RSE, économie circulaire et transition écologique.</p>
+                    <a href="https://wa.me/22870674796?text=Bonjour,%20je%20souhaite%20m'inscrire%20à%20cette%20formation.%20Pouvez-vous%20me%20donner%20plus%20d'informations%20?" class="event-cta" target="_blank">S'inscrire</a>
+                </div>
+            </article>
+
+            <!-- Formation Santé & Sécurité au Travail -->
+            <article class="event-card" data-category="workshop">
+                <div class="event-cover event-safety">
+                    <span class="event-badge workshop">Formation</span>
+                </div>
+                <div class="event-body">
+                    <h3>Formation en Santé & Sécurité au Travail</h3>
+                    <p class="event-excerpt">Prévenez les risques professionnels : évaluation des dangers, mise en place de mesures préventives et culture sécurité.</p>
+                    <a href="https://wa.me/22870674796?text=Bonjour,%20je%20souhaite%20m'inscrire%20à%20cette%20formation.%20Pouvez-vous%20me%20donner%20plus%20d'informations%20?" class="event-cta" target="_blank">S'inscrire</a>
+                </div>
+            </article>
+
+            <!-- Formation Gouvernance, Risque & Conformité (GRC) -->
+            <article class="event-card" data-category="workshop">
+                <div class="event-cover event-governance">
+                    <span class="event-badge workshop">Formation</span>
+                </div>
+                <div class="event-body">
+                    <h3>Formation en Gouvernance, Risque & Conformité (GRC)</h3>
+                    <p class="event-excerpt">Maîtrisez les enjeux de gouvernance d'entreprise, gestion des risques et conformité réglementaire.</p>
+                    <a href="https://wa.me/22870674796?text=Bonjour,%20je%20souhaite%20m'inscrire%20à%20cette%20formation.%20Pouvez-vous%20me%20donner%20plus%20d'informations%20?" class="event-cta" target="_blank">S'inscrire</a>
+                </div>
+            </article>
+
+            <!-- Formation Transformation Numérique -->
+            <article class="event-card" data-category="workshop">
+                <div class="event-cover event-digital">
+                    <span class="event-badge workshop">Formation</span>
+                </div>
+                <div class="event-body">
+                    <h3>Formation en Transformation Numérique</h3>
+                    <p class="event-excerpt">Accompagnez la digitalisation de votre organisation : stratégie digitale, conduite du changement et nouvelles technologies.</p>
+                    <a href="https://wa.me/22870674796?text=Bonjour,%20je%20souhaite%20m'inscrire%20à%20cette%20formation.%20Pouvez-vous%20me%20donner%20plus%20d'informations%20?" class="event-cta" target="_blank">S'inscrire</a>
+                </div>
+            </article>
+
+            <!-- Formation Qualité & Management -->
+            <article class="event-card" data-category="workshop">
+                <div class="event-cover event-quality">
+                    <span class="event-badge workshop">Formation</span>
+                </div>
+                <div class="event-body">
+                    <h3>Formation en Qualité & Management</h3>
+                    <p class="event-excerpt">Implémentez des systèmes qualité efficaces : ISO 9001, amélioration continue et management par la qualité.</p>
+                    <a href="https://wa.me/22870674796?text=Bonjour,%20je%20souhaite%20m'inscrire%20à%20cette%20formation.%20Pouvez-vous%20me%20donner%20plus%20d'informations%20?" class="event-cta" target="_blank">S'inscrire</a>
+                </div>
+            </article>
+
+            <!-- Formation Management & Leadership -->
+            <article class="event-card" data-category="workshop">
+                <div class="event-cover event-leadership">
+                    <span class="event-badge workshop">Formation</span>
+                </div>
+                <div class="event-body">
+                    <h3>Formation en Management & Leadership</h3>
+                    <p class="event-excerpt">Développez vos compétences managériales : leadership, motivation d'équipe, communication et prise de décision.</p>
+                    <a href="https://wa.me/22870674796?text=Bonjour,%20je%20souhaite%20m'inscrire%20à%20cette%20formation.%20Pouvez-vous%20me%20donner%20plus%20d'informations%20?" class="event-cta" target="_blank">S'inscrire</a>
+                </div>
+            </article>
+
+            <!-- Formation Gestion de Projet -->
+            <article class="event-card" data-category="workshop">
+                <div class="event-cover event-project">
+                    <span class="event-badge workshop">Formation</span>
+                </div>
+                <div class="event-body">
+                    <h3>Formation en Gestion de Projet</h3>
+                    <p class="event-excerpt">Maîtrisez les méthodologies de gestion de projet : planification, suivi, gestion des risques et livraison réussie.</p>
+                    <a href="https://wa.me/22870674796?text=Bonjour,%20je%20souhaite%20m'inscrire%20à%20cette%20formation.%20Pouvez-vous%20me%20donner%20plus%20d'informations%20?" class="event-cta" target="_blank">S'inscrire</a>
+                </div>
+            </article>
+
+            <!-- Formation Développement Personnel -->
+            <article class="event-card" data-category="workshop">
+                <div class="event-cover event-personal">
+                    <span class="event-badge workshop">Formation</span>
+                </div>
+                <div class="event-body">
+                    <h3>Formation en Développement Personnel</h3>
+                    <p class="event-excerpt">Renforcez votre confiance en soi, gestion du stress, intelligence émotionnelle, marketing de soi et charisme personnel.</p>
+                    <a href="https://wa.me/22870674796?text=Bonjour,%20je%20souhaite%20m'inscrire%20à%20cette%20formation.%20Pouvez-vous%20me%20donner%20plus%20d'informations%20?" class="event-cta" target="_blank">S'inscrire</a>
+                </div>
+            </article>
+
+            <!-- Formation Sécurité, Système & Réseau -->
+            <article class="event-card" data-category="workshop">
+                <div class="event-cover event-security">
+                    <span class="event-badge workshop">Formation</span>
+                </div>
+                <div class="event-body">
+                    <h3>Formation en Sécurité, Système & Réseau</h3>
+                    <p class="event-excerpt">Sécurisez vos infrastructures IT : administration système, sécurité réseau et protection contre les cybermenaces.</p>
+                    <a href="https://wa.me/22870674796?text=Bonjour,%20je%20souhaite%20m'inscrire%20à%20cette%20formation.%20Pouvez-vous%20me%20donner%20plus%20d'informations%20?" class="event-cta" target="_blank">S'inscrire</a>
+                </div>
+            </article>
+
+            <!-- Formation Cloud & Virtualisation -->
+            <article class="event-card" data-category="workshop">
+                <div class="event-cover event-cloud">
+                    <span class="event-badge workshop">Formation</span>
+                </div>
+                <div class="event-body">
+                    <h3>Formation en Cloud & Virtualisation</h3>
+                    <p class="event-excerpt">Migrez vers le cloud : architectures cloud, virtualisation, conteneurisation et optimisation des coûts.</p>
+                    <a href="https://wa.me/22870674796?text=Bonjour,%20je%20souhaite%20m'inscrire%20à%20cette%20formation.%20Pouvez-vous%20me%20donner%20plus%20d'informations%20?" class="event-cta" target="_blank">S'inscrire</a>
+                </div>
+            </article>
+
+            <!-- Formation Bureautique -->
+            <article class="event-card" data-category="workshop">
+                <div class="event-cover event-office">
+                    <span class="event-badge workshop">Formation</span>
+                </div>
+                <div class="event-body">
+                    <h3>Formation en Bureautique</h3>
+                    <p class="event-excerpt">Perfectionnez votre maîtrise des outils bureautiques : Word, Excel, PowerPoint et Outlook pour une productivité optimale.</p>
+                    <a href="https://wa.me/22870674796?text=Bonjour,%20je%20souhaite%20m'inscrire%20à%20cette%20formation.%20Pouvez-vous%20me%20donner%20plus%20d'informations%20?" class="event-cta" target="_blank">S'inscrire</a>
+                </div>
+            </article>
+
+            <!-- Formation IA -->
+            <article class="event-card" data-category="workshop">
+                <div class="event-cover event-ia">
+                    <span class="event-badge workshop">Formation</span>
+                </div>
+                <div class="event-body">
+                    <h3>Formation en Intelligence Artificielle</h3>
+                    <p class="event-excerpt">Découvrez les applications de l'IA : machine learning, deep learning, IA générative et intégration en entreprise.</p>
+                    <a href="https://wa.me/22870674796?text=Bonjour,%20je%20souhaite%20m'inscrire%20à%20cette%20formation.%20Pouvez-vous%20me%20donner%20plus%20d'informations%20?" class="event-cta" target="_blank">S'inscrire</a>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
+
+<!-- Script pour le filtrage -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const eventCards = document.querySelectorAll('.event-card');
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            // Retirer la classe active de tous les boutons
+            filterBtns.forEach(b => b.classList.remove('active'));
+            // Ajouter la classe active au bouton cliqué
+            btn.classList.add('active');
+            
+            const filter = btn.getAttribute('data-filter');
+            
+            eventCards.forEach(card => {
+                if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    });
+});
+</script>
+{% endblock %}
