@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from functools import wraps
 import os
+import glob
 
 # Crée l'application Flask
 app = Flask(__name__)
@@ -56,13 +57,87 @@ class AvisClient(db.Model):
     def __repr__(self):
         return f'<AvisClient {self.nom_complet}>'
 
+# Fonction pour lister les images dans un dossier
+def get_images_from_folder(folder_name):
+    """Récupère la liste des images dans un dossier static"""
+    folder_path = os.path.join(app.static_folder, folder_name)
+    if not os.path.exists(folder_path):
+        return []
+    
+    # Extensions d'images supportées
+    extensions = ['*.png', '*.jpg', '*.jpeg', '*.gif', '*.svg', '*.webp']
+    images = []
+    
+    for ext in extensions:
+        images.extend(glob.glob(os.path.join(folder_path, ext)))
+    
+    # Retourner seulement les noms de fichiers
+    return [os.path.basename(img) for img in images]
+
+# Fonction pour créer des images de placeholder si elles n'existent pas
+def create_placeholder_images():
+    """Crée des images SVG de placeholder pour les partenaires et certifications"""
+    
+    # Liste des partenaires (basée sur les templates)
+    partenaires = [
+        'aibd', 'air liquide', 'anglogold', 'ansd', 'apm terminals', 'boa', 'bollore', 
+        'cat', 'cbi', 'cde', 'ciments du sahel', 'coris bank', 'diamond bank', 
+        'ecobank', 'enda', 'giz', 'iam', 'ics', 'ird', 'kirene', 'lonase', 
+        'orange', 'pcci', 'petrosen', 'sde', 'sen eau', 'sgbs', 'sonatel', 
+        'total', 'ucad', 'uemoa', 'unesco', 'usaid'
+    ]
+    
+    # Liste des certifications (basée sur les templates)
+    certifications = [
+        'apics', 'british', 'cambridge', 'cgeit', 'cisaf', 'cobit', 'comptia', 
+        'ec council', 'google', 'iiba', 'isaca', 'iso', 'itil', 'microsoft', 
+        'pmi', 'prince2', 'safe', 'scrum', 'toefl', 'toeic'
+    ]
+    
+    # Créer les dossiers s'ils n'existent pas
+    os.makedirs(os.path.join(app.static_folder, 'partenaires'), exist_ok=True)
+    os.makedirs(os.path.join(app.static_folder, 'certifications'), exist_ok=True)
+    
+    # Créer les images de partenaires
+    for partner in partenaires:
+        filepath = os.path.join(app.static_folder, 'partenaires', f'{partner}.svg')
+        if not os.path.exists(filepath):
+            svg_content = f'''<svg width="120" height="60" xmlns="http://www.w3.org/2000/svg">
+  <rect width="120" height="60" fill="#f8f9fa" stroke="#e9ecef" stroke-width="1" rx="8"/>
+  <text x="60" y="35" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#495057">{partner.upper()}</text>
+</svg>'''
+            with open(filepath, 'w', encoding='utf-8') as f:
+                f.write(svg_content)
+    
+    # Créer les images de certifications
+    for cert in certifications:
+        filepath = os.path.join(app.static_folder, 'certifications', f'{cert}.svg')
+        if not os.path.exists(filepath):
+            svg_content = f'''<svg width="100" height="80" xmlns="http://www.w3.org/2000/svg">
+  <rect width="100" height="80" fill="#4169e1" stroke="#2740d1" stroke-width="2" rx="8"/>
+  <text x="50" y="45" font-family="Arial, sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="white">{cert.upper()}</text>
+</svg>'''
+            with open(filepath, 'w', encoding='utf-8') as f:
+                f.write(svg_content)
+
 
 @app.route('/')
 def home():
     """Affiche la page d'accueil."""
+    # Créer les images de placeholder si nécessaire
+    create_placeholder_images()
+    
     # Récupérer les avis clients approuvés pour affichage
     avis_clients = AvisClient.query.filter_by(approuve=True).order_by(AvisClient.date_creation.desc()).limit(12).all()
-    return render_template('index.html', avis_clients=avis_clients)
+    
+    # Récupérer les listes d'images
+    partners_images = get_images_from_folder('partenaires')
+    certifications_images = get_images_from_folder('certifications')
+    
+    return render_template('index.html', 
+                         avis_clients=avis_clients,
+                         partners_images=partners_images,
+                         certifications_images=certifications_images)
 
 @app.route('/mission')
 def mission():
@@ -70,12 +145,30 @@ def mission():
 
 @app.route('/formations')
 def formations():
-    return render_template('formations.html')
+    # Créer les images de placeholder si nécessaire
+    create_placeholder_images()
+    
+    # Récupérer les listes d'images
+    partners_images = get_images_from_folder('partenaires')
+    certifications_images = get_images_from_folder('certifications')
+    
+    return render_template('formations.html',
+                         partners_images=partners_images,
+                         certifications_images=certifications_images)
 
 @app.route('/catalogue-2025')
 def catalogue_2025():
     """Alias SEO vers le catalogue 2025."""
-    return render_template('formations.html')
+    # Créer les images de placeholder si nécessaire
+    create_placeholder_images()
+    
+    # Récupérer les listes d'images
+    partners_images = get_images_from_folder('partenaires')
+    certifications_images = get_images_from_folder('certifications')
+    
+    return render_template('formations.html',
+                         partners_images=partners_images,
+                         certifications_images=certifications_images)
 
 
 @app.route('/secteurs')
@@ -85,7 +178,16 @@ def secteurs():
 
 @app.route('/solutions')
 def solutions():
-    return render_template('solutions.html')
+    # Créer les images de placeholder si nécessaire
+    create_placeholder_images()
+    
+    # Récupérer les listes d'images
+    partners_images = get_images_from_folder('partenaires')
+    certifications_images = get_images_from_folder('certifications')
+    
+    return render_template('solutions.html',
+                         partners_images=partners_images,
+                         certifications_images=certifications_images)
 
 
 @app.route('/modalites')

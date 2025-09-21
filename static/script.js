@@ -1,10 +1,15 @@
-// Menu mobile
-const menuToggle = document.getElementById('mobile-menu');
-const navMenu = document.querySelector('.nav-menu');
-const navLinks = document.querySelectorAll('.nav-link');
+// Fonction pour initialiser le menu mobile
+function initMobileMenu() {
+    const menuToggle = document.getElementById('mobile-menu');
+    const navMenu = document.querySelector('.nav-menu');
+    const navLinks = document.querySelectorAll('.nav-link');
 
-// Toggle menu mobile
-if (menuToggle && navMenu) {
+    if (!menuToggle || !navMenu) {
+        console.warn('Menu mobile non trouvé, tentative de réinitialisation...');
+        return false;
+    }
+
+    // Toggle menu mobile
     menuToggle.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -45,39 +50,49 @@ if (menuToggle && navMenu) {
             menuToggle.focus();
         }
     });
-}
 
-// Fermer le menu au clic sur un lien
-navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-        if (window.innerWidth <= 768) {
-            menuToggle.classList.remove('active');
-            navMenu.classList.remove('active');
-            document.body.classList.remove('no-scroll');
-            menuToggle.setAttribute('aria-expanded', 'false');
-            navMenu.setAttribute('aria-hidden', 'true');
-        }
-    });
-});
-
-// Gestion des sous-menus sur mobile
-document.querySelectorAll('.has-submenu').forEach(item => {
-    const link = item.querySelector('.nav-link');
-    const submenu = item.querySelector('.megamenu, .submenu');
-    
-    if (link && submenu) {
-        link.addEventListener('click', (e) => {
+    // Fermer le menu au clic sur un lien
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
             if (window.innerWidth <= 768) {
-                e.preventDefault();
-                item.classList.toggle('active');
-                submenu.classList.toggle('active');
+                menuToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+                document.body.classList.remove('no-scroll');
+                menuToggle.setAttribute('aria-expanded', 'false');
+                navMenu.setAttribute('aria-hidden', 'true');
             }
         });
-    }
-});
+    });
 
-// Amélioration du scroll fluide
-function smoothScroll(target) {
+    return true;
+}
+
+// Attendre que le DOM soit chargé
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialiser le menu mobile
+    if (!initMobileMenu()) {
+        // Si l'initialisation échoue, réessayer après un délai
+        setTimeout(initMobileMenu, 100);
+    }
+
+    // Gestion des sous-menus sur mobile
+    document.querySelectorAll('.has-submenu').forEach(item => {
+        const link = item.querySelector('.nav-link');
+        const submenu = item.querySelector('.megamenu, .submenu');
+        
+        if (link && submenu) {
+            link.addEventListener('click', (e) => {
+                if (window.innerWidth <= 768) {
+                    e.preventDefault();
+                    item.classList.toggle('active');
+                    submenu.classList.toggle('active');
+                }
+            });
+        }
+    });
+
+    // Amélioration du scroll fluide
+    function smoothScroll(target) {
     const element = document.querySelector(target);
     if (element) {
         const headerHeight = document.querySelector('.header')?.offsetHeight || 0;
@@ -585,32 +600,98 @@ hasSubmenu.forEach(item => {
             if (trigger) trigger.setAttribute('aria-expanded', 'false');
         }
     });
-});
+    });
 
-// Fermer en cliquant à l'extérieur
-document.addEventListener('click', (e) => {
-    if (!e.target.closest('.has-submenu')) {
-        document.querySelectorAll('.submenu').forEach(menu => menu.classList.remove('active'));
-        document.querySelectorAll('.megamenu').forEach(menu => menu.classList.remove('active'));
-        document.querySelectorAll('.has-submenu > .nav-link').forEach(link => link.setAttribute('aria-expanded', 'false'));
-    }
-});
+    // Fermer en cliquant à l'extérieur
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.has-submenu')) {
+            document.querySelectorAll('.submenu').forEach(menu => menu.classList.remove('active'));
+            document.querySelectorAll('.megamenu').forEach(menu => menu.classList.remove('active'));
+            document.querySelectorAll('.has-submenu > .nav-link').forEach(link => link.setAttribute('aria-expanded', 'false'));
+        }
+    });
 
-// Gestion "Lire la suite" sur les cartes événements
-document.addEventListener('click', (e) => {
-    const link = e.target.closest('.event-read');
-    if (!link) return;
-    e.preventDefault();
-    const body = link.closest('.event-body');
-    if (!body) return;
-    const more = body.querySelector('.event-more');
-    if (!more) return;
-    const isHidden = more.hasAttribute('hidden');
-    if (isHidden) {
-        more.removeAttribute('hidden');
-        link.textContent = 'Lire moins';
-    } else {
-        more.setAttribute('hidden', '');
-        link.textContent = 'Lire la suite';
+    // Gestion "Lire la suite" sur les cartes événements
+    document.addEventListener('click', (e) => {
+        const link = e.target.closest('.event-read');
+        if (!link) return;
+        e.preventDefault();
+        const body = link.closest('.event-body');
+        if (!body) return;
+        const more = body.querySelector('.event-more');
+        if (!more) return;
+        const isHidden = more.hasAttribute('hidden');
+        if (isHidden) {
+            more.removeAttribute('hidden');
+            link.textContent = 'Lire moins';
+        } else {
+            more.setAttribute('hidden', '');
+            link.textContent = 'Lire la suite';
+        }
+    });
+
+    // Gestion des images manquantes (partenaires et certifications)
+    function handleImageError(img) {
+        const isPartner = img.src.includes('partenaires/');
+        const isCertification = img.src.includes('certifications/');
+        
+        if (isPartner || isCertification) {
+            // Extraire le nom du fichier sans extension
+            const fileName = img.src.split('/').pop().split('.')[0];
+            const displayName = fileName.replace(/[-_]/g, ' ').toUpperCase();
+            
+            // Créer un SVG de remplacement
+            const svgContent = isPartner 
+                ? `<svg width="120" height="60" xmlns="http://www.w3.org/2000/svg">
+                     <rect width="120" height="60" fill="#f8f9fa" stroke="#e9ecef" stroke-width="1" rx="8"/>
+                     <text x="60" y="35" font-family="Arial, sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="#495057">${displayName}</text>
+                   </svg>`
+                : `<svg width="100" height="80" xmlns="http://www.w3.org/2000/svg">
+                     <rect width="100" height="80" fill="#4169e1" stroke="#2740d1" stroke-width="2" rx="8"/>
+                     <text x="50" y="45" font-family="Arial, sans-serif" font-size="9" font-weight="bold" text-anchor="middle" fill="white">${displayName}</text>
+                   </svg>`;
+            
+            // Convertir le SVG en data URL
+            const svgDataUrl = 'data:image/svg+xml;base64,' + btoa(svgContent);
+            img.src = svgDataUrl;
+            img.style.backgroundColor = '#f8f9fa';
+            img.style.border = '1px solid #e9ecef';
+            img.style.borderRadius = '8px';
+            img.style.padding = '5px';
+        }
     }
-});
+
+    // Appliquer la gestion d'erreur à toutes les images de partenaires et certifications
+    document.querySelectorAll('img[src*="partenaires/"], img[src*="certifications/"]').forEach(img => {
+        img.addEventListener('error', () => handleImageError(img));
+        
+        // Vérifier si l'image est déjà cassée
+        if (!img.complete || img.naturalHeight === 0) {
+            handleImageError(img);
+        }
+    });
+
+    // Observer pour les nouvelles images ajoutées dynamiquement
+    const imageObserver = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+            mutation.addedNodes.forEach((node) => {
+                if (node.nodeType === 1) { // Element node
+                    const images = node.querySelectorAll ? node.querySelectorAll('img[src*="partenaires/"], img[src*="certifications/"]') : [];
+                    images.forEach(img => {
+                        img.addEventListener('error', () => handleImageError(img));
+                        if (!img.complete || img.naturalHeight === 0) {
+                            handleImageError(img);
+                        }
+                    });
+                }
+            });
+        });
+    });
+
+    // Observer les changements dans le DOM
+    imageObserver.observe(document.body, {
+        childList: true,
+        subtree: true
+    });
+
+}); // Fin de DOMContentLoaded

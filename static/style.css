@@ -483,6 +483,7 @@ ul {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
     border-bottom: 1px solid #eef0f3;
     z-index: 1000;
+    overflow-x: hidden;
 }
 
 .navbar {
@@ -490,6 +491,8 @@ ul {
     justify-content: space-between;
     align-items: center;
     padding: 20px 0; /* un peu plus d'espace */
+    width: 100%;
+    overflow-x: hidden;
 }
 
 /* Topbar (au-dessus du menu) */
@@ -503,6 +506,9 @@ ul {
     padding: 12px 18px; /* topbar un peu plus haute */
     border-radius: 0 16px 16px 16px;
     margin: 10px 0 10px;
+    width: 100%;
+    overflow-x: hidden;
+    box-sizing: border-box;
 }
 .topbar-left { display: flex; gap: 10px; }
 .topbar .social {
@@ -959,15 +965,33 @@ ul {
 .menu-toggle {
     display: none;
     cursor: pointer;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+    background: transparent;
+    border: none;
+    z-index: 1001;
+    position: relative;
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+}
+
+.menu-toggle:focus {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+    border-radius: 4px;
 }
 
 .bar {
     display: block;
-    width: 25px;
+    width: 100%;
     height: 3px;
-    margin: 5px 0;
+    margin: 0;
     background-color: var(--text-color);
     transition: var(--transition);
+    border-radius: 2px;
 }
 
 /* Styles responsifs */
@@ -1048,12 +1072,12 @@ ul {
     
     /* Navigation mobile */
     .menu-toggle {
-        display: block;
+        display: flex !important;
         z-index: 1001;
     }
 
     .menu-toggle.active .bar:nth-child(1) {
-        transform: translateY(8px) rotate(45deg);
+        transform: translateY(6px) rotate(45deg);
     }
 
     .menu-toggle.active .bar:nth-child(2) {
@@ -1061,7 +1085,7 @@ ul {
     }
 
     .menu-toggle.active .bar:nth-child(3) {
-        transform: translateY(-8px) rotate(-45deg);
+        transform: translateY(-6px) rotate(-45deg);
     }
 
     .nav-menu {
@@ -1706,9 +1730,17 @@ table {
     box-sizing: border-box;
 }
 
-html, body {
+html {
     overflow-x: hidden;
     width: 100%;
+    scroll-behavior: smooth;
+}
+
+body {
+    overflow-x: hidden;
+    width: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 .container,
@@ -2006,6 +2038,777 @@ img.lazy.loaded {
     .grid-item {
         min-width: 0;
         flex: 1 1 100%;
+    }
+}
+
+/* ===== STYLES RESPONSIFS SPÉCIFIQUES AUX PAGES ===== */
+
+/* Page Formations - Corrections responsives */
+.formations-hero {
+    padding: 80px 0 !important;
+}
+
+@media (max-width: 768px) {
+    .formations-hero {
+        padding: 60px 0 40px !important;
+    }
+    
+    /* Grille hero formations */
+    .formations-hero [style*="grid-template-columns"] {
+        display: block !important;
+        grid-template-columns: none !important;
+    }
+    
+    .formations-hero [style*="grid-template-columns"] > div:first-child {
+        margin-bottom: 30px !important;
+    }
+    
+    .formations-hero h1 {
+        font-size: 2.2rem !important;
+        line-height: 1.2 !important;
+    }
+    
+    .formations-hero [style*="display: flex"] {
+        flex-direction: column !important;
+        gap: 12px !important;
+    }
+    
+    .formations-hero .btn {
+        width: 100% !important;
+        text-align: center !important;
+        justify-content: center !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .formations-hero h1 {
+        font-size: 1.8rem !important;
+    }
+    
+    .formations-hero p {
+        font-size: 1rem !important;
+    }
+}
+
+/* Page Solutions - Corrections responsives */
+.solutions-hero .hero-layout {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+    .solutions-hero .hero-layout {
+        flex-direction: column !important;
+        gap: 30px !important;
+    }
+    
+    .solutions-hero .hero-image {
+        flex: none !important;
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+    
+    .solutions-hero .hero-image img {
+        height: 250px !important;
+    }
+    
+    .solutions-hero .hero-content h1 {
+        font-size: 2rem !important;
+        text-align: center !important;
+    }
+}
+
+/* Page Contact - Corrections responsives */
+.contact-hero {
+    padding: 6rem 0 4rem !important;
+}
+
+@media (max-width: 768px) {
+    .contact-hero {
+        padding: 4rem 0 3rem !important;
+    }
+    
+    .contact-hero h1 {
+        font-size: 2.2rem !important;
+    }
+}
+
+/* Grilles génériques dans toutes les pages */
+@media (max-width: 768px) {
+    [style*="display: grid"][style*="grid-template-columns"] {
+        display: block !important;
+        grid-template-columns: none !important;
+    }
+    
+    [style*="display: grid"][style*="grid-template-columns"] > * {
+        margin-bottom: 20px !important;
+    }
+    
+    [style*="display: grid"][style*="grid-template-columns"] > *:last-child {
+        margin-bottom: 0 !important;
+    }
+    
+    /* Statistiques */
+    [style*="grid-template-columns: repeat(auto-fit"] {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 20px !important;
+    }
+}
+
+/* Corrections pour les éléments avec styles inline */
+@media (max-width: 768px) {
+    /* Flexbox inline corrections */
+    [style*="display: flex"] {
+        flex-wrap: wrap !important;
+    }
+    
+    [style*="display: flex"][style*="gap:"] > * {
+        flex: 1 1 100% !important;
+        min-width: 100% !important;
+    }
+    
+    /* Font sizes inline corrections */
+    [style*="font-size: 3.5rem"] {
+        font-size: 2.2rem !important;
+    }
+    
+    [style*="font-size: 3rem"] {
+        font-size: 2rem !important;
+    }
+    
+    [style*="font-size: 2.5rem"] {
+        font-size: 1.8rem !important;
+    }
+    
+    /* Padding inline corrections */
+    [style*="padding: 120px"] {
+        padding: 60px 0 !important;
+    }
+    
+    [style*="padding: 100px"] {
+        padding: 50px 0 !important;
+    }
+    
+    [style*="padding: 80px"] {
+        padding: 40px 0 !important;
+    }
+}
+
+@media (max-width: 480px) {
+    [style*="font-size: 3.5rem"] {
+        font-size: 1.8rem !important;
+    }
+    
+    [style*="font-size: 3rem"] {
+        font-size: 1.6rem !important;
+    }
+    
+    [style*="font-size: 2.5rem"] {
+        font-size: 1.5rem !important;
+    }
+    
+    [style*="padding: 60px"] {
+        padding: 30px 0 !important;
+    }
+    
+    [style*="padding: 50px"] {
+        padding: 25px 0 !important;
+    }
+    
+    [style*="padding: 40px"] {
+        padding: 20px 0 !important;
+    }
+}
+
+/* Page Événements - Corrections responsives */
+@media (max-width: 768px) {
+    .events-grid {
+        grid-template-columns: 1fr !important;
+        gap: 15px !important;
+    }
+    
+    .event-card {
+        margin-bottom: 15px !important;
+    }
+}
+
+/* Page Modalités - Corrections responsives */
+@media (max-width: 768px) {
+    .modalites-content [style*="display: grid"] {
+        display: block !important;
+    }
+    
+    .modalites-content [style*="grid-template-columns"] {
+        grid-template-columns: none !important;
+    }
+}
+
+/* Page À propos - Corrections responsives */
+@media (max-width: 768px) {
+    .apropos-hero [style*="grid-template-columns"] {
+        display: block !important;
+        grid-template-columns: none !important;
+    }
+    
+    .apropos-content [style*="display: flex"] {
+        flex-direction: column !important;
+    }
+}
+
+/* Corrections générales pour tous les contenus avec styles inline */
+@media (max-width: 768px) {
+    /* Images responsives */
+    [style*="width:"][style*="height:"] img,
+    [style*="background:"][style*="height:"] {
+        height: auto !important;
+        min-height: 200px !important;
+    }
+    
+    /* Conteneurs avec largeur fixe */
+    [style*="width: 400px"],
+    [style*="max-width: 400px"] {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    [style*="width: 300px"],
+    [style*="max-width: 300px"] {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    /* Gaps et espacements */
+    [style*="gap: 60px"] {
+        gap: 20px !important;
+    }
+    
+    [style*="gap: 40px"] {
+        gap: 15px !important;
+    }
+    
+    [style*="gap: 30px"] {
+        gap: 12px !important;
+    }
+    
+    /* Marges */
+    [style*="margin-bottom: 40px"] {
+        margin-bottom: 20px !important;
+    }
+    
+    [style*="margin-bottom: 30px"] {
+        margin-bottom: 15px !important;
+    }
+    
+    [style*="margin-bottom: 24px"] {
+        margin-bottom: 12px !important;
+    }
+}
+
+/* Corrections spécifiques pour les formulaires dans toutes les pages */
+@media (max-width: 768px) {
+    .contact-form,
+    .newsletter-form,
+    form {
+        width: 100% !important;
+    }
+    
+    .contact-form .form-group,
+    .form-group {
+        margin-bottom: 15px !important;
+    }
+    
+    .contact-form input,
+    .contact-form textarea,
+    .contact-form select,
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    textarea,
+    select {
+        width: 100% !important;
+        padding: 12px !important;
+        font-size: 16px !important;
+        border-radius: 8px !important;
+        border: 1px solid #ddd !important;
+        box-sizing: border-box !important;
+    }
+    
+    .contact-form .form-row,
+    .form-row {
+        flex-direction: column !important;
+        gap: 15px !important;
+    }
+    
+    .contact-form .form-col,
+    .form-col {
+        width: 100% !important;
+        flex: none !important;
+    }
+}
+
+/* Corrections pour les cartes et contenus avec background images */
+@media (max-width: 768px) {
+    [style*="background:"][style*="url("] {
+        background-size: cover !important;
+        background-position: center !important;
+        min-height: 200px !important;
+    }
+    
+    [style*="background-image:"] {
+        background-size: cover !important;
+        background-position: center !important;
+        min-height: 200px !important;
+    }
+}
+
+/* Corrections pour les boutons dans toutes les pages */
+@media (max-width: 768px) {
+    .btn,
+    [class*="btn"],
+    a[style*="padding:"][style*="border-radius:"] {
+        display: block !important;
+        width: 100% !important;
+        text-align: center !important;
+        margin-bottom: 10px !important;
+        padding: 12px 20px !important;
+        box-sizing: border-box !important;
+    }
+    
+    .btn + .btn,
+    [class*="btn"] + [class*="btn"] {
+        margin-left: 0 !important;
+        margin-top: 10px !important;
+    }
+}
+
+/* Corrections pour les sections avec background gradients */
+@media (max-width: 768px) {
+    [style*="background: linear-gradient"],
+    [style*="background-image: linear-gradient"] {
+        padding: 40px 0 !important;
+    }
+}
+
+/* Corrections pour les éléments positionnés absolument */
+@media (max-width: 768px) {
+    [style*="position: absolute"] {
+        position: static !important;
+        transform: none !important;
+        top: auto !important;
+        right: auto !important;
+        bottom: auto !important;
+        left: auto !important;
+    }
+}
+
+/* Corrections pour les conteneurs avec max-width fixe */
+@media (max-width: 768px) {
+    [style*="max-width: 1200px"],
+    [style*="max-width: 1000px"],
+    [style*="max-width: 800px"] {
+        max-width: 100% !important;
+        padding: 0 15px !important;
+    }
+}
+
+/* Corrections pour les listes et navigation */
+@media (max-width: 768px) {
+    .breadcrumbs,
+    .breadcrumb {
+        font-size: 0.9rem !important;
+        padding: 8px 15px !important;
+    }
+    
+    .pagination {
+        justify-content: center !important;
+        flex-wrap: wrap !important;
+    }
+    
+    .pagination .page-link {
+        padding: 8px 12px !important;
+        margin: 2px !important;
+    }
+}
+
+/* Corrections pour les modales et popups */
+@media (max-width: 768px) {
+    .modal,
+    .popup,
+    .overlay {
+        padding: 10px !important;
+    }
+    
+    .modal-content,
+    .popup-content {
+        width: 95% !important;
+        max-width: none !important;
+        margin: 20px auto !important;
+        max-height: 90vh !important;
+        overflow-y: auto !important;
+    }
+    
+    .modal-header,
+    .popup-header {
+        padding: 15px !important;
+    }
+    
+    .modal-body,
+    .popup-body {
+        padding: 15px !important;
+    }
+    
+    .modal-footer,
+    .popup-footer {
+        padding: 15px !important;
+        flex-direction: column !important;
+    }
+    
+    .modal-footer .btn,
+    .popup-footer .btn {
+        width: 100% !important;
+        margin-bottom: 10px !important;
+    }
+}
+
+/* Corrections pour les tableaux responsifs */
+@media (max-width: 768px) {
+    table {
+        font-size: 14px !important;
+    }
+    
+    .table-responsive {
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+    }
+    
+    .table-responsive table {
+        min-width: 600px !important;
+    }
+}
+
+/* Corrections pour les alertes et messages */
+@media (max-width: 768px) {
+    .alert,
+    .message,
+    .notification {
+        padding: 12px !important;
+        font-size: 14px !important;
+        border-radius: 8px !important;
+        margin-bottom: 15px !important;
+    }
+    
+    .alert .btn,
+    .message .btn,
+    .notification .btn {
+        width: auto !important;
+        display: inline-block !important;
+        margin-top: 10px !important;
+    }
+}
+
+/* Corrections spéciales pour les très petits écrans (320px - 480px) */
+@media (max-width: 480px) {
+    /* Réduction des paddings pour économiser l'espace */
+    .container {
+        padding: 0 10px !important;
+    }
+    
+    [style*="padding: 40px"] {
+        padding: 20px 10px !important;
+    }
+    
+    [style*="padding: 30px"] {
+        padding: 15px 10px !important;
+    }
+    
+    [style*="padding: 20px"] {
+        padding: 10px !important;
+    }
+    
+    /* Réduction des font-sizes pour très petits écrans */
+    h1, [style*="font-size: 3.5rem"],
+    [style*="font-size: 3rem"],
+    [style*="font-size: 2.5rem"] {
+        font-size: 1.5rem !important;
+        line-height: 1.3 !important;
+    }
+    
+    h2 {
+        font-size: 1.3rem !important;
+    }
+    
+    h3 {
+        font-size: 1.1rem !important;
+    }
+    
+    p, div, span {
+        font-size: 14px !important;
+        line-height: 1.5 !important;
+    }
+    
+    /* Boutons plus petits sur très petits écrans */
+    .btn,
+    [class*="btn"] {
+        padding: 10px 15px !important;
+        font-size: 14px !important;
+    }
+    
+    /* Formulaires optimisés */
+    input, textarea, select {
+        padding: 10px !important;
+        font-size: 16px !important; /* Garde 16px pour éviter le zoom iOS */
+    }
+}
+
+/* Corrections pour les écrans moyens (481px - 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+    /* Grilles 2 colonnes sur tablettes portrait */
+    [style*="grid-template-columns: repeat(3"],
+    [style*="grid-template-columns: repeat(4"] {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 15px !important;
+    }
+    
+    /* Font sizes intermédiaires */
+    [style*="font-size: 3.5rem"] {
+        font-size: 2rem !important;
+    }
+    
+    [style*="font-size: 3rem"] {
+        font-size: 1.8rem !important;
+    }
+    
+    [style*="font-size: 2.5rem"] {
+        font-size: 1.6rem !important;
+    }
+}
+
+/* Corrections pour les écrans larges de tablettes (769px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+    /* Grilles 3 colonnes sur tablettes paysage */
+    [style*="grid-template-columns: repeat(4"],
+    [style*="grid-template-columns: repeat(5"] {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 20px !important;
+    }
+    
+    /* Réduction légère des paddings */
+    [style*="padding: 120px"] {
+        padding: 80px 0 !important;
+    }
+    
+    [style*="padding: 100px"] {
+        padding: 60px 0 !important;
+    }
+}
+
+/* Corrections pour éviter les débordements horizontaux */
+@media (max-width: 768px) {
+    /* Force tous les éléments à rester dans les limites */
+    * {
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    
+    /* Conteneurs spéciaux */
+    .container,
+    .hero-container,
+    .content-container,
+    [class*="container"] {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        overflow-x: hidden !important;
+    }
+    
+    /* Images et médias */
+    img, video, iframe, object, embed {
+        max-width: 100% !important;
+        height: auto !important;
+    }
+    
+    /* Tableaux */
+    table {
+        width: 100% !important;
+        table-layout: fixed !important;
+    }
+    
+    /* Préservation des ratios d'aspect */
+    [style*="aspect-ratio"],
+    [style*="padding-bottom: 56.25%"] {
+        width: 100% !important;
+    }
+}
+
+/* Corrections pour l'accessibilité sur mobile */
+@media (max-width: 768px) {
+    /* Zones de clic plus grandes */
+    a, button, .btn, [role="button"] {
+        min-height: 44px !important;
+        min-width: 44px !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 12px 16px !important;
+    }
+    
+    /* Focus visible */
+    a:focus, button:focus, .btn:focus, input:focus, textarea:focus, select:focus {
+        outline: 2px solid var(--accent-color) !important;
+        outline-offset: 2px !important;
+    }
+    
+    /* Espacement entre éléments interactifs */
+    a + a, button + button, .btn + .btn {
+        margin-top: 8px !important;
+    }
+}
+
+/* ===== STYLES POUR LES IMAGES PARTENAIRES ET CERTIFICATIONS ===== */
+
+/* Images partenaires */
+.partners-logos img,
+.real-logos img {
+    max-width: 100%;
+    height: auto;
+    max-height: 60px;
+    object-fit: contain;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    filter: grayscale(100%) opacity(0.7);
+}
+
+.partners-logos img:hover,
+.real-logos img:hover {
+    filter: grayscale(0%) opacity(1);
+    transform: scale(1.05);
+}
+
+/* Images certifications */
+.cert-logos img,
+.certifications-grid img,
+.certification-item img {
+    max-width: 100%;
+    height: auto;
+    max-height: 80px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.cert-logos img:hover,
+.certifications-grid img:hover,
+.certification-item img:hover {
+    transform: scale(1.1);
+}
+
+/* Conteneurs d'images responsive */
+@media (max-width: 768px) {
+    .partners-logos,
+    .real-logos {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 15px !important;
+    }
+    
+    .cert-logos {
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 10px !important;
+    }
+    
+    .certifications-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 15px !important;
+    }
+    
+    .partners-logos img,
+    .real-logos img {
+        max-height: 40px;
+    }
+    
+    .cert-logos img,
+    .certifications-grid img {
+        max-height: 60px;
+    }
+}
+
+@media (max-width: 480px) {
+    .partners-logos,
+    .real-logos,
+    .certifications-grid {
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
+    }
+    
+    .cert-logos {
+        gap: 8px !important;
+    }
+}
+
+/* Styles pour les images SVG placeholder */
+.partners-logos svg,
+.real-logos svg,
+.cert-logos svg,
+.certifications-grid svg {
+    max-width: 100%;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+.partners-logos svg:hover,
+.real-logos svg:hover,
+.cert-logos svg:hover,
+.certifications-grid svg:hover {
+    transform: scale(1.05);
+}
+
+/* Amélioration de l'affichage des images manquantes */
+img[src*="partenaires/"],
+img[src*="certifications/"] {
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+img[src*="partenaires/"]:hover,
+img[src*="certifications/"]:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 2px 8px rgba(65, 105, 225, 0.2);
+}
+
+/* Gestion des erreurs d'images */
+img[src*="partenaires/"]::after,
+img[src*="certifications/"]::after {
+    content: "Image non disponible";
+    display: block;
+    text-align: center;
+    color: #6c757d;
+    font-size: 12px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+/* Animation de chargement pour les images */
+.partners-logos,
+.cert-logos,
+.certifications-grid {
+    opacity: 0;
+    animation: fadeInImages 0.6s ease-in-out 0.3s forwards;
+}
+
+@keyframes fadeInImages {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
