@@ -11,7 +11,7 @@
     <meta property="og:title" content="Conseilux - Formation et Développement Professionnel">
     <meta property="og:description" content="La formation sur mesure, humaine et digitale pour développer vos compétences et celles de vos équipes.">
     <meta property="og:url" content="{{ request.url }}">
-    <meta property="og:image" content="{{ url_for('static', filename='images/conseilux-og.jpg') }}">
+    <meta property="og:image" content="{{ url_for('static', filename='conseilux.jpg') }}">
     <meta property="og:site_name" content="Conseilux">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -138,16 +138,40 @@
                     <a href="{{ url_for('contact') }}" class="btn btn-dark btn-pill">Contact</a>
                 </div>
             </div>
-            <!-- Bande certifications globale défilante (toutes les images de static/certifications/) -->
+            <!-- Bande certifications globale défilante -->
             <div class="cert-marquee" aria-label="Certifications" style="overflow:hidden; padding:8px 0;">
                 <div class="cert-track" style="display:flex; gap:12px; align-items:center; will-change:transform; animation: cert-scroll 30s linear infinite;">
-                    {% for img in certifications_images %}
-                        <img src="{{ url_for('static', filename='certifications/' ~ img) }}" alt="{{ img.rsplit('.', 1)[0] }}" style="height:22px; object-fit:contain; opacity:.95;">
-                    {% endfor %}
+                    <img src="{{ url_for('static', filename='logos/lean six sigma.png') }}" alt="Lean Six Sigma" style="height:22px; object-fit:contain; opacity:.95;">
+                    <img src="{{ url_for('static', filename='logos/nebosh.png') }}" alt="NEBOSH" style="height:22px; object-fit:contain; opacity:.95;">
+                    <img src="{{ url_for('static', filename='logos/pecb.png') }}" alt="PECB" style="height:22px; object-fit:contain; opacity:.95;">
+                    <img src="{{ url_for('static', filename='logos/pmp.png') }}" alt="PMP" style="height:22px; object-fit:contain; opacity:.95;">
+                    <img src="{{ url_for('static', filename='logos/safe.png') }}" alt="SAFe" style="height:22px; object-fit:contain; opacity:.95;">
+                    <img src="{{ url_for('static', filename='logos/scrum.png') }}" alt="Scrum" style="height:22px; object-fit:contain; opacity:.95;">
+                    <img src="{{ url_for('static', filename='logos/sol.png') }}" alt="SOL" style="height:22px; object-fit:contain; opacity:.95;">
+                    <img src="{{ url_for('static', filename='logos/solu.png') }}" alt="SOLU" style="height:22px; object-fit:contain; opacity:.95;">
+                    <img src="{{ url_for('static', filename='logos/toefl.png') }}" alt="TOEFL" style="height:22px; object-fit:contain; opacity:.95;">
+                    <img src="{{ url_for('static', filename='logos/toeic.png') }}" alt="TOEIC" style="height:22px; object-fit:contain; opacity:.95;">
+                    <img src="{{ url_for('static', filename='logos/togaf.png') }}" alt="TOGAF" style="height:22px; object-fit:contain; opacity:.95;">
+                    <img src="{{ url_for('static', filename='logos/itil.png') }}" alt="ITIL" style="height:22px; object-fit:contain; opacity:.95;">
+                    <img src="{{ url_for('static', filename='logos/iso.png') }}" alt="ISO" style="height:22px; object-fit:contain; opacity:.95;">
+                    <img src="{{ url_for('static', filename='logos/cobit.png') }}" alt="COBIT" style="height:22px; object-fit:contain; opacity:.95;">
+                    <img src="{{ url_for('static', filename='logos/isaca.png') }}" alt="ISACA" style="height:22px; object-fit:contain; opacity:.95;">
                     {# duplication pour défilement infini #}
-                    {% for img in certifications_images %}
-                        <img src="{{ url_for('static', filename='certifications/' ~ img) }}" alt="" aria-hidden="true" style="height:22px; object-fit:contain; opacity:.95;">
-                    {% endfor %}
+                    <img src="{{ url_for('static', filename='logos/lean six sigma.png') }}" alt="" aria-hidden="true" style="height:22px; object-fit:contain; opacity:.95;">
+                    <img src="{{ url_for('static', filename='logos/nebosh.png') }}" alt="" aria-hidden="true" style="height:22px; object-fit:contain; opacity:.95;">
+                    <img src="{{ url_for('static', filename='logos/pecb.png') }}" alt="" aria-hidden="true" style="height:22px; object-fit:contain; opacity:.95;">
+                    <img src="{{ url_for('static', filename='logos/pmp.png') }}" alt="" aria-hidden="true" style="height:22px; object-fit:contain; opacity:.95;">
+                    <img src="{{ url_for('static', filename='logos/safe.png') }}" alt="" aria-hidden="true" style="height:22px; object-fit:contain; opacity:.95;">
+                    <img src="{{ url_for('static', filename='logos/scrum.png') }}" alt="" aria-hidden="true" style="height:22px; object-fit:contain; opacity:.95;">
+                    <img src="{{ url_for('static', filename='logos/sol.png') }}" alt="" aria-hidden="true" style="height:22px; object-fit:contain; opacity:.95;">
+                    <img src="{{ url_for('static', filename='logos/solu.png') }}" alt="" aria-hidden="true" style="height:22px; object-fit:contain; opacity:.95;">
+                    <img src="{{ url_for('static', filename='logos/toefl.png') }}" alt="" aria-hidden="true" style="height:22px; object-fit:contain; opacity:.95;">
+                    <img src="{{ url_for('static', filename='logos/toeic.png') }}" alt="" aria-hidden="true" style="height:22px; object-fit:contain; opacity:.95;">
+                    <img src="{{ url_for('static', filename='logos/togaf.png') }}" alt="" aria-hidden="true" style="height:22px; object-fit:contain; opacity:.95;">
+                    <img src="{{ url_for('static', filename='logos/itil.png') }}" alt="" aria-hidden="true" style="height:22px; object-fit:contain; opacity:.95;">
+                    <img src="{{ url_for('static', filename='logos/iso.png') }}" alt="" aria-hidden="true" style="height:22px; object-fit:contain; opacity:.95;">
+                    <img src="{{ url_for('static', filename='logos/cobit.png') }}" alt="" aria-hidden="true" style="height:22px; object-fit:contain; opacity:.95;">
+                    <img src="{{ url_for('static', filename='logos/isaca.png') }}" alt="" aria-hidden="true" style="height:22px; object-fit:contain; opacity:.95;">
                 </div>
             </div>
             <nav class="navbar" role="navigation" aria-label="Menu principal">

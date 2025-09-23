@@ -124,15 +124,14 @@ def create_placeholder_images():
 @app.route('/')
 def home():
     """Affiche la page d'accueil."""
-    # Créer les images de placeholder si nécessaire
-    create_placeholder_images()
+    # Fonction de création de SVG désactivée - utilisation des vraies images PNG uniquement
     
     # Récupérer les avis clients approuvés pour affichage
     avis_clients = AvisClient.query.filter_by(approuve=True).order_by(AvisClient.date_creation.desc()).limit(12).all()
     
     # Récupérer les listes d'images
-    partners_images = get_images_from_folder('partenaires')
-    certifications_images = get_images_from_folder('certifications')
+    partners_images = get_images_from_folder('images')
+    certifications_images = get_images_from_folder('logos')
     
     return render_template('index.html', 
                          avis_clients=avis_clients,
@@ -145,12 +144,11 @@ def mission():
 
 @app.route('/formations')
 def formations():
-    # Créer les images de placeholder si nécessaire
-    create_placeholder_images()
+    # Fonction de création de SVG désactivée - utilisation des vraies images PNG uniquement
     
     # Récupérer les listes d'images
-    partners_images = get_images_from_folder('partenaires')
-    certifications_images = get_images_from_folder('certifications')
+    partners_images = get_images_from_folder('images')
+    certifications_images = get_images_from_folder('logos')
     
     return render_template('formations.html',
                          partners_images=partners_images,
@@ -159,12 +157,11 @@ def formations():
 @app.route('/catalogue-2025')
 def catalogue_2025():
     """Alias SEO vers le catalogue 2025."""
-    # Créer les images de placeholder si nécessaire
-    create_placeholder_images()
+    # Fonction de création de SVG désactivée - utilisation des vraies images PNG uniquement
     
     # Récupérer les listes d'images
-    partners_images = get_images_from_folder('partenaires')
-    certifications_images = get_images_from_folder('certifications')
+    partners_images = get_images_from_folder('images')
+    certifications_images = get_images_from_folder('logos')
     
     return render_template('formations.html',
                          partners_images=partners_images,
@@ -178,12 +175,11 @@ def secteurs():
 
 @app.route('/solutions')
 def solutions():
-    # Créer les images de placeholder si nécessaire
-    create_placeholder_images()
+    # Fonction de création de SVG désactivée - utilisation des vraies images PNG uniquement
     
     # Récupérer les listes d'images
-    partners_images = get_images_from_folder('partenaires')
-    certifications_images = get_images_from_folder('certifications')
+    partners_images = get_images_from_folder('images')
+    certifications_images = get_images_from_folder('logos')
     
     return render_template('solutions.html',
                          partners_images=partners_images,
@@ -520,7 +516,7 @@ def inject_certifications_images():
     allowed_exts = {'.png', '.jpg', '.jpeg', '.svg', '.webp'}
 
     # Certifications
-    certs_folder = os.path.join(app.static_folder, 'certifications')
+    certs_folder = os.path.join(app.static_folder, 'logos')
     certifications_images = []
     try:
         for name in sorted(os.listdir(certs_folder)):
@@ -530,7 +526,7 @@ def inject_certifications_images():
         certifications_images = []
 
     # Partenaires
-    partners_folder = os.path.join(app.static_folder, 'partenaires')
+    partners_folder = os.path.join(app.static_folder, 'images')
     partners_images = []
     try:
         for name in sorted(os.listdir(partners_folder)):

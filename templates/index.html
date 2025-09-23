@@ -21,7 +21,7 @@
                     <!-- Bande de certifications (toutes les images dans static/certifications/) -->
                     <div class="cert-logos" aria-label="Certifications">
                         {% for img in certifications_images %}
-                            <img src="{{ url_for('static', filename='certifications/' ~ img) }}" alt="{{ img.rsplit('.', 1)[0] }}" loading="lazy">
+                            <img src="{{ url_for('static', filename='logos/' ~ img) }}" alt="{{ img.rsplit('.', 1)[0] }}" loading="lazy">
                         {% endfor %}
                     </div>
                 </div>
@@ -88,7 +88,7 @@
             <div class="partners-logos real-logos" aria-label="Partenaires & Accréditations">
                 {% for img in partners_images %}
                     <div>
-                        <img src="{{ url_for('static', filename='partenaires/' ~ img) }}" alt="{{ img.rsplit('.', 1)[0] }}">
+                        <img src="{{ url_for('static', filename='images/' ~ img) }}" alt="{{ img.rsplit('.', 1)[0] }}">
                     </div>
                 {% endfor %}
             </div>
