@@ -88,7 +88,10 @@
             <div class="partners-logos real-logos" aria-label="Partenaires & Accréditations">
                 {% for img in partners_images %}
                     <div>
-                        <img src="{{ url_for('static', filename='images/' ~ img) }}" alt="{{ img.rsplit('.', 1)[0] }}">
+                        <img src="{{ url_for('static', filename='images/' ~ (img | urlencode)) }}" 
+                             alt="{{ img.rsplit('.', 1)[0].replace('_', ' ').title() }}"
+                             loading="lazy"
+                             onerror="this.style.display='none';">
                     </div>
                 {% endfor %}
             </div>

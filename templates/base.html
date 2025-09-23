@@ -141,37 +141,21 @@
             <!-- Bande certifications globale défilante -->
             <div class="cert-marquee" aria-label="Certifications" style="overflow:hidden; padding:8px 0;">
                 <div class="cert-track" style="display:flex; gap:12px; align-items:center; will-change:transform; animation: cert-scroll 30s linear infinite;">
-                    <img src="{{ url_for('static', filename='logos/lean six sigma.png') }}" alt="Lean Six Sigma" style="height:22px; object-fit:contain; opacity:.95;">
-                    <img src="{{ url_for('static', filename='logos/nebosh.png') }}" alt="NEBOSH" style="height:22px; object-fit:contain; opacity:.95;">
-                    <img src="{{ url_for('static', filename='logos/pecb.png') }}" alt="PECB" style="height:22px; object-fit:contain; opacity:.95;">
-                    <img src="{{ url_for('static', filename='logos/pmp.png') }}" alt="PMP" style="height:22px; object-fit:contain; opacity:.95;">
-                    <img src="{{ url_for('static', filename='logos/safe.png') }}" alt="SAFe" style="height:22px; object-fit:contain; opacity:.95;">
-                    <img src="{{ url_for('static', filename='logos/scrum.png') }}" alt="Scrum" style="height:22px; object-fit:contain; opacity:.95;">
-                    <img src="{{ url_for('static', filename='logos/sol.png') }}" alt="SOL" style="height:22px; object-fit:contain; opacity:.95;">
-                    <img src="{{ url_for('static', filename='logos/solu.png') }}" alt="SOLU" style="height:22px; object-fit:contain; opacity:.95;">
-                    <img src="{{ url_for('static', filename='logos/toefl.png') }}" alt="TOEFL" style="height:22px; object-fit:contain; opacity:.95;">
-                    <img src="{{ url_for('static', filename='logos/toeic.png') }}" alt="TOEIC" style="height:22px; object-fit:contain; opacity:.95;">
-                    <img src="{{ url_for('static', filename='logos/togaf.png') }}" alt="TOGAF" style="height:22px; object-fit:contain; opacity:.95;">
-                    <img src="{{ url_for('static', filename='logos/itil.png') }}" alt="ITIL" style="height:22px; object-fit:contain; opacity:.95;">
-                    <img src="{{ url_for('static', filename='logos/iso.png') }}" alt="ISO" style="height:22px; object-fit:contain; opacity:.95;">
-                    <img src="{{ url_for('static', filename='logos/cobit.png') }}" alt="COBIT" style="height:22px; object-fit:contain; opacity:.95;">
-                    <img src="{{ url_for('static', filename='logos/isaca.png') }}" alt="ISACA" style="height:22px; object-fit:contain; opacity:.95;">
+                    {% for img in certifications_images %}
+                        <img src="{{ url_for('static', filename='logos/' ~ (img | urlencode)) }}" 
+                             alt="{{ img.rsplit('.', 1)[0].replace('_', ' ').title() }}" 
+                             style="height:22px; object-fit:contain; opacity:.95;"
+                             loading="lazy"
+                             onerror="this.style.display='none';">
+                    {% endfor %}
                     {# duplication pour défilement infini #}
-                    <img src="{{ url_for('static', filename='logos/lean six sigma.png') }}" alt="" aria-hidden="true" style="height:22px; object-fit:contain; opacity:.95;">
-                    <img src="{{ url_for('static', filename='logos/nebosh.png') }}" alt="" aria-hidden="true" style="height:22px; object-fit:contain; opacity:.95;">
-                    <img src="{{ url_for('static', filename='logos/pecb.png') }}" alt="" aria-hidden="true" style="height:22px; object-fit:contain; opacity:.95;">
-                    <img src="{{ url_for('static', filename='logos/pmp.png') }}" alt="" aria-hidden="true" style="height:22px; object-fit:contain; opacity:.95;">
-                    <img src="{{ url_for('static', filename='logos/safe.png') }}" alt="" aria-hidden="true" style="height:22px; object-fit:contain; opacity:.95;">
-                    <img src="{{ url_for('static', filename='logos/scrum.png') }}" alt="" aria-hidden="true" style="height:22px; object-fit:contain; opacity:.95;">
-                    <img src="{{ url_for('static', filename='logos/sol.png') }}" alt="" aria-hidden="true" style="height:22px; object-fit:contain; opacity:.95;">
-                    <img src="{{ url_for('static', filename='logos/solu.png') }}" alt="" aria-hidden="true" style="height:22px; object-fit:contain; opacity:.95;">
-                    <img src="{{ url_for('static', filename='logos/toefl.png') }}" alt="" aria-hidden="true" style="height:22px; object-fit:contain; opacity:.95;">
-                    <img src="{{ url_for('static', filename='logos/toeic.png') }}" alt="" aria-hidden="true" style="height:22px; object-fit:contain; opacity:.95;">
-                    <img src="{{ url_for('static', filename='logos/togaf.png') }}" alt="" aria-hidden="true" style="height:22px; object-fit:contain; opacity:.95;">
-                    <img src="{{ url_for('static', filename='logos/itil.png') }}" alt="" aria-hidden="true" style="height:22px; object-fit:contain; opacity:.95;">
-                    <img src="{{ url_for('static', filename='logos/iso.png') }}" alt="" aria-hidden="true" style="height:22px; object-fit:contain; opacity:.95;">
-                    <img src="{{ url_for('static', filename='logos/cobit.png') }}" alt="" aria-hidden="true" style="height:22px; object-fit:contain; opacity:.95;">
-                    <img src="{{ url_for('static', filename='logos/isaca.png') }}" alt="" aria-hidden="true" style="height:22px; object-fit:contain; opacity:.95;">
+                    {% for img in certifications_images %}
+                        <img src="{{ url_for('static', filename='logos/' ~ (img | urlencode)) }}" 
+                             alt="" aria-hidden="true" 
+                             style="height:22px; object-fit:contain; opacity:.95;"
+                             loading="lazy"
+                             onerror="this.style.display='none';">
+                    {% endfor %}
                 </div>
             </div>
             <nav class="navbar" role="navigation" aria-label="Menu principal">

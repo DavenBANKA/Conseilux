@@ -5,6 +5,7 @@ from datetime import datetime
 from functools import wraps
 import os
 import glob
+from urllib.parse import quote
 
 # Crée l'application Flask
 app = Flask(__name__)
@@ -37,6 +38,14 @@ app.config['MAIL_DEFAULT_SENDER'] = os.environ.get('MAIL_DEFAULT_SENDER', 'conta
 # Initialiser Flask-Mail et SQLAlchemy
 mail = Mail(app)
 db = SQLAlchemy(app)
+
+# Ajouter un filtre pour encoder les URLs
+@app.template_filter('urlencode')
+def urlencode_filter(s):
+    """Encode une chaîne pour l'utiliser dans une URL"""
+    if s is None:
+        return s
+    return quote(str(s))
 
 # Modèle de base de données pour les abonnés newsletter
 class AbonneNewsletter(db.Model):
@@ -527,7 +536,9 @@ def inject_certifications_images():
     try:
         for name in sorted(os.listdir(certs_folder)):
             if os.path.splitext(name)[1].lower() in allowed_exts:
-                certifications_images.append(name)
+                # Exclure les fichiers de copie
+                if '- Copie' not in name:
+                    certifications_images.append(name)
     except Exception:
         certifications_images = []
 
