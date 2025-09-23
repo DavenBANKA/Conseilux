@@ -16,7 +16,13 @@ app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'votre-cle-secrete-tres-
 ADMIN_PASSWORD = os.environ.get('ADMIN_PASSWORD', 'AdminConseilux2024!')
 
 # Configuration de la base de données
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///newsletter.db'
+# Utiliser un chemin absolu pour la base de données en production
+if os.environ.get('VERCEL'):
+    # En production Vercel, utiliser une base de données temporaire
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
+else:
+    # En développement local
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///newsletter.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Configuration Flask-Mail
@@ -619,10 +625,13 @@ def conditions_generales():
     """Page des conditions générales d'utilisation"""
     return render_template('conditions_generales.html')
 
-if __name__ == '__main__':
-    # Initialiser la base de données au démarrage
+# Initialiser la base de données au démarrage de l'application
+try:
     init_db()
-    
+except Exception as e:
+    print(f"Erreur lors de l'initialisation de la base de données: {e}")
+
+if __name__ == '__main__':
     # Lancer le serveur de développement Flask
     # Accessible sur http://127.0.0.1:5000
     app.run(debug=True)
