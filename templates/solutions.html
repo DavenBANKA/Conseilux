@@ -1044,7 +1044,7 @@
     <div class="hero-container">
         <div class="hero-layout">
             <div class="hero-image">
-                <img src="{{ url_for('static', filename='images/team-training.jpg') }}" alt="Équipe en formation" style="width: 100%; height: 400px; object-fit: cover; border-radius: 8px;"/>
+                <img src="{{ url_for('static', filename='solutions-team.jpg') }}" alt="Équipe en formation" style="width: 100%; height: 400px; object-fit: cover; border-radius: 8px;"/>
             </div>
             <div class="hero-content">
                 <h1>Nos Solutions</h1>
@@ -1270,7 +1270,7 @@
                     {% set cert_name = img.rsplit('.', 1)[0] %}
                     <div class="certification-item">
                         <div class="cert-logo">
-                            <img src="{{ url_for('static', filename='certifications/' ~ img) }}" alt="{{ cert_name }}" />
+                            <img src="{{ url_for('static', filename='logos/' ~ img) }}" alt="{{ cert_name }}" />
                         </div>
                         <h4>{{ cert_name|title }}</h4>
                         <p>

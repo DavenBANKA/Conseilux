@@ -1,11 +1,15 @@
-from flask import Flask, render_template, request, jsonify, session, redirect, url_for, flash
-from flask_mail import Mail, Message
+from flask import Flask, render_template, request, jsonify, redirect, url_for, session, flash, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
+from flask_mail import Mail, Message
 from datetime import datetime
-from functools import wraps
 import os
+import smtplib
 import glob
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+import re
 from urllib.parse import quote
+from functools import wraps
 
 # Crée l'application Flask
 app = Flask(__name__)
@@ -525,8 +529,8 @@ Ce message a été envoyé automatiquement depuis le site web."""
 
 @app.context_processor
 def inject_certifications_images():
-    """Expose la liste des fichiers d'images dans static/certifications/ aux templates.
-    Utilisé pour afficher dynamiquement tous les logos disponibles sans les coder en dur.
+    """
+    Injecte les images de certifications et partenaires dans tous les templates
     """
     allowed_exts = {'.png', '.jpg', '.jpeg', '.svg', '.webp'}
 
@@ -536,10 +540,11 @@ def inject_certifications_images():
     try:
         for name in sorted(os.listdir(certs_folder)):
             if os.path.splitext(name)[1].lower() in allowed_exts:
-                # Exclure les fichiers de copie
-                if '- Copie' not in name:
+                # Exclure les fichiers de copie et vérifier que le fichier existe
+                if '- Copie' not in name and os.path.isfile(os.path.join(certs_folder, name)):
                     certifications_images.append(name)
-    except Exception:
+    except Exception as e:
+        print(f"Erreur lors du chargement des certifications: {e}")
         certifications_images = []
 
     # Partenaires
@@ -548,14 +553,33 @@ def inject_certifications_images():
     try:
         for name in sorted(os.listdir(partners_folder)):
             if os.path.splitext(name)[1].lower() in allowed_exts:
-                partners_images.append(name)
-    except Exception:
+                # Vérifier que le fichier existe
+                if os.path.isfile(os.path.join(partners_folder, name)):
+                    partners_images.append(name)
+    except Exception as e:
+        print(f"Erreur lors du chargement des partenaires: {e}")
         partners_images = []
 
     return {
         'certifications_images': certifications_images,
         'partners_images': partners_images,
     }
+
+# Filtre personnalisé pour l'encodage des URLs
+@app.template_filter('safe_url_encode')
+def safe_url_encode(filename):
+    """Encode les noms de fichiers pour les URLs de manière sûre"""
+    return quote(filename, safe='')
+
+# Route explicite pour servir les fichiers statiques (pour Vercel)
+@app.route('/static/<path:filename>')
+def serve_static(filename):
+    """Sert les fichiers statiques avec gestion des noms avec espaces"""
+    try:
+        return send_from_directory(app.static_folder, filename)
+    except Exception as e:
+        print(f"Erreur lors du service du fichier statique {filename}: {e}")
+        return "File not found", 404
 
 # Fonction pour initialiser la base de données
 def init_db():

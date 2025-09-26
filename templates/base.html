@@ -142,15 +142,15 @@
             <div class="cert-marquee" aria-label="Certifications" style="overflow:hidden; padding:8px 0;">
                 <div class="cert-track" style="display:flex; gap:12px; align-items:center; will-change:transform; animation: cert-scroll 30s linear infinite;">
                     {% for img in certifications_images %}
-                        <img src="{{ url_for('static', filename='logos/' ~ (img | urlencode)) }}" 
-                             alt="{{ img.rsplit('.', 1)[0].replace('_', ' ').title() }}" 
+                        <img src="{{ url_for('static', filename='logos/' ~ (img | safe_url_encode)) }}" 
+                             alt="{{ img.rsplit('.', 1)[0].replace('_', ' ').replace('-', ' ').title() }}" 
                              style="height:22px; object-fit:contain; opacity:.95;"
                              loading="lazy"
                              onerror="this.style.display='none';">
                     {% endfor %}
                     {# duplication pour défilement infini #}
                     {% for img in certifications_images %}
-                        <img src="{{ url_for('static', filename='logos/' ~ (img | urlencode)) }}" 
+                        <img src="{{ url_for('static', filename='logos/' ~ (img | safe_url_encode)) }}" 
                              alt="" aria-hidden="true" 
                              style="height:22px; object-fit:contain; opacity:.95;"
                              loading="lazy"
